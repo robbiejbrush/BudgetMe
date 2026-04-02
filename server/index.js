@@ -12,8 +12,16 @@ const userRouter = require('./routes/Users')
 app.use("/auth", userRouter);
 
 const transactionRouter = require('./routes/Transactions')
-app.use("/transaction", transactionRouter);
+app.use("/transactions", transactionRouter);
 
+const recurringTransactionRouter = require('./routes/RecurringTransactions')
+app.use("/recurringTransactions", recurringTransactionRouter);
+
+const categoriesRouter = require('./routes/Categories')
+app.use("/categories", categoriesRouter);
+
+const budgetsRouter = require('./routes/Budgets')
+app.use("/budgets", budgetsRouter);
 
 const PORT = 3001; //process.env.PORT || 3306;
 

@@ -1,19 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const { Transactions } = require('../models');
 
-//Gets all transactions for a userId
+// Get all transactions by userId
 router.get("/:userId", async (req, res) => {
     try {
-        const userId = req.params.userId;
-        
-        const userWithTransactions = await Users.findByPk(userId, {
-            include: [{
-                model: Transactions,
-                through: { attributes: [] }
-            }]
+        const transactions = await Transactions.findAll({
+            where: { userId: req.params.userId }
         });
-
-        res.json(userWithTransactions ? userWithTransactions.Transactions : []);
+        res.json(transactions);
     } catch (error) {
         console.error("Error getting transactions: ", error);
         res.status(500).json({ error: "Failed to get transactions." });
@@ -25,7 +20,7 @@ router.post("/create", async (req, res) => {
     const transactionData = req.body;
     
     try {
-        const newTransaction = await Transaction.create({
+        const newTransaction = await Transactions.create({
             ...transactionData
     });
         res.json(newTransaction);
@@ -58,17 +53,17 @@ router.put("/edit/:transactionId", async (req, res) => {
     } else {
       res.status(404).json({ message: "Transaction not found" });
     }
-  } catch (err) {
-    res.status(500).json({ error: "Error updating transaction", details: err });
+  } catch (error) {
+    res.status(500).json({ error: "Error updating transaction", details: error.message });
   }
 });
 
 //Deletes transaction
 router.delete("/:transactionId", async (req, res) => {
-  const transactionId = req.params.taskId;
+  const transactionId = req.params.transactionId;
 
   try {
-    const result = await Transaction.destroy({
+    const result = await Transactions.destroy({
       where: { transactionId: transactionId }
     });
 
@@ -79,7 +74,7 @@ router.delete("/:transactionId", async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send({error: "Error deleting transaction", details: err});
+    res.status(500).send({error: "Error deleting transaction", details: error.message});
   }
 });
 
