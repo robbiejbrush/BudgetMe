@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { Budgets } = require('../models');
+const { Budgets, Categories } = require('../models');
 
-// Get all budgets by userId
+//Get all budgets by userId
 router.get("/:userId", async (req, res) => {
     try {
         const budgets = await Budgets.findAll({
-            where: { userId: req.params.userId }
+            where: { userId: req.params.userId },
+            include: [{
+                model: Categories,
+                attributes: ['name']
+            }],
+            order: [
+                [Categories, 'name', 'ASC']
+            ]
         });
         res.json(budgets);
     } catch (error) {

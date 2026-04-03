@@ -2,11 +2,38 @@ const express = require('express');
 const router = express.Router();
 const { RecurringTransactions } = require('../models');
 
-// Get all recurring transactions by userId
+//Get all recurring transactions by userId, ordered by soonest next charge date, with optional type and category filters
 router.get("/:userId", async (req, res) => {
     try {
+        const { userId } = req.params;
+        const { categoryId, type } = req.query;
+
+        const filter = { userId };
+
+        if (categoryId) filter.categoryId = categoryId;
+        if (type) filter.type = type;
+
         const recurringTransactions = await RecurringTransactions.findAll({
-            where: { userId: req.params.userId }
+            where: filter,
+            order: [
+                [
+                    Sequelize.literal(`
+                        CASE 
+                            /* If never charged, the start date is the next charge date */
+                            WHEN lastChargedDate IS NULL THEN startDate
+                            
+                            /* Otherwise, calculate based on the last charge */
+                            WHEN frequency = 'weekly' THEN DATE_ADD(lastChargedDate, INTERVAL 7 DAY)
+                            WHEN frequency = 'biweekly' THEN DATE_ADD(lastChargedDate, INTERVAL 14 DAY)
+                            WHEN frequency = 'monthly' THEN DATE_ADD(lastChargedDate, INTERVAL 1 MONTH)
+                            
+                            /* Fallback to prevent null sorting issues */
+                            ELSE COALESCE(lastChargedDate, startDate)
+                        END
+                    `), 
+                'ASC'
+                ]
+            ]
         });
         res.json(recurringTransactions);
     } catch (error) {

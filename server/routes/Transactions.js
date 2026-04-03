@@ -2,11 +2,20 @@ const express = require('express');
 const router = express.Router();
 const { Transactions } = require('../models');
 
-// Get all transactions by userId
+//Get all transactions by userId, ordered by most recent, with optional type and category filters
 router.get("/:userId", async (req, res) => {
     try {
+        const { userId } = req.params;
+        const { categoryId, type } = req.query;
+
+        const filter = { userId };
+
+        if (categoryId) filter.categoryId = categoryId;
+        if (type) filter.type = type;
+
         const transactions = await Transactions.findAll({
-            where: { userId: req.params.userId }
+            where: filter,
+            order: [['date', 'DESC']]
         });
         res.json(transactions);
     } catch (error) {

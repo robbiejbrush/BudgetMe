@@ -3,7 +3,7 @@ const router = express.Router();
 const { Categories } = require('../models');
 const { Op } = require("sequelize");
 
-// Get all categories by userId and null userId (global categories)
+//Get all categories by userId and null userId (global categories)
 router.get("/:userId", async (req, res) => {
     try {
         const categories = await Categories.findAll({
@@ -12,7 +12,10 @@ router.get("/:userId", async (req, res) => {
                     { userId: req.params.userId },
                     { userId: null }
                 ]
-            }
+            },
+            order: [
+                ['name', 'ASC']
+            ]
         });
         res.json(categories);
     } catch (error) {
