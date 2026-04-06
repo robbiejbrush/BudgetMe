@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+.OverviewHeading {
+    font-size: 30px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    padding-top: 20px;
+    margin-top: 0;
+}
+
+.NetDiv, .BreakdownDiv {
+    background-color: black;
+    border-radius: 15px;
+    padding: 20px;
+    display: inline-block;
+    border: 2px solid #111;
+    box-shadow: 
+        inset 40px 40px 100px rgba(0, 0, 0, 1), 
+        inset -20px -20px 60px rgba(255, 255, 255, 0.2);
+}
+
+/*Net Income Div*/
+.IncomeText, .ExpensesText, .NetText {
+    font-size: 20px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+}
+
+/*Breakdown Div*/
+.CategoryRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.Label {
+  width: 80px; /* Keep names aligned */
+  font-weight: bold;
+  color: white;
+}
+
+.BarBackground {
+  flex-grow: 1; /* Takes up remaining space */
+  background-color: #eee;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 12px;
+}
+
+.BarFill {
+  height: 100%;
+  background-color: #4caf50;
+  width: var(--percent);
+  transition: width 0.5s ease-in-out;
+  height: 100%;
+}
+
+.Percentage {
+  width: 40px;
+  font-size: 0.9rem;
+  text-align: right;
+  color: white;
+}
