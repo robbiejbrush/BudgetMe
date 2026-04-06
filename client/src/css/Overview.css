@@ -8,20 +8,6 @@
     margin-top: 0;
 }
 
-.NetDiv, .BreakdownDiv {
-    background-color: #1b1919;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    margin: 20px;
-}
-
-.NetDiv {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
 .LoadingText {
     font-size: 30px;
     color: orange;
@@ -38,7 +24,26 @@
     margin: 0;
 }
 
+.NetDiv {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    background-color: #1b1919;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+}
+
 /*Breakdown Div*/
+.BreakdownDiv {
+    background-color: #1b1919;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+}
+
 .CategoryRow {
   display: flex;
   align-items: center;
@@ -84,4 +89,14 @@
   color: orange;
   font-family: 'Outfit', sans-serif;
   font-weight: bold;
+}
+
+/*Graphs Div*/
+.GraphsDiv {
+    background-color: #1b1919;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+    height: 400px;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../css/Overview.css'
+import ExpensesPieChart from '../components/ExpensesPieChart';
 
 function Overview() {
   //Get userId to fetch all user info
@@ -47,15 +48,15 @@ function Overview() {
         //Calculate total expenses
         const grandExpenses = Object.values(totalsLookup).reduce((sum, val) => sum + val, 0);
 
-        //Map to final category objects with percentages
+        //Map to final category objects with percentages, omit $0 totals
         const finalData = cats.map(cat => {
           const catTotal = totalsLookup[cat.categoryId] || 0;
           return {
             ...cat,
             total: catTotal,
-            percentage: grandExpenses > 0 ? ((catTotal / grandExpenses) * 100).toFixed(1) : 0
+            percentage: grandExpenses > 0 ? parseFloat(((catTotal / grandExpenses) * 100).toFixed(1)) : 0
           };
-        });
+        }).filter(cat => cat.total > 0);
 
         //Calculate net
         const grandNet = grandIncome - grandExpenses;
@@ -76,6 +77,8 @@ function Overview() {
 
   if (loading) return <div className= "LoadingText">Loading Data...</div>;
 
+  console.log("Pie Data:", categories)
+  
   return (
     <div>
       <h1 className= "OverviewHeading">Overview</h1>
@@ -107,6 +110,9 @@ function Overview() {
               <span className="Percentage">{cat.percentage}%</span>
             </div>
           ))}
+        </div>
+        <div className= "GraphsDiv">
+          <ExpensesPieChart data= { categories }/>
         </div>
       </div>
     </div>
