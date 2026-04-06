@@ -14,6 +14,8 @@ function Overview() {
 
   const [categories, setCategories] = useState([]);
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [net, setNet] = useState(0);
   const [loading, setLoading] = useState(true);
 
   //Fetch all user's categories and transactions, return totals and perctantages
@@ -31,14 +33,19 @@ function Overview() {
         const cats = catRes.data;
         const trans = transRes.data;
 
+        //Calculate total income
+        const grandIncome = trans
+          .filter(t => t.type === 'income')
+          .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+
         //Sum transactions per category
         const totalsLookup = trans.filter(t => t.type === 'expense').reduce((acc, t) => {
           acc[t.categoryId] = (acc[t.categoryId] || 0) + parseFloat(t.amount);
           return acc;
         }, {});
 
-        //Calculate grand total
-        const grandTotal = Object.values(totalsLookup).reduce((sum, val) => sum + val, 0);
+        //Calculate total expenses
+        const grandExpenses = Object.values(totalsLookup).reduce((sum, val) => sum + val, 0);
 
         //Map to final category objects with percentages
         const finalData = cats.map(cat => {
@@ -46,12 +53,17 @@ function Overview() {
           return {
             ...cat,
             total: catTotal,
-            percentage: grandTotal > 0 ? ((catTotal / grandTotal) * 100).toFixed(1) : 0
+            percentage: grandExpenses > 0 ? ((catTotal / grandExpenses) * 100).toFixed(1) : 0
           };
         });
 
+        //Calculate net
+        const grandNet = grandIncome - grandExpenses;
+
         setCategories(finalData);
-        setTotalExpenses(grandTotal);
+        setTotalExpenses(grandExpenses);
+        setTotalIncome(grandIncome);
+        setNet(grandNet);
         setLoading(false);
       } catch (err) {
         console.error("Axios fetch error:", err);
@@ -62,16 +74,24 @@ function Overview() {
     fetchData();
   }, [userId]);
 
-  if (loading) return <div>Loading Data...</div>;
+  if (loading) return <div className= "LoadingText">Loading Data...</div>;
 
   return (
     <div>
       <h1 className= "OverviewHeading">Overview</h1>
       <div>
         <div className= "NetDiv">
-          <h1 className= "IncomeText">Income: $xxxx.xx</h1>
-          <h1 className= "ExpensesText">Expenses: ${totalExpenses.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
-          <h1 className= "NetText">Net: $xxx.xx</h1>
+          <h1 className= "IncomeText">
+            Income: <span style= {{ color: 'orange' }}>${totalIncome.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          </h1>
+          <h1 className= "ExpensesText">
+            Expenses: <span style= {{ color: 'orange' }}>${totalExpenses.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          </h1>
+          <h1 className= "NetText">
+            Net: <span style={{ color: net >= 0 ? 'green' : 'red' }}>
+              ${net.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+          </h1>
         </div>
         <div className= "BreakdownDiv">
           {categories.filter((cat) => cat.type?.toLowerCase() !== 'income').sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage)).map((cat) => (
@@ -81,7 +101,7 @@ function Overview() {
               <div className="BarBackground">
                 <div 
                   className="BarFill" 
-                  style={{ "--percent": `${cat.percentage}%` }} 
+                  style={{ "--percent": `${parseFloat(cat.percentage)}%` }} 
                 />
               </div>
               <span className="Percentage">{cat.percentage}%</span>
