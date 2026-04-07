@@ -1,11 +1,11 @@
 import React from 'react';
 import { PieChart, Pie, Tooltip, Sector, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['orange', 'black', 'white'];
+const colours = ['orange', 'black', 'white'];
 
 const renderSlice = (props) => {
   const { index, ...others } = props;
-  return <Sector {...others} fill={COLORS[index % COLORS.length]} />;
+  return <Sector {...others} fill={colours[index % colours.length]} />;
 };
 
 const CustomToolTip = ({ active, payload }) => {
@@ -21,7 +21,11 @@ const CustomToolTip = ({ active, payload }) => {
         fontFamily: 'Outfit, sans-serif'
       }}>
         <p style={{ margin: 0, fontWeight: 'bold', color: 'orange' }}>{data.name}</p>
-        <p style={{ margin: 0 }}>Amount: ${data.total.toLocaleString()}</p>
+        <p style={{ margin: 0 }}>Amount: ${data.total.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })
+        }</p>
         <p style={{ margin: 0 }}>Share: {data.percentage}%</p>
       </div>
     );
@@ -38,7 +42,7 @@ const ExpensesPieChart = ({ data }) => {
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth="400px">
         <PieChart>
           <Pie 
             data={sortedData} 
@@ -46,7 +50,7 @@ const ExpensesPieChart = ({ data }) => {
             nameKey="name" 
             cx="50%" 
             cy="50%" 
-            outerRadius={180}
+            outerRadius={178}
             shape={renderSlice} 
             startAngle={90}    
             endAngle={-270}

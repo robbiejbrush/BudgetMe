@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../css/Overview.css'
 import ExpensesPieChart from '../components/ExpensesPieChart';
+import MonthlyBarChart from '../components/MonthlyBarChart';
 
 function Overview() {
   //Get userId to fetch all user info
@@ -17,9 +18,11 @@ function Overview() {
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
   const [net, setNet] = useState(0);
+  const [monthlyExpenses, setMonthlyExpenses] = useState(0);
+
   const [loading, setLoading] = useState(true);
 
-  //Fetch all user's categories and transactions, return totals and perctantages
+  //Fetch all user's categories and transactions, calculate page data
   useEffect(() => {
     if (!userId) return;
 
@@ -60,7 +63,30 @@ function Overview() {
 
         //Calculate net
         const grandNet = grandIncome - grandExpenses;
+        
+        //Generate month and expense objects for bar graph
+        //Initialize an array with all 12 months (ensures bars show even if $0)
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+        const monthlyDataMap = monthNames.reduce((acc, month) => {
+          acc[month] = 0;
+          return acc;
+        }, {});
+
+        //Sum up expenses per month
+        trans.filter(t => t.type === 'expense').forEach(t => {
+          const date = new Date(t.date); // Assuming your DB has a 'date' field
+          const month = monthNames[date.getMonth()];
+          monthlyDataMap[month] += parseFloat(t.amount);
+        });
+
+        //Convert the map into the array Recharts needs
+        const barChartData = monthNames.map(month => ({
+          month: month,
+          expenses: parseFloat(monthlyDataMap[month].toFixed(2))
+        }));
+        
+        setMonthlyExpenses(barChartData); 
         setCategories(finalData);
         setTotalExpenses(grandExpenses);
         setTotalIncome(grandIncome);
@@ -78,7 +104,7 @@ function Overview() {
   if (loading) return <div className= "LoadingText">Loading Data...</div>;
 
   console.log("Pie Data:", categories)
-  
+
   return (
     <div>
       <h1 className= "OverviewHeading">Overview</h1>
@@ -96,6 +122,10 @@ function Overview() {
             </span>
           </h1>
         </div>
+        <div className= "GraphsDiv">
+          <ExpensesPieChart data= { categories }/>
+          <MonthlyBarChart data= { monthlyExpenses }/>
+        </div>
         <div className= "BreakdownDiv">
           {categories.filter((cat) => cat.type?.toLowerCase() !== 'income').sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage)).map((cat) => (
             <div key={cat.categoryId} className="CategoryRow">
@@ -110,9 +140,6 @@ function Overview() {
               <span className="Percentage">{cat.percentage}%</span>
             </div>
           ))}
-        </div>
-        <div className= "GraphsDiv">
-          <ExpensesPieChart data= { categories }/>
         </div>
       </div>
     </div>
