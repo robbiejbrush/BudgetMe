@@ -1,18 +1,13 @@
 import React from 'react';
 import '../../css/Overview.css'
+import { monthNamesFull, getYearOptions } from '../../utils/dateHelpers';
 
 const FilterBar = ({ selectedMonth, setSelectedMonth, selectedYear, setSelectedYear}) => {
 
-  const currentYear = new Date().getUTCFullYear();
-  const yearOptions = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3, currentYear - 4, currentYear - 5];  
-
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"
-  ];
+  const yearOptions = getYearOptions(5); 
 
   return (
-    <div className= "FilterDiv">
+        <div className= "FilterDiv">
           <select 
             className= "MonthSelect"
             value={selectedMonth} 
@@ -21,7 +16,7 @@ const FilterBar = ({ selectedMonth, setSelectedMonth, selectedYear, setSelectedY
               setSelectedMonth(val === "all" ? "all" : parseInt(val));
             }}>
             <option value="all">All Months</option>
-            {monthNames.map((m, i) => (
+            {monthNamesFull.map((m, i) => (
               <option key={m} value={i}>{m}</option>
             ))}
           </select>

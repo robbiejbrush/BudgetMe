@@ -16,6 +16,12 @@
   color: orange;
   border-radius: 5px;
   font-family: 'Outfit', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+.MonthSelect:hover, .YearSelect:hover {
+  cursor: pointer;
 }
 
 /*Heading Div*/
@@ -31,20 +37,17 @@
 
 .FilterDiv {
   flex: 1;
-  max-width: 50px;
   border-radius: 15px;
-  background-color: #1b1919;
   color: orange;
   font-family: 'Outfit', sans-serif;
+  justify-content: flex-start;
+  display: flex;
+  gap: 10px;
 }
 
-.EmptyDiv, .FilterDiv {
+.EmptyDiv {
   flex: 1;
   display: flex;
-}
-
-.FilterDiv {
-  justify-content: flex-start;
 }
 
 .OverviewHeading {
