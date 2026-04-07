@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import '../css/Overview.css'
 import ExpensesPieChart from '../components/ExpensesPieChart';
 import MonthlyBarChart from '../components/MonthlyBarChart';
+import FilterBar from '../components/Overview/FilterBar';
 
 function Overview() {
   //Get userId to fetch all user info
@@ -135,34 +136,12 @@ function Overview() {
   return (
     <div>
       <div className= "HeaderDiv">
-        <div className= "BtnDiv">
-          <select 
-            className= "MonthSelect"
-            value={selectedMonth} 
-            onChange={(e) => {
-              const val = e.target.value;
-              setSelectedMonth(val === "all" ? "all" : parseInt(val));
-            }}>
-            <option value="all">All Months</option>
-            {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m, i) => (
-              <option key={m} value={i}>{m}</option>
-            ))}
-          </select>
-
-          <select 
-            className= "YearSelect"
-            value={selectedYear} 
-            onChange={(e) => setSelectedYear(parseInt(e.target.value))}>
-            {[new Date().getUTCFullYear() - 5,
-              new Date().getUTCFullYear() - 4,
-              new Date().getUTCFullYear() - 3, 
-              new Date().getUTCFullYear() - 2, 
-              new Date().getUTCFullYear() - 1, 
-              new Date().getUTCFullYear()].map(y => (
-              <option key={y} value={y}>{y}</option>
-            ))}
-          </select>
-        </div>
+        <FilterBar
+          selectedMonth={selectedMonth} 
+          setSelectedMonth={setSelectedMonth} 
+          selectedYear={selectedYear} 
+          setSelectedYear={setSelectedYear}
+        />
         <h1 className= "OverviewHeading">Overview</h1>
         <div className= "EmptyDiv"/>
       </div>
