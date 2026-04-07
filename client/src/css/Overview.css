@@ -1,19 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+.LoadingText, .NoDataMessage {
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0;
+    min-height: 70vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.MonthSelect, .YearSelect {
+  background-color: #1b1919;
+  color: orange;
+  border-radius: 5px;
+}
+
+/*Heading Div*/
+.HeaderDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.FilterBtn {
+  flex: 1;
+  max-width: 50px;
+  border-radius: 15px;
+  background-color: #1b1919;
+  color: orange;
+  font-family: 'Outfit', sans-serif;
+}
+
+.FilterBtn:hover {
+  cursor: pointer;
+}
+
+.EmptyDiv, .BtnDiv {
+  flex: 1;
+  display: flex;
+}
+
+.BtnDiv {
+  justify-content: flex-start;
+}
+
 .OverviewHeading {
     font-size: 30px;
     color: orange;
     font-family: 'Outfit', sans-serif;
-    padding-top: 20px;
     margin-top: 0;
-}
-
-.LoadingText {
-    font-size: 30px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
-    padding-top: 20px;
-    margin-top: 0;
+    flex: 1;
+    margin-bottom: 0px;
+    flex: 0 0 auto;
+    text-align: center;
 }
 
 /*Net Income Div*/
