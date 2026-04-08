@@ -1,4 +1,3 @@
-import { jwtDecode } from 'jwt-decode';
 import '../css/Overview.css'
 import ExpensesPieChart from '../components/Overview/ExpensesPieChart';
 import MonthlyBarChart from '../components/Overview/MonthlyBarChart';

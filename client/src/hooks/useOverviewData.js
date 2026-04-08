@@ -3,7 +3,7 @@ import axios from 'axios';
 import { monthNamesShort } from '../utils/dateHelpers';
 
 export const useOverviewData = (userId) => {
-    const [rawCategories, setRawCategories] = useState([]);
+      const [rawCategories, setRawCategories] = useState([]);
       const [displayCategories, setDisplayCategories] = useState([]);    
       const [rawTransactions, setRawTransactions] = useState([]);
       const [totalExpenses, setTotalExpenses] = useState(0);
@@ -14,7 +14,7 @@ export const useOverviewData = (userId) => {
       const [selectedYear, setSelectedYear] = useState(new Date().getUTCFullYear());
       const [loading, setLoading] = useState(true);
 
-    //Fetch all user's categories and transactions
+      //Fetch all user's categories and transactions
       useEffect(() => {
         if (!userId) return;
     
