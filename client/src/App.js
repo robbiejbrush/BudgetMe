@@ -4,6 +4,10 @@ import { jwtDecode } from "jwt-decode";
 import { useState } from 'react';
 import Login from './pages/Login.js'
 import Overview from './pages/Overview.js';
+import Transactions from './pages/Transactions.js';
+import Budgets from './pages/Budgets.js';
+import Settings from './pages/Settings.js';
+import NavBar from './components/NavBar.js';
 
 //Get access token from cookies method
 const getAccessToken = () => document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];
@@ -35,17 +39,7 @@ function Navigation() {
   
   //App bar
   return (
-    <div className="NavBar">
-      <div style={{ flex: 1, textAlign: 'left' }}>
-        {/*Burger menu*/}
-      </div>
-      <div>
-        <h1 className = "AppBarHeading"> { pageName } </h1>
-      </div>
-      <div style={{ flex: 1, textAlign: 'right' }}>
-        <h1 className= "AppBarUser"> { userName } </h1>
-      </div>
-    </div>
+    <NavBar pageName={ pageName } userName={ userName }/>
   );
 }
 
@@ -69,6 +63,18 @@ function App() {
             <Route 
               path="/overview" 
               element={isAuthenticated ? <Overview /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/transactions" 
+              element={isAuthenticated ? <Transactions /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/budgets" 
+              element={isAuthenticated ? <Budgets /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/settings" 
+              element={isAuthenticated ? <Settings /> : <Navigate to="/login" replace />} 
             />
           </Routes>
       </Router>
