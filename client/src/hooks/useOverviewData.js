@@ -1,42 +1,20 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { monthNamesShort } from '../utils/dateHelpers';
+import { useUserData } from './useUserData';
 
 export const useOverviewData = (userId) => {
-      const [rawCategories, setRawCategories] = useState([]);
       const [displayCategories, setDisplayCategories] = useState([]);    
-      const [rawTransactions, setRawTransactions] = useState([]);
       const [totalExpenses, setTotalExpenses] = useState(0);
       const [totalIncome, setTotalIncome] = useState(0);
       const [net, setNet] = useState(0);
       const [monthlyExpenses, setMonthlyExpenses] = useState([]);
       const [selectedMonth, setSelectedMonth] = useState("all");
       const [selectedYear, setSelectedYear] = useState(new Date().getUTCFullYear());
-      const [loading, setLoading] = useState(true);
-
-      //Fetch all user's categories and transactions
-      useEffect(() => {
-        if (!userId) return;
-    
-        const fetchData = async () => {
-          try {
-            //Get all user's transactions and categories
-            const [catRes, transRes] = await Promise.all([
-              axios.get(`http://localhost:3001/categories/${userId}`),
-              axios.get(`http://localhost:3001/transactions/${userId}`)
-            ]);
-    
-            setRawCategories(catRes.data);
-            setRawTransactions(transRes.data);
-    
-            setLoading(false);
-          } catch (err) {
-            console.error("Axios fetch error:", err);
-            setLoading(false);
-          }
-        };
-        fetchData();
-      }, [userId]);
+      const {
+        rawCategories,
+        rawTransactions,
+        loading
+      } = useUserData(userId);
 
       //Runs calculations on received data for displaying
         useEffect(() => {

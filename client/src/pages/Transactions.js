@@ -1,15 +1,16 @@
 import React from 'react';
 import '../css/Transactions.css'
-import { useTransactionsData } from '../hooks/useTransactionsData';
 import { useUserId } from '../hooks/useAuth';
+import { useUserData } from '../hooks/useUserData';
 
 function Transactions() {
   const userId = useUserId();
 
   const {
     rawCategories,
-    rawTransactions
-  } = useTransactionsData(userId);
+    rawTransactions,
+    loading
+  } = useUserData(userId);
   
   return (
     <div>
@@ -24,7 +25,6 @@ function Transactions() {
           <span>Counterparty</span>
           <span>Category</span>
         </div>
-        
         {(() => {
           let lastMonth = "";
 
@@ -46,7 +46,6 @@ function Transactions() {
                 </div>
               );
             }
-
             return (
               <React.Fragment key={transaction.transactionId}>
                 {monthHeader}
