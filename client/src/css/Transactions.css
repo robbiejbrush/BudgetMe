@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/*Heading Div*/
+.HeaderDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.EmptyDiv {
+  flex: 1;
+  display: flex;
+}
+
+.TransHeading {
+    font-size: 30px;
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0;
+    flex: 1;
+    margin-bottom: 0px;
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+/*Trans Div*/
+.TransDiv {
+    display: flex;
+    justify-content: center;
+    background-color: #1b1919;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+}

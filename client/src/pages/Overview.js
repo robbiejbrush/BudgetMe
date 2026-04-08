@@ -6,16 +6,11 @@ import FilterBar from '../components/Overview/FilterBar';
 import SummaryStats from '../components/Overview/SummaryStats';
 import CategoriesBreakdown from '../components/Overview/CategoriesBreakdown';
 import { useOverviewData } from '../hooks/useOverviewData';
+import { useUserId } from '../hooks/useAuth';
 
 function Overview() {
-  //Get userId to fetch all user info
-  let userId = null;
-  const token = document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];
-  if (token) {
-      const decoded = jwtDecode(token);
-      userId = decoded.userId;
-  }
-
+  const userId = useUserId();
+  
   const {
     displayCategories,
     totalIncome,
