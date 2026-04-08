@@ -37,7 +37,6 @@ function Navigation() {
     pageName = "BudgetMe"
   }
   
-  //App bar
   return (
     <NavBar pageName={ pageName } userName={ userName }/>
   );

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/*Nav Bar*/
+.NavBar {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: space-between; 
+  background-color: black;
+  padding: 0 20px; 
+  border-bottom: 2px solid orange;
+}
+
+.SideBarDiv {
+  flex: 1;
+  position: relative; /* Establish positioning context for the child */
+  height: 100%;       /* Match the parent's height */
+  display: flex;      /* Allows for flex-based centering */
+  align-items: center; 
+}
+
+.NavBar > div {
+  display: flex;
+  align-items: center;
+}
+
+.NavBar > div:nth-child(2) {
+  justify-content: center;
+  flex: 2;
+}
+
+.NavBar > div:nth-child(3) {
+  flex: 1;
+  display: flex;             
+  justify-content: flex-end; 
+  text-align: right;
+}
+
+.AppBarHeading {
+  font-size: 60px;
+  color: orange;
+  font-family: 'Outfit', sans-serif;
+}
+.AppBarUser {
+  font-size: 30px;
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  margin-right: 0px;
+}

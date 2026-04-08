@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+.bm-burger-button {
+    position: absolute;
+    width: 30px;
+    height: 24px;
+    left: 0;          
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bm-burger-bars {
+  background: white;
+  border-radius: 15px;
+}
+.bm-burger-bars-hover {
+  background: orange;
+}
+
+.bm-cross {
+  background: white;
+}
+
+.bm-menu-wrap {
+  width: auto !important;
+  height: auto !important;    
+  min-width: 125px;
+}
+
+.bm-menu {
+  background: #1b1919;
+  border-radius: 15px;
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+  border: 1px solid orange;
+}
+
+.bm-item-list {
+  display: flex !important;
+  flex-direction: column; 
+  gap: 10px;          
+}
+
+.menu-item {
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    text-decoration: none !important;
+    font-weight: bold;
+}
