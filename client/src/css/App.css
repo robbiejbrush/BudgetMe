@@ -11,3 +11,14 @@ body, html {
 * { 
   box-sizing: border-box; 
 }
+
+.LoadingText, .NoDataMessage {
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0;
+    min-height: 70vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
