@@ -49,3 +49,14 @@
   font-family: 'Outfit', sans-serif;
   margin-right: 0px;
 }
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .AppBarUser {
+    font-size: 1.0rem;
+  }
+
+  .AppBarHeading {
+    font-size: 30px;
+  }
+}

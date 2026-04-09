@@ -68,6 +68,28 @@
     align-items: center;
 }
 
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .TransactionRow {
+    font-size: 0.8rem;
+    gap: 5px;
+    padding: 8px 4px;
+  }
+
+  .Counterparty, .Category {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 400px) {
+  .TransactionRow {
+    font-size: 0.7rem;
+    grid-template-columns: 0.8fr 0.8fr 1fr 1fr; /* Tighten columns */
+  }
+}
+
 .TransactionRow span {
   text-align: left;
   overflow: hidden;
