@@ -85,7 +85,7 @@
 }
 
 /* Mobile Adjustments */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .TransactionRow {
     font-size: 0.7rem;
     gap: 5px;

@@ -1,12 +1,15 @@
 import React from 'react';
-import '../css/Transactions.css'
-import { useUserId } from '../hooks/useAuth';
-import { useUserData } from '../hooks/useUserData';
-import TransDisplay from '../components/Transactions/TransDisplay';
-import { useTransactionFilter } from '../hooks/useTransactionFilter';
-import FilterBar from '../components/FilterBar';
+import '../Transactions/Transactions.css'
+import { useUserId } from '../../hooks/useAuth';
+import { useUserData } from '../../hooks/useUserData';
+import TransDisplay from '../../components/Transactions/TransDisplay';
+import { useTransactionFilter } from '../../hooks/useTransactionFilter';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import { useNavigate } from 'react-router-dom';
 
 function Transactions() {
+  const navigate = useNavigate();
+
   const userId = useUserId();
 
   const {
@@ -46,7 +49,9 @@ function Transactions() {
         />
         <h1 className= "TransHeading">Transactions</h1>
         <div className= "ButtonDiv">
-          <button className= "AddTransBtn">
+          <button 
+            className= "AddTransBtn"
+            onClick={() => navigate('/addTransaction')}>
             Add Transaction
           </button>
         </div>

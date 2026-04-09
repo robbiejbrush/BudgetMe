@@ -1,13 +1,14 @@
-import './css/App.css';
+import './App.css';
 import {BrowserRouter as Router, Route, Routes, useLocation, Navigate} from 'react-router';
 import { jwtDecode } from "jwt-decode";
 import { useState } from 'react';
-import Login from './pages/Login.js'
-import Overview from './pages/Overview.js';
-import Transactions from './pages/Transactions.js';
+import Login from './pages/Login/Login.js'
+import Overview from './pages/Overview/Overview.js';
+import Transactions from './pages/Transactions/Transactions.js';
 import Budgets from './pages/Budgets.js';
 import Settings from './pages/Settings.js';
-import NavBar from './components/NavBar.js';
+import NavBar from './components/NavBar/NavBar.js';
+import AddTransaction from './pages/AddTransaction.js';
 
 //Get access token from cookies method
 const getAccessToken = () => document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];
@@ -74,6 +75,10 @@ function App() {
             <Route 
               path="/settings" 
               element={isAuthenticated ? <Settings /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/addTransaction" 
+              element={isAuthenticated ? <AddTransaction /> : <Navigate to="/login" replace />} 
             />
           </Routes>
       </Router>

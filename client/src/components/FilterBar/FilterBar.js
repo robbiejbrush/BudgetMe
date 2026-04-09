@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/FilterBar.css'
-import { monthNamesFull, getYearOptions } from '../utils/dateHelpers';
+import '../FilterBar/FilterBar.css'
+import { monthNamesFull, getYearOptions } from '../../utils/dateHelpers';
 
 const FilterBar = ({ 
   selectedMonth, setSelectedMonth, 

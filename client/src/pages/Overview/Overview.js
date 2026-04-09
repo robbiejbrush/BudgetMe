@@ -1,11 +1,11 @@
-import '../css/Overview.css'
-import ExpensesPieChart from '../components/Overview/ExpensesPieChart';
-import MonthlyBarChart from '../components/Overview/MonthlyBarChart';
-import FilterBar from '../components/FilterBar';
-import SummaryStats from '../components/Overview/SummaryStats';
-import CategoriesBreakdown from '../components/Overview/CategoriesBreakdown';
-import { useOverviewData } from '../hooks/useOverviewData';
-import { useUserId } from '../hooks/useAuth';
+import '../Overview/Overview.css'
+import ExpensesPieChart from '../../components/Overview/ExpensesPieChart';
+import MonthlyBarChart from '../../components/Overview/MonthlyBarChart';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import SummaryStats from '../../components/Overview/SummaryStats';
+import CategoriesBreakdown from '../../components/Overview/CategoriesBreakdown';
+import { useOverviewData } from '../../hooks/useOverviewData';
+import { useUserId } from '../../hooks/useAuth';
 
 function Overview() {
   const userId = useUserId();

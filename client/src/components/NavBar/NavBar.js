@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/NavBar.css'
-import Sidebar from './SidebarMenu';
+import '../NavBar/NavBar.css'
+import Sidebar from '../SidebarMenu/SidebarMenu';
 
 function NavBar({ pageName, userName }) {
   return (

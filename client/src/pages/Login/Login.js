@@ -1,6 +1,5 @@
 import React from 'react';
-import '../css/Login.css';
-import '../css/App.css';
+import '../Login/Login.css';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
