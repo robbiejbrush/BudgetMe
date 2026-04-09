@@ -8,7 +8,7 @@ import Transactions from './pages/Transactions/Transactions.js';
 import Budgets from './pages/Budgets.js';
 import Settings from './pages/Settings.js';
 import NavBar from './components/NavBar/NavBar.js';
-import AddTransaction from './pages/AddTransaction.js';
+import AddTransaction from './pages/AddTransactions/AddTransactions.js';
 
 //Get access token from cookies method
 const getAccessToken = () => document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+.AddTransHeading {
+    font-size: 30px;
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.FieldsDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-top: 2px solid orange;
+
+}
+
+.FieldInput {
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.Label {
+    color: orange;
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+
+.Error {
+    color: red;
+    font-family: 'Outfit', sans-serif;
+    padding-top: 10px;
+}
+
+.InputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.CurrencySymbol {
+  position: absolute;
+  left: 2px;        
+  top: 50%;           
+  transform: translateY(-50%);
+  color: orange;
+  font-family: 'Outfit', sans-serif;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.AmountInput {
+  padding-left: 25px !important;
+  width: 75px;
+}
+
+.SubmitButton {
+    margin-top: 20px;
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.SubmitButton:hover {
+    cursor: pointer;
+}
