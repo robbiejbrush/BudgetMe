@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.MonthSelect, .YearSelect {
-  background-color: #1b1919;
-  color: orange;
-  border-radius: 5px;
-  font-family: 'Outfit', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  border: none;
-}
-
-.MonthSelect:hover, .YearSelect:hover {
-  cursor: pointer;
-}
-
 /*Heading Div*/
 .HeaderDiv {
   display: flex;
@@ -22,16 +9,6 @@
   padding-right: 20px;
   padding-left: 20px;
   width: 100%;
-}
-
-.FilterDiv {
-  flex: 1;
-  border-radius: 15px;
-  color: orange;
-  font-family: 'Outfit', sans-serif;
-  justify-content: flex-start;
-  display: flex;
-  gap: 10px;
 }
 
 .EmptyDiv {

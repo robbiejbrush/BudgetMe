@@ -1,8 +1,14 @@
 import React from 'react';
-import '../../css/Overview.css'
+import '../../css/FilterBar.css'
 import { monthNamesFull, getYearOptions } from '../../utils/dateHelpers';
 
-const FilterBar = ({ selectedMonth, setSelectedMonth, selectedYear, setSelectedYear}) => {
+const FilterBar = ({ 
+  selectedMonth, setSelectedMonth, 
+  selectedYear, setSelectedYear,
+  selectedType, setSelectedType,
+  selectedCategory, setSelectedCategory,
+  categories = []
+}) => {
 
   const yearOptions = getYearOptions(5); 
 
@@ -29,6 +35,31 @@ const FilterBar = ({ selectedMonth, setSelectedMonth, selectedYear, setSelectedY
               <option key={y} value={y}>{y}</option>
             ))}
           </select>
+          {setSelectedType && (
+            <select 
+              className= "TypeSelect"
+              value={selectedType} 
+              onChange={(e) => setSelectedType(e.target.value)}>
+              <option value="all">All Types</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          )}
+
+          {setSelectedCategory && (
+            <select 
+              className= "CategorySelect"
+              value={selectedCategory} 
+              onChange={(e) => {
+                const val = e.target.value;
+                setSelectedCategory(val === "all" ? "all" : parseInt(val))}
+              }>
+              <option value="all">All Categories</option>
+              {categories.map(cat => (
+                <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
+              ))}
+            </select>
+          )}
         </div>
   );
 }

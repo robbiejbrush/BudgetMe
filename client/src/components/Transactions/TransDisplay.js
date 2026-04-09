@@ -15,7 +15,9 @@ function TransDisplay({ filteredTransactions, rawCategories }) {
           let lastMonth = "";
 
           return filteredTransactions && filteredTransactions.map((transaction) => {
-            const category = rawCategories[transaction.categoryId];
+            const category = rawCategories.find(
+              (cat) => Number(cat.categoryId) === Number(transaction.categoryId)
+            );
             const isExpense = transaction.type === 'expense';
             
             //Format the date to "Month Year"

@@ -23,7 +23,8 @@ const categoryList = [
   { name: "Maintenance & Repairs", type: "expense" },
   { name: "Taxes", type: "expense" },
   { name: "Shopping & Retail", type: "expense" },
-  { name: "Charity & Donations", type: "expense" }
+  { name: "Charity & Donations", type: "expense" },
+  { name: "Other", type: "expense"}
 ];
 
 module.exports = {
