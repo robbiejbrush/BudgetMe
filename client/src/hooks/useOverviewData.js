@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { monthNamesShort } from '../utils/dateHelpers';
 import { useUserData } from './useUserData';
+import { useTransactionFilter } from './useTransactionFilter';
 
 export const useOverviewData = (userId) => {
       const [displayCategories, setDisplayCategories] = useState([]);    
@@ -8,37 +9,30 @@ export const useOverviewData = (userId) => {
       const [totalIncome, setTotalIncome] = useState(0);
       const [net, setNet] = useState(0);
       const [monthlyExpenses, setMonthlyExpenses] = useState([]);
-      const [selectedMonth, setSelectedMonth] = useState("all");
-      const [selectedYear, setSelectedYear] = useState(new Date().getUTCFullYear());
       const {
         rawCategories,
         rawTransactions,
         loading
       } = useUserData(userId);
+      const {
+        selectedMonth,
+        setSelectedMonth,
+        selectedYear,
+        setSelectedYear,
+        filteredTransactions
+      } = useTransactionFilter(rawTransactions);
 
       //Runs calculations on received data for displaying
         useEffect(() => {
             if (!rawTransactions.length) return;
 
-            //Filter transactions for selected month/year
-            const filteredTrans = rawTransactions.filter(t => {
-            const d = new Date(t.date);
-            const yearMatch = d.getUTCFullYear() === parseInt(selectedYear);
-            
-            if (selectedMonth === "all") {
-                return yearMatch; 
-            } else {
-                return yearMatch && d.getUTCMonth() === parseInt(selectedMonth); 
-            }
-            });
-
             //Calculate total income
-            const grandIncome = filteredTrans
+            const grandIncome = filteredTransactions
             .filter(t => t.type === 'income')
             .reduce((sum, t) => sum + parseFloat(t.amount), 0);
 
             //Sum transactions per category
-            const totalsLookup = filteredTrans.filter(t => t.type === 'expense').reduce((acc, t) => {
+            const totalsLookup = filteredTransactions.filter(t => t.type === 'expense').reduce((acc, t) => {
             acc[t.categoryId] = (acc[t.categoryId] || 0) + parseFloat(t.amount);
             return acc;
             }, {});
@@ -83,7 +77,7 @@ export const useOverviewData = (userId) => {
             setTotalExpenses(grandExpenses);
             setTotalIncome(grandIncome);
             setNet(grandNet);
-        }, [rawTransactions, rawCategories, selectedMonth, selectedYear]);
+        }, [rawTransactions, rawCategories, selectedMonth, selectedYear, filteredTransactions]);
 
       return {
         displayCategories,

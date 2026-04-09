@@ -15,7 +15,10 @@ export const getYearOptions = (back = 5) => {
 };
 
 export const formatCurrency = (amount) => {
-  return amount.toLocaleString(undefined, { 
+  const value = Number(amount);
+  if (isNaN(value)) return "0.00";
+  
+  return value.toLocaleString(undefined, { 
     minimumFractionDigits: 2, 
     maximumFractionDigits: 2 
   });

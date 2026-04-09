@@ -1,6 +1,7 @@
 import React from 'react';
+import { formatCurrency } from '../../utils/dateHelpers';
 
-function TransDisplay({ rawTransactions, rawCategories }) {
+function TransDisplay({ filteredTransactions, rawCategories }) {
 
     return (
         <div className="TransDiv">
@@ -13,7 +14,7 @@ function TransDisplay({ rawTransactions, rawCategories }) {
         {(() => {
           let lastMonth = "";
 
-          return rawTransactions && rawTransactions.map((transaction) => {
+          return filteredTransactions && filteredTransactions.map((transaction) => {
             const category = rawCategories[transaction.categoryId];
             const isExpense = transaction.type === 'expense';
             
@@ -37,7 +38,7 @@ function TransDisplay({ rawTransactions, rawCategories }) {
                 <div className="TransactionRow">
                   <span className="Date">{transaction.date}</span>
                   <span className="Amount" style={{ color: isExpense ? 'red' : 'green' }}>
-                    {isExpense ? '-' : '+'}${transaction.amount}
+                    {isExpense ? '-' : '+'}${formatCurrency(transaction.amount)}
                   </span>
                   <span className="Counterparty">{transaction.counterparty}</span>
                   <span className="Category">{category?.name || 'Uncategorized'}</span>
