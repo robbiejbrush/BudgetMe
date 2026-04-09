@@ -4,7 +4,7 @@ import { useUserId } from '../hooks/useAuth';
 import { useUserData } from '../hooks/useUserData';
 import TransDisplay from '../components/Transactions/TransDisplay';
 import { useTransactionFilter } from '../hooks/useTransactionFilter';
-import FilterBar from '../components/Overview/FilterBar';
+import FilterBar from '../components/FilterBar';
 
 function Transactions() {
   const userId = useUserId();
@@ -45,7 +45,11 @@ function Transactions() {
           categories={visibleCategories}
         />
         <h1 className= "TransHeading">Transactions</h1>
-        <div className= "EmptyDiv"/>
+        <div className= "ButtonDiv">
+          <button className= "AddTransBtn">
+            Add Transaction
+          </button>
+        </div>
       </div>
       {filteredTransactions.length === 0 ? (
         <div className="NoDataMessage">

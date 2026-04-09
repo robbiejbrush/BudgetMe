@@ -1,7 +1,7 @@
 import '../css/Overview.css'
 import ExpensesPieChart from '../components/Overview/ExpensesPieChart';
 import MonthlyBarChart from '../components/Overview/MonthlyBarChart';
-import FilterBar from '../components/Overview/FilterBar';
+import FilterBar from '../components/FilterBar';
 import SummaryStats from '../components/Overview/SummaryStats';
 import CategoriesBreakdown from '../components/Overview/CategoriesBreakdown';
 import { useOverviewData } from '../hooks/useOverviewData';
