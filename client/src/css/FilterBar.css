@@ -9,7 +9,7 @@
   border: none;
 }
 
-.MonthSelect:hover, .YearSelect:hover {
+.MonthSelect:hover, .YearSelect:hover, .TypeSelect:hover, .CategorySelect:hover {
   cursor: pointer;
 }
 
