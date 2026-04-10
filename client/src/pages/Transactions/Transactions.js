@@ -1,11 +1,12 @@
 import React from 'react';
 import '../Transactions/Transactions.css'
 import { useUserId } from '../../hooks/useAuth';
-import { useUserData } from '../../hooks/useUserData';
 import TransDisplay from '../../components/Transactions/TransDisplay';
 import { useTransactionFilter } from '../../hooks/useTransactionFilter';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import { useNavigate } from 'react-router-dom';
+import { useCategories } from '../../hooks/useCategories';
+import { useTransactions } from '../../hooks/useTransactions';
 
 function Transactions() {
   const navigate = useNavigate();
@@ -14,9 +15,12 @@ function Transactions() {
 
   const {
     rawCategories,
+    loading: categoriesLoading
+  } = useCategories(userId);
+  const {
     rawTransactions,
-    loading
-  } = useUserData(userId);
+    loading: transactionsLoading
+  } = useTransactions(userId);
   const {
     selectedMonth, setSelectedMonth,
     selectedYear, setSelectedYear,
@@ -31,7 +35,7 @@ function Transactions() {
     return cat.type === selectedType;       
   });
 
-  if (loading) return <div className= "LoadingText"><h2>Loading Data...</h2></div>;
+  if (categoriesLoading || transactionsLoading) return <div className= "LoadingText"><h2>Loading Data...</h2></div>;
 
   return (
     <div>

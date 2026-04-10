@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { monthNamesShort } from '../utils/dateHelpers';
-import { useUserData } from './useUserData';
 import { useTransactionFilter } from './useTransactionFilter';
+import { useCategories } from './useCategories';
+import { useTransactions } from './useTransactions';
 
 export const useOverviewData = (userId) => {
       const [displayCategories, setDisplayCategories] = useState([]);    
@@ -11,9 +12,12 @@ export const useOverviewData = (userId) => {
       const [monthlyExpenses, setMonthlyExpenses] = useState([]);
       const {
         rawCategories,
+        loading: categoriesLoading
+      } = useCategories(userId);
+      const {
         rawTransactions,
-        loading
-      } = useUserData(userId);
+        loading: transactionsLoading
+      } = useTransactions(userId);
       const {
         selectedMonth,
         setSelectedMonth,
@@ -89,6 +93,7 @@ export const useOverviewData = (userId) => {
         setSelectedMonth, 
         selectedYear,    
         setSelectedYear,
-        loading
+        categoriesLoading,
+        transactionsLoading
       }
 }

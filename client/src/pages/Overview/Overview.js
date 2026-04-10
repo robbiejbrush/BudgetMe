@@ -20,10 +20,11 @@ function Overview() {
     setSelectedMonth,
     selectedYear,
     setSelectedYear,
-    loading
+    categoriesLoading,
+    transactionsLoading
   } = useOverviewData(userId);
 
-  if (loading) return <div className= "LoadingText"><h2>Loading Data...</h2></div>;
+  if (categoriesLoading || transactionsLoading) return <div className= "LoadingText"><h2>Loading Data...</h2></div>;
 
   return (
     <div>

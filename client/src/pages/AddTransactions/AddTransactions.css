@@ -16,6 +16,8 @@
     align-items: center;
     flex-direction: column;
     border-top: 2px solid orange;
+    padding-bottom: 20px;
+    margin-top: 20px;
 
 }
 
@@ -29,7 +31,7 @@
 }
 
 .Label {
-    color: orange;
+    color: white;
     padding-bottom: 10px;
     padding-top: 20px;
 }
@@ -71,8 +73,23 @@
     font-family: 'Outfit', sans-serif;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .SubmitButton:hover {
     cursor: pointer;
+}
+
+.HowMany {
+    padding-right: 20px;
+}
+
+.TransHeading {
+    padding-top: 20px;
+    font-size: 25px;
+}
+.HowManyInput {
+    width: 50px;
 }
