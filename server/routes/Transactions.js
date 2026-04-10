@@ -26,17 +26,14 @@ router.get("/:userId", async (req, res) => {
 
 //Creates transaction
 router.post("/create", async (req, res) => {
-    const transactionData = req.body;
+    const { transactions } = req.body;
     
     try {
-        const newTransaction = await Transactions.create({
-            ...transactionData
-    });
-        res.json(newTransaction);
-
+        const newTransactions = await Transactions.bulkCreate(transactions);
+        res.json(newTransactions);
     } catch (error) {
-        console.error("Error creating transaction: ", error);
-        res.status(500).json({ error: "Failed to create transaction." });
+        console.error("Error creating transactions: ", error);
+        res.status(500).json({ error: "Failed to create transactions." });
     }
 });
 
