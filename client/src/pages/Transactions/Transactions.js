@@ -19,7 +19,8 @@ function Transactions() {
   } = useCategories(userId);
   const {
     rawTransactions,
-    loading: transactionsLoading
+    loading: transactionsLoading,
+    setRawTransactions
   } = useTransactions(userId);
   const {
     selectedMonth, setSelectedMonth,
@@ -65,7 +66,7 @@ function Transactions() {
           <h2>There are no transactions for this time.</h2>
         </div>
       ) : (
-      <TransDisplay filteredTransactions={ filteredTransactions } rawCategories={ rawCategories }/>
+      <TransDisplay filteredTransactions={ filteredTransactions } rawCategories={ rawCategories } setRawTransactions={ setRawTransactions }/>
       )
       }
     </div>

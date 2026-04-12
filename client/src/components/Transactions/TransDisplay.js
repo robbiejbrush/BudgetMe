@@ -1,13 +1,35 @@
 import React from 'react';
 import { formatCurrency } from '../../utils/dateHelpers';
+import useTransactionDelete from './useTransactionDelete';
 
-function TransDisplay({ filteredTransactions, rawCategories }) {
+function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
+
+    const { deleteTransaction, loading, error } = useTransactionDelete();
 
     const onEdit = (transaction) => {
 
     }
-    const onDelete = (transactionId) => {
+    const onDelete = async (transactionId) => {
+      if (!window.confirm("Are you sure you want to delete this transaction?")) return;
 
+      try {
+        await deleteTransaction(transactionId);
+
+        //Update current screen on delete
+        setRawTransactions(prev => prev.filter(t => t.transactionId !== transactionId));
+        
+        alert("Transaction deleted successfully!");
+      } catch (err) {
+        console.error("Failed to delete:", err);
+      }
+    }
+
+    if (loading) {
+      return <div className= "LoadingText">Deleting transaction...</div>;
+    }
+
+    if (error) {
+      return <div className= "ErrorText">{ error }</div>;
     }
 
     return (

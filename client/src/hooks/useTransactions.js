@@ -12,5 +12,5 @@ export const useTransactions = (userId) => {
       .finally(() => setLoading(false));
   }, [userId]);
 
-  return { rawTransactions, loading };
+  return { rawTransactions, loading, setRawTransactions };
 };
