@@ -86,9 +86,10 @@
     padding-right: 20px;
 }
 
-.TransHeading {
-    padding-top: 20px;
+.TranHeading {
     font-size: 25px;
+    font-family: 'Outfit', sans-serif;
+    color: orange;
 }
 .HowManyInput {
     width: 50px;

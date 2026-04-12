@@ -9,7 +9,7 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
                         
     return(
         <div key={index} className= "FieldsDiv">
-            <h3 className= "TransHeading">Transaction #{index + 1}</h3>
+            <h3 className= "TranHeading">Transaction #{index + 1}</h3>
 
             <label className= "Label" htmlFor="AmountInput">Amount:</label>
             <div className="InputWrapper">
