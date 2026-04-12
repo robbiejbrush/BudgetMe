@@ -3,7 +3,7 @@ import '../AddTransactions/AddTransactions.css';
 import {Formik, Form, FieldArray} from 'formik';
 import { useCategories } from '../../hooks/useCategories';
 import { transactionSchema } from './TransactionSchema';
-import { useTransactionForm } from '../../hooks/useTransactionForm';
+import { useTransactionForm } from '../AddTransactions/useTransactionForm.js';
 import TransactionFieldGroup from '../../components/AddTransactions/TransactionFieldGroup';
 
 const singleTransaction = {

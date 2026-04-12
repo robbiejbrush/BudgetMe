@@ -4,7 +4,7 @@ import MonthlyBarChart from '../../components/Overview/MonthlyBarChart';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import SummaryStats from '../../components/Overview/SummaryStats';
 import CategoriesBreakdown from '../../components/Overview/CategoriesBreakdown';
-import { useOverviewData } from '../../hooks/useOverviewData';
+import { useOverviewData } from '../Overview/useOverviewData.js'
 import { useUserId } from '../../hooks/useAuth';
 
 function Overview() {
