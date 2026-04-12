@@ -15,7 +15,10 @@ router.get("/:userId", async (req, res) => {
 
         const transactions = await Transactions.findAll({
             where: filter,
-            order: [['date', 'DESC']]
+            order: [
+              ['date', 'DESC'],
+              ['createdAt', 'DESC']
+            ]
         });
         res.json(transactions);
     } catch (error) {
