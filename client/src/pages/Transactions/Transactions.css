@@ -78,7 +78,7 @@
 .TransactionRow {
     color: white;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 15px;
     width: 100%;
     text-align: left;
@@ -87,21 +87,30 @@
     font-size: 20px;
     font-family: 'Outfit', sans-serif;
     align-items: center;
+    justify-content: start;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 1000px) {
-  .TransactionRow {
-    font-size: 0.7rem;
-    gap: 5px;
-    padding: 8px 4px;
-  }
+.Actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  gap: 10px;
+}
 
-  .Counterparty, .Category {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.EditBtn, .DeleteBtn {
+  background-color: #1b1919;
+  color: orange;
+  border-radius: 5px;
+  font-family: 'Outfit', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+.DeleteBtn {
+  color: red;
+}
+
+.EditBtn:hover, .DeleteBtn:hover {
+  cursor: pointer;
 }
 
 .TransactionRow span {
@@ -115,4 +124,55 @@
   font-weight: bold;
   border-bottom: 3px solid orange;
   color: orange;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 800px) {
+  .Counterparty, .Category {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .TransactionRow.Header {
+    display: none;
+  }
+
+  .Date::before { content: "Date: "; }
+  .Amount::before { content: "Amount: "; }
+  .Counterparty::before { content: "Counterparty: "; }
+  .Category::before { content: "Category: "; }
+
+  .TransactionRow span::before {
+    font-weight: bold;
+    color: orange;   
+  }
+
+  .TransactionRow {
+    display: flex;
+    flex-direction: column; /* Stack details vertically */
+    padding: 10px;
+    border-bottom: 1px solid orange;
+    align-items: center;
+  }
+  
+  /* Make the amount and counterparty sit side-by-side at the top */
+  .RowHeader { 
+    display: flex; 
+    justify-content: space-between; 
+    font-weight: bold;
+  }
+
+  .Actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .TransactionRow span {
+    display: block; 
+    width: 300px;    
+    text-align: left; 
+  }
 }

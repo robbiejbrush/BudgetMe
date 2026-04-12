@@ -3,6 +3,13 @@ import { formatCurrency } from '../../utils/dateHelpers';
 
 function TransDisplay({ filteredTransactions, rawCategories }) {
 
+    const onEdit = (transaction) => {
+
+    }
+    const onDelete = (transactionId) => {
+
+    }
+
     return (
         <div className="TransDiv">
         <div className="TransactionRow Header">
@@ -44,6 +51,20 @@ function TransDisplay({ filteredTransactions, rawCategories }) {
                   </span>
                   <span className="Counterparty">{transaction.counterparty}</span>
                   <span className="Category">{category?.name || 'Uncategorized'}</span>
+                  <div className="Actions">
+                    <button 
+                      onClick={() => onEdit(transaction)} 
+                      className="EditBtn"
+                    >
+                      Edit
+                    </button>
+                    <button 
+                      onClick={() => onDelete(transaction.transactionId)} 
+                      className="DeleteBtn"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </React.Fragment>
             );
