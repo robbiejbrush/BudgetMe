@@ -10,10 +10,11 @@ export const useTransactionFilter = (rawTransactions) => {
     if (!rawTransactions.length) return [];
 
     return rawTransactions.filter(t => {
-      const d = new Date(t.date);
-      
-      const yearMatch = d.getUTCFullYear() === parseInt(selectedYear);
-      const monthMatch = selectedMonth === "all" || d.getUTCMonth() === parseInt(selectedMonth);
+      const [year, month] = t.date.split('-').map(Number);
+      const transactionMonth = month - 1; 
+
+      const yearMatch = year === parseInt(selectedYear);
+      const monthMatch = selectedMonth === "all" || transactionMonth === parseInt(selectedMonth);
       
       const typeMatch = selectedType === "all" || t.type === selectedType;
       

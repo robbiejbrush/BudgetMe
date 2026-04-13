@@ -11,13 +11,11 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
     }
     const onDelete = async (transactionId) => {
       if (!window.confirm("Are you sure you want to delete this transaction?")) return;
-
       try {
         await deleteTransaction(transactionId);
 
         //Update current screen on delete
         setRawTransactions(prev => prev.filter(t => t.transactionId !== transactionId));
-        
         alert("Transaction deleted successfully!");
       } catch (err) {
         console.error("Failed to delete:", err);
@@ -29,7 +27,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
     }
 
     if (error) {
-      return <div className= "ErrorText">{ error }</div>;
+      return <div className= "ErrorText">Couldn't delete transaction: { error }</div>;
     }
 
     return (
@@ -50,7 +48,9 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
             const isExpense = transaction.type === 'expense';
             
             //Format the date to "Month Year"
-            const dateObj = new Date(transaction.date);
+            const [year, month] = transaction.date.split('-').map(Number);
+
+            const dateObj = new Date(year, month - 1, 1); 
             const currentMonth = dateObj.toLocaleString('default', { month: 'long', year: 'numeric' });
 
             //Check if the month has changed

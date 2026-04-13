@@ -78,7 +78,7 @@
 .TransactionRow {
     color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
     gap: 15px;
     width: 100%;
     text-align: left;
