@@ -125,6 +125,9 @@
   border-bottom: 3px solid orange;
   color: orange;
 }
+.GhostText {
+  color: #1b1919;
+}
 
 /* Mobile Adjustments */
 @media (max-width: 800px) {
@@ -150,13 +153,12 @@
 
   .TransactionRow {
     display: flex;
-    flex-direction: column; /* Stack details vertically */
+    flex-direction: column; 
     padding: 10px;
     border-bottom: 1px solid orange;
     align-items: center;
   }
   
-  /* Make the amount and counterparty sit side-by-side at the top */
   .RowHeader { 
     display: flex; 
     justify-content: space-between; 
@@ -168,12 +170,14 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    gap: 20px;
   }
 
   .TransactionRow span {
     display: block; 
-    width: 300px;    
+    width: auto;    
     text-align: left;
     font-size: 16px; 
+    margin: 2px auto;
   }
 }
