@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/*Header Div*/
+.BudgetsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ButtonDiv {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 20px;
+}
+
+.LimitsBtn {
+  background-color: #1b1919;
+  color: orange;
+  border-radius: 5px;
+  font-family: 'Outfit', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+  width: auto;
+}
+
+.LimitsBtn:hover {
+  cursor: pointer;
+}
+
+.BudgetsHeading {
+    font-size: 30px;
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+    text-align: center;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    align-self: center;
+}
+
+/*Budgets Div*/
