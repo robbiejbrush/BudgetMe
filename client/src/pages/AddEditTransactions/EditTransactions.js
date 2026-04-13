@@ -3,24 +3,26 @@ import './AddEditTransactions.css';
 import { Formik, Form } from 'formik';
 import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
-import { useAddTransaction } from './useAddTransaction.js';
+import { useEditTransaction } from './useTransactionEdit.js';
 import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
 import { useParams } from 'react-router-dom';
 import { useTransaction } from './useTransaction.js';
 
 function EditTransactions() {
+    const { 
+        transactionId 
+    } = useParams();
+    
     const {
-        onSubmit,
-        userId
-    } = useAddTransaction();
+        userId,
+        onSubmit
+    } = useEditTransaction(transactionId);
+    
     const {
         rawCategories,
         loading: categoriesLoading
     } = useCategories(userId);
 
-    const { 
-        transactionId 
-    } = useParams();
     const {
         transaction,
         loading
