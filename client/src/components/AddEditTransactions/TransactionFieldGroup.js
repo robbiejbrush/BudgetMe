@@ -1,15 +1,17 @@
 import React from 'react';
 import { Field } from 'formik';
-import '../../pages/AddTransactions/AddTransactions.css'
+import '../../pages/AddEditTransactions/AddEditTransactions.css'
 
-function TransactionFieldGroup( {index, transaction, errors, rawCategories, categoriesLoading} ) {
+function TransactionFieldGroup( {index, transaction, errors, rawCategories, categoriesLoading, showHeading = true} ) {
     const filteredCategories = transaction.type 
         ? rawCategories.filter(cat => cat.type === transaction.type)
         : rawCategories;
                         
     return(
         <div key={index} className= "FieldsDiv">
-            <h3 className= "TranHeading">Transaction #{index + 1}</h3>
+            {showHeading && (
+                <h3 className="TranHeading">Transaction #{index + 1}</h3>
+            )}
 
             <label className= "Label" htmlFor="AmountInput">Amount:</label>
             <div className="InputWrapper">

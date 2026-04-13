@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js'
 
-export const useTransactionForm = (resetForm) => {
+export const useAddTransaction = () => {
   const navigate = useNavigate();
   const userId = useUserId();
 

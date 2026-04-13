@@ -56,7 +56,7 @@ function Transactions() {
         <div className= "ButtonDiv">
           <button 
             className= "AddTransBtn"
-            onClick={() => navigate('/addTransaction')}>
+            onClick={() => navigate('/addTransactions')}>
             Add Transaction
           </button>
         </div>

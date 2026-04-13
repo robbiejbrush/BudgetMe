@@ -1,14 +1,16 @@
 import React from 'react';
 import { formatCurrency } from '../../utils/dateHelpers';
 import useTransactionDelete from './useTransactionDelete';
+import { useNavigate } from 'react-router-dom';
 
 function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
 
-    const { deleteTransaction, loading, error } = useTransactionDelete();
-
+    const navigate = useNavigate();
     const onEdit = (transaction) => {
-
+      navigate(`/editTransaction/${transaction.transactionId}`);
     }
+
+    const { deleteTransaction, loading, error } = useTransactionDelete();
     const onDelete = async (transactionId) => {
       if (!window.confirm("Are you sure you want to delete this transaction?")) return;
       try {

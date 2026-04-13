@@ -8,7 +8,8 @@ import Transactions from './pages/Transactions/Transactions.js';
 import Budgets from './pages/Budgets.js';
 import Settings from './pages/Settings.js';
 import NavBar from './components/NavBar/NavBar.js';
-import AddTransaction from './pages/AddTransactions/AddTransactions.js';
+import AddTransactions from './pages/AddEditTransactions/AddTransactions.js';
+import EditTransactions from './pages/AddEditTransactions/EditTransactions.js';
 
 //Get access token from cookies method
 const getAccessToken = () => document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];
@@ -77,8 +78,12 @@ function App() {
               element={isAuthenticated ? <Settings /> : <Navigate to="/login" replace />} 
             />
             <Route 
-              path="/addTransaction" 
-              element={isAuthenticated ? <AddTransaction /> : <Navigate to="/login" replace />} 
+              path="/addTransactions" 
+              element={isAuthenticated ? <AddTransactions /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/editTransaction/:transactionId" 
+              element={isAuthenticated ? <EditTransactions /> : <Navigate to="/login" replace />} 
             />
           </Routes>
       </Router>

@@ -7,7 +7,7 @@ export const useTransactions = (userId) => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`http://localhost:3001/transactions/${userId}`)
+    axios.get(`http://localhost:3001/transactions/getAll/${userId}`)
       .then(res => setRawTransactions(res.data))
       .finally(() => setLoading(false));
   }, [userId]);

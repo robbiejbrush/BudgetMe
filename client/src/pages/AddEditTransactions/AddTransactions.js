@@ -1,10 +1,10 @@
 import React from 'react';
-import '../AddTransactions/AddTransactions.css';
+import './AddEditTransactions.css';
 import {Formik, Form, FieldArray} from 'formik';
-import { useCategories } from '../../hooks/useCategories';
-import { transactionSchema } from './TransactionSchema';
-import { useTransactionForm } from '../AddTransactions/useTransactionForm.js';
-import TransactionFieldGroup from '../../components/AddTransactions/TransactionFieldGroup';
+import { useCategories } from '../../hooks/useCategories.js';
+import { transactionSchema } from './TransactionSchema.js';
+import { useAddTransaction } from './useAddTransaction.js';
+import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
 
 const singleTransaction = {
   amount: "",
@@ -19,7 +19,7 @@ function AddTransactions() {
     onSubmit, 
     handleCountChange, 
     userId
-  } = useTransactionForm();
+  } = useAddTransaction();
   const {
     rawCategories,
     loading: categoriesLoading

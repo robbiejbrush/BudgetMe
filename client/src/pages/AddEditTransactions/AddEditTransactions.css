@@ -94,3 +94,14 @@
 .HowManyInput {
     width: 50px;
 }
+
+/*Edit CSS*/
+.EditTransHeading {
+    font-size: 30px;
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0px;
+    text-align: center;
+    padding-top: 20px;
+}

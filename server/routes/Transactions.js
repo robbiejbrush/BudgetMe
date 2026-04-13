@@ -3,7 +3,7 @@ const router = express.Router();
 const { Transactions } = require('../models');
 
 //Get all transactions by userId, ordered by most recent, with optional type and category filters
-router.get("/:userId", async (req, res) => {
+router.get("/getAll/:userId", async (req, res) => {
     try {
         const { userId } = req.params;
         const { categoryId, type } = req.query;
@@ -24,6 +24,24 @@ router.get("/:userId", async (req, res) => {
     } catch (error) {
         console.error("Error getting transactions: ", error);
         res.status(500).json({ error: "Failed to get transactions." });
+    }
+});
+
+//Get one transaction by transactionId, ordered by most recent, with optional type and category filters
+router.get("/getOne/:transactionId", async (req, res) => {
+    try {
+        const { transactionId } = req.params;
+
+        const transaction = await Transactions.findByPk(transactionId);
+
+        if (!transaction) {
+            return res.status(404).json({ error: "Transaction not found." });
+        }
+        
+        res.json(transaction);
+    } catch (error) {
+        console.error("Error getting transaction: ", error);
+        res.status(500).json({ error: "Failed to get transaction." });
     }
 });
 
