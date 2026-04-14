@@ -1,35 +1,14 @@
 import React from 'react';
 import '../Budgets/Budgets.css'
 import FilterBar from '../../components/FilterBar/FilterBar';
-import { useTransactionFilter } from '../../hooks/useTransactionFilter';
-import { useUserId } from '../../hooks/useAuth';
-import { useBudgets } from './useBudgets';
-import { useCategories } from '../../hooks/useCategories'
-import { useTransactions } from '../../hooks/useTransactions';
-import { useMemo } from 'react';
 import { formatCurrency } from '../../utils/dateHelpers';
+import { useBudgetsData } from './useBudgetsData';
+import { useBudgetsMetrics } from './useBudgetsMetrics';
 
 function Budgets() {
-  const userId = useUserId();
-  const {
-    budgets,
-    loading: budgetsLoading,
-  } = useBudgets(userId);
-  const {
-    rawTransactions,
-    loading: transactionsLoading,
-  } = useTransactions(userId);
-  const {
-    selectedMonth, setSelectedMonth,
-    selectedYear, setSelectedYear,
-    selectedCategory, setSelectedCategory,
-    filteredTransactions
-  } = useTransactionFilter(rawTransactions);
-  const {
-    rawCategories,
-    loading: categoriesLoading
-  } = useCategories(userId);
-
+  const { data, filters, isLoading } = useBudgetsData();
+  const m = useBudgetsMetrics(data, filters);
+/*
   //Only display expense categories
   const expenseCategories = useMemo(() => {
     return rawCategories.filter(cat => cat.type === 'expense');
@@ -142,36 +121,37 @@ function Budgets() {
     };
   }, [rawTransactions, selectedYear, selectedCategory, selectedMonth, safeTotalSpent]);
 
-  if (budgetsLoading || categoriesLoading || transactionsLoading) return <div className= "LoadingText">Loading data...</div>;
+  */
+  if (isLoading) return <div className= "LoadingText">Loading data...</div>;
 
   return (
     <div>
       <div className= "BudgetsHeader">
         <div className= "FilterDiv">
           <FilterBar
-            selectedMonth={selectedMonth} 
-            setSelectedMonth={setSelectedMonth} 
-            selectedYear={selectedYear} 
-            setSelectedYear={setSelectedYear}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            categories={expenseCategories}
+            selectedMonth={filters.selectedMonth} 
+            setSelectedMonth={filters.setSelectedMonth} 
+            selectedYear={filters.selectedYear} 
+            setSelectedYear={filters.setSelectedYear}
+            selectedCategory={filters.selectedCategory}
+            setSelectedCategory={filters.setSelectedCategory}
+            categories={m.expenseCategories}
           />
         </div>
           <h1 className= "BudgetsHeading">Budgets</h1>
           <div className= "EmptyDiv"/>
       </div>
       <div className= "BudgetsOverview">
-        <h2 className= "MonthHeading">{dateHeading}</h2>
-        {hasNoBudget ? (
-          <div className= "NoDataMessage"><h2>There is no budget set for {activeCategory?.name || "this category"}.</h2></div>
+        <h2 className= "MonthHeading">{m.dateHeading}</h2>
+        {m.hasNoBudget ? (
+          <div className= "NoDataMessage"><h2>There is no budget set for {m.activeCategory?.name || "this category"}.</h2></div>
         ) : (
-          hasNoTransactions ? (
+          m.hasNoTransactions ? (
             <div className= "NoDataMessage"><h2>There are no transactions for this period.</h2></div>
         ) : (
           <>
             <div className="BudgetInfo">
-              <span className= "PercentOutput">{selectedCategory === 'all' ? `Total Budget: ${percentage.toFixed(0)}%` : `${activeCategory.name} Budget: ${percentage.toFixed(0)}%`}</span>
+              <span className= "PercentOutput">{filters.selectedCategory === 'all' ? `Total Budget: ${m.percentage.toFixed(0)}%` : `${m.activeCategory.name} Budget: ${m.percentage.toFixed(0)}%`}</span>
             </div>
             {/* Progress Bar Container */}
             <div 
@@ -185,27 +165,27 @@ function Budgets() {
             }}>
               {/* Colored Bar */}
               <div style={{
-                width: `${displayWidth}%`,
+                width: `${m.displayWidth}%`,
                 height: '100%',
-                backgroundColor: barColor,
+                backgroundColor: m.barColor,
                 transition: 'width 0.5s ease-in-out, background-color 0.3s'
               }} />
             </div>
 
             <div className="BudgetTotals">
-              <p>${safeTotalSpent.toLocaleString()} spent of ${safeBudget.toLocaleString()}</p>
+              <p>${m.totalSpent.toLocaleString()} spent of ${m.currentBudget.toLocaleString()}</p>
             </div>
           </>
         ))}
             <div className= "AveragesDiv">
               <div className= "TypicalSpend">
                 <h2>Typical Spend:</h2>
-                <h2 style={{ color: 'white'}}>${formatCurrency(typicalSpendMetrics.typical)}</h2>
+                <h2 style={{ color: 'white'}}>${formatCurrency(m.typicalSpendMetrics.typical)}</h2>
               </div>
               <div className= "BelowTypical">
-                <h2>{typicalSpendMetrics.isAbove ? "Below Typical:" : "Over Typical:"}</h2>
-                <h2 style={{ color: typicalSpendMetrics.isAbove ? "#4caf50" : "#f44336" }}>
-                  ${formatCurrency(Math.abs(typicalSpendMetrics.diff))}
+                <h2>{m.typicalSpendMetrics.isAbove ? "Below Typical:" : "Over Typical:"}</h2>
+                <h2 style={{ color: m.typicalSpendMetrics.isAbove ? "#4caf50" : "#f44336" }}>
+                  ${formatCurrency(Math.abs(m.typicalSpendMetrics.diff))}
                 </h2>
               </div>
             </div>
