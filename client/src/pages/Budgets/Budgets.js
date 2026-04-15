@@ -7,12 +7,21 @@ import { useBudgetsMetrics } from './useBudgetsMetrics';
 import BudgetStatus from '../../components/Budgets/BudgetStatus';
 import SpendMetrics from '../../components/Budgets/SpendMetrics';
 import useBudgetDelete from './useBudgetDelete';
+import { useState } from 'react';
 
 function Budgets() {
   const { data, filters, isLoading } = useBudgetsData();
   const m = useBudgetsMetrics(data, filters);
 
-  const onEdit = () => {
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({ categoryId: '', monthlyLimit: '' });
+  //Triggers edit mode on budget
+  const startEdit = (budget) => {
+    setEditingId(budget.budgetId);
+    setEditForm({ categoryId: budget.categoryId, monthlyLimit: budget.monthlyLimit });
+  };
+
+  const onSubmitEdit = () => {
 
   };
 
@@ -57,33 +66,67 @@ function Budgets() {
       </div>
       <div className= "BudgetsList">
         <div className= "BudgetItem Header">
-          <span>Category</span>
-          <span>Monthly Limit</span>
+          <span className= "BudgetItemsHeading">Category</span>
+          <span className= "BudgetItemsHeading">Monthly Limit</span>
           <span className= "EmptySpan"></span>
         </div>
         {data.budgets.length === 0 ? (
           <div className= "NoDataMessage">No budgets are set.</div>
         ) : (
           data.budgets.map((budget) => {
+            const isEditing = editingId === budget.budgetId;
             const category = data.rawCategories.find(cat => cat.categoryId === budget.categoryId);
             return(
               <div className= "BudgetItem">
-                <span>{category.name}</span>
-                <span>${budget.monthlyLimit}</span>
-                <div className="Actions">
-                      <button 
-                        onClick={() => onEdit()} 
-                        className="EditBtn"
-                      >
-                        Edit
+                {isEditing ? (
+                  <>
+                    <select 
+                      className= "EditCategorySelect"
+                      value={editForm.categoryId}
+                      onChange={(e) => setEditForm({ ...editForm, categoryId: e.target.value })}
+                    >
+                      {data.rawCategories.filter(cat => {
+                          //Check if this category already has a budget assigned
+                          const isAssigned = data.budgets.some(b => b.categoryId === cat.categoryId);
+                          //Check if this is the category currently being edited
+                          const isCurrentEdit = cat.categoryId === editForm.categoryId;
+                          //Check if it is an income category
+                          const isIncome = cat.type === 'income';
+                          return (!isAssigned || isCurrentEdit) && !isIncome;
+                        }).map(cat => (
+                        <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
+                      ))}
+                    </select>
+
+                    <div className="EditAmountWrapper">
+                      <span className="EditCurrencySymbol">$</span>
+                      <input 
+                        type="number" 
+                        className="EditAmountInput"
+                        value={editForm.monthlyLimit}
+                        onChange={(e) => setEditForm({ ...editForm, monthlyLimit: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="Actions">
+                      <button className= "EditSubmitBtn" onClick={() => onSubmitEdit(budget.budgetId, editForm)}>
+                        Submit
                       </button>
-                      <button 
-                        onClick={() => onDelete(budget.budgetId)} 
-                        className="DeleteBtn"
-                      >
-                        Delete
+                      <button className= "EditCancelBtn" onClick={() => setEditingId(null)}>
+                        Cancel
                       </button>
                     </div>
+                  </>
+                ) : (
+                  <>
+                    <span className= "BudgetItemSpan">{category.name}</span>
+                    <span className= "BudgetItemSpan">${formatCurrency(budget.monthlyLimit)}</span>
+                    <div className="Actions">
+                      <button onClick={() => startEdit(budget)} className="EditBtn">Edit</button>
+                      <button onClick={() => onDelete(budget.budgetId)} className="DeleteBtn">Delete</button>
+                    </div>
+                  </>
+                )}
               </div>
             );
           })
