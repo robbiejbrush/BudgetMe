@@ -10,7 +10,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
       navigate(`/editTransaction/${transaction.transactionId}`);
     }
 
-    const { deleteTransaction, loading, error } = useTransactionDelete();
+    const { deleteTransaction, loading } = useTransactionDelete();
     const onDelete = async (transactionId) => {
       if (!window.confirm("Are you sure you want to delete this transaction?")) return;
       try {
@@ -20,16 +20,13 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
         setRawTransactions(prev => prev.filter(t => t.transactionId !== transactionId));
         alert("Transaction deleted successfully!");
       } catch (err) {
+        alert("Couldn't delete this transaction. Try again.");
         console.error("Failed to delete:", err);
       }
     }
 
     if (loading) {
       return <div className= "LoadingText">Deleting transaction...</div>;
-    }
-
-    if (error) {
-      return <div className= "ErrorText">Couldn't delete transaction: { error }</div>;
     }
 
     return (

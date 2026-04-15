@@ -1,16 +1,16 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 
-const useTransactionDelete = () => {
+const useBudgetDelete = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const deleteTransaction = useCallback(async (transactionId, options = {}) => {
+  const deleteBudget = useCallback(async (budgetId, options = {}) => {
     setLoading(true);
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/transactions/${transactionId}`, {
+      const response = await axios.delete(`http://localhost:3001/budgets/${budgetId}`, {
         headers: options.headers || {},
         data: options.body || null 
       });
@@ -24,7 +24,7 @@ const useTransactionDelete = () => {
     }
   }, []);
 
-  return { deleteTransaction, loading, success };
+  return { deleteBudget, loading, success };
 };
 
-export default useTransactionDelete;
+export default useBudgetDelete;
