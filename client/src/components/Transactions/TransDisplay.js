@@ -39,7 +39,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
           <span>Amount</span>
           <span>Counterparty</span>
           <span>Category</span>
-          <span className= "GhostText">Ghost Text</span>
+          <span className= "EmptySpan"></span>
         </div>
         {(() => {
           let lastMonth = "";

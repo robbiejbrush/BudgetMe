@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js';
 
-export const useEditTransaction = (transactionId) => {
+export const useTransactionEdit = (transactionId) => {
   const navigate = useNavigate();
   const userId = useUserId();
 

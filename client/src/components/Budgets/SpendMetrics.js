@@ -6,7 +6,7 @@ const SpendMetrics = ({ metrics, formatCurrency }) => {
   return (
     <div className="AveragesDiv">
       <div className="TypicalSpend">
-        <h2>Typical Spend:</h2>
+        <h2>{"Typical Spend:"}</h2>
         <h2 style={{ color: 'white' }}>
           ${formatCurrency(typical)}
         </h2>

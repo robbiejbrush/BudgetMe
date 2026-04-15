@@ -2,6 +2,8 @@ import React from 'react';
 import ProgressBar from './ProgressBar'; // Recommended to extract this too!
 
 const BudgetStatus = ({ m, filters }) => {
+  const categoryName = filters.selectedCategory === 'all' ? 'Total' : m.activeCategory?.name;
+  
   if (m.hasNoBudget) {
     return (
       <div className="NoDataMessage">
@@ -18,13 +20,11 @@ const BudgetStatus = ({ m, filters }) => {
     );
   }
 
-  const categoryName = filters.selectedCategory === 'all' ? 'Total' : m.activeCategory?.name;
-
   return (
     <>
       <div className="BudgetInfo">
         <span className="PercentOutput">
-          {categoryName} Budget: {m.percentage.toFixed(0)}%
+          {categoryName} Budget: <span style={{color: m.barColor}}>{m.percentage.toFixed(0)}%</span>
         </span>
       </div>
 
@@ -34,7 +34,7 @@ const BudgetStatus = ({ m, filters }) => {
       />
 
       <div className="BudgetTotals">
-        <p>${m.totalSpent.toLocaleString()} spent of ${m.currentBudget.toLocaleString()}</p>
+        <p>${m.totalSpent.toLocaleString()} <span style={{color: 'orange'}}>spent of</span> ${m.currentBudget.toLocaleString()}</p>
       </div>
     </>
   );

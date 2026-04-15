@@ -3,7 +3,7 @@ import './AddEditTransactions.css';
 import {Formik, Form, FieldArray} from 'formik';
 import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
-import { useAddTransaction } from './useAddTransaction.js';
+import { useTransactionAdd } from './useTransactionAdd.js';
 import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
 
 const singleTransaction = {
@@ -19,7 +19,7 @@ function AddTransactions() {
     onSubmit, 
     handleCountChange, 
     userId
-  } = useAddTransaction();
+  } = useTransactionAdd();
   const {
     rawCategories,
     loading: categoriesLoading

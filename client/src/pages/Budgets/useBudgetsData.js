@@ -7,7 +7,7 @@ import { useTransactionFilter } from "../../hooks/useTransactionFilter";
 export const useBudgetsData = () => {
   const userId = useUserId();
 
-  const { budgets, loading: bLoad } = useBudgets(userId);
+  const { budgets, setBudgets, loading: bLoad } = useBudgets(userId);
   const { rawTransactions, loading: tLoad } = useTransactions(userId);
   const { rawCategories, loading: cLoad } = useCategories(userId);
 
@@ -16,6 +16,7 @@ export const useBudgetsData = () => {
   return {
     data: { 
         budgets: budgets || [], 
+        setBudgets,
         rawTransactions: rawTransactions || [], 
         rawCategories: rawCategories || [] 
     },

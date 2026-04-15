@@ -11,6 +11,14 @@ function Budgets() {
   const { data, filters, isLoading } = useBudgetsData();
   const m = useBudgetsMetrics(data, filters);
 
+  const onEdit = () => {
+
+  };
+
+  const onDelete = () => {
+
+  };
+
   if (isLoading) return <div className= "LoadingText">Loading data...</div>;
 
   return (
@@ -35,8 +43,35 @@ function Budgets() {
         <BudgetStatus m= {m} filters= {filters}/>
         <SpendMetrics metrics= {m.typicalSpendMetrics} formatCurrency= {formatCurrency}/>
       </div>
-      <div className= "LimitsOverview">
-
+      <div className= "BudgetsList">
+        <div className= "BudgetItem Header">
+          <span>Category</span>
+          <span>Monthly Limit</span>
+          <span className= "EmptySpan"></span>
+        </div>
+        {data.budgets.map((budget) => {
+          const category = data.rawCategories.find(cat => cat.categoryId === budget.categoryId);
+          return(
+            <div className= "BudgetItem">
+              <span>{category.name}</span>
+              <span>${budget.monthlyLimit}</span>
+              <div className="Actions">
+                    <button 
+                      onClick={() => onEdit()} 
+                      className="EditBtn"
+                    >
+                      Edit
+                    </button>
+                    <button 
+                      onClick={() => onDelete()} 
+                      className="DeleteBtn"
+                    >
+                      Delete
+                    </button>
+                  </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   )

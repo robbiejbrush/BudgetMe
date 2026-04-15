@@ -3,7 +3,7 @@ import './AddEditTransactions.css';
 import { Formik, Form } from 'formik';
 import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
-import { useEditTransaction } from './useTransactionEdit.js';
+import { useTransactionEdit } from './useTransactionEdit.js';
 import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
 import { useParams } from 'react-router-dom';
 import { useTransaction } from './useTransaction.js';
@@ -16,7 +16,7 @@ function EditTransactions() {
     const {
         userId,
         onSubmit
-    } = useEditTransaction(transactionId);
+    } = useTransactionEdit(transactionId);
     
     const {
         rawCategories,
