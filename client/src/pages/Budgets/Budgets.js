@@ -8,6 +8,7 @@ import BudgetStatus from '../../components/Budgets/BudgetStatus';
 import SpendMetrics from '../../components/Budgets/SpendMetrics';
 import useBudgetDelete from './useBudgetDelete';
 import { useState } from 'react';
+import { useBudgetEdit } from './useBudgetEdit';
 
 function Budgets() {
   const { data, filters, isLoading } = useBudgetsData();
@@ -20,9 +21,16 @@ function Budgets() {
     setEditingId(budget.budgetId);
     setEditForm({ categoryId: budget.categoryId, monthlyLimit: budget.monthlyLimit });
   };
-
-  const onSubmitEdit = () => {
-
+  //Hook for put request
+  const {
+    onSubmit
+  } = useBudgetEdit(editingId, data.setBudgets);
+  //Handles closing edit mode and calling hook
+  const handleEditSubmit = async () => {
+    const success = await onSubmit(editForm);
+    if (success) {
+      setEditingId(null); // Close the edit inputs on success
+    }
   };
 
   const { deleteBudget, loading: deleteLoading } = useBudgetDelete();
@@ -108,8 +116,8 @@ function Budgets() {
                       />
                     </div>
 
-                    <div className="Actions">
-                      <button className= "EditSubmitBtn" onClick={() => onSubmitEdit(budget.budgetId, editForm)}>
+                    <div className="BudgetsActions">
+                      <button className= "EditSubmitBtn" onClick={handleEditSubmit}>
                         Submit
                       </button>
                       <button className= "EditCancelBtn" onClick={() => setEditingId(null)}>
@@ -121,7 +129,7 @@ function Budgets() {
                   <>
                     <span className= "BudgetItemSpan">{category.name}</span>
                     <span className= "BudgetItemSpan">${formatCurrency(budget.monthlyLimit)}</span>
-                    <div className="Actions">
+                    <div className="EditActions">
                       <button onClick={() => startEdit(budget)} className="EditBtn">Edit</button>
                       <button onClick={() => onDelete(budget.budgetId)} className="DeleteBtn">Delete</button>
                     </div>

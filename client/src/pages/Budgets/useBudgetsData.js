@@ -13,9 +13,16 @@ export const useBudgetsData = () => {
 
   const filterState = useTransactionFilter(rawTransactions);
 
+  // Sort budgets alphabetically
+  const sortedBudgets = [...(budgets || [])].sort((a, b) => {
+    const nameA = rawCategories?.find(c => c.categoryId === a.categoryId)?.name || "";
+    const nameB = rawCategories?.find(c => c.categoryId === b.categoryId)?.name || "";
+    return nameA.localeCompare(nameB);
+  });
+
   return {
     data: { 
-        budgets: budgets || [], 
+        budgets: sortedBudgets || [], 
         setBudgets,
         rawTransactions: rawTransactions || [], 
         rawCategories: rawCategories || [] 
