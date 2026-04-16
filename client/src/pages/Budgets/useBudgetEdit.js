@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js';
 
-export const useBudgetEdit = (budgetId, setBudgets) => {
+export const useBudgetEdit = (setBudgets) => {
   const userId = useUserId();
 
-  const onEditSubmit = async (values) => {
+  const onEditSubmit = async (budgetId, values) => {
     
     const updatedData = {
       ...values,
