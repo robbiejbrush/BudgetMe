@@ -48,6 +48,28 @@ function Budgets() {
     }
   }
 
+  const unusedCategoriesWithSelected = () => {
+    return data.rawCategories.filter(cat => {
+      //Check if this category already has a budget assigned
+      const isAssigned = data.budgets.some(b => b.categoryId === cat.categoryId);
+      //Check if this is the category currently being edited
+      const isCurrentEdit = cat.categoryId === editForm.categoryId;
+      //Check if it is an income category
+      const isIncome = cat.type === 'income';
+      return (!isAssigned || isCurrentEdit) && !isIncome;
+    });
+  }
+
+  const unusedCategories = () => {
+    return data.rawCategories.filter(cat => {
+      //Check if this category already has a budget assigned
+      const isAssigned = data.budgets.some(b => b.categoryId === cat.categoryId);
+      //Check if it is an income category
+      const isIncome = cat.type === 'income';
+      return (!isAssigned) && !isIncome;
+    });
+  }
+
   if (isLoading || deleteLoading) return <div className= "LoadingText">Loading data...</div>;
 
   return (
@@ -76,8 +98,9 @@ function Budgets() {
         <div className= "BudgetItem Header">
           <span className= "BudgetItemsHeading">Category</span>
           <span className= "BudgetItemsHeading">Monthly Limit</span>
-          <span className= "EmptySpan"></span>
+          <span></span>
         </div>
+        <div className="BudgetsHeaderDivider"></div>
         {data.budgets.length === 0 ? (
           <div className= "NoDataMessage">No budgets are set.</div>
         ) : (
@@ -93,21 +116,13 @@ function Budgets() {
                       value={editForm.categoryId}
                       onChange={(e) => setEditForm({ ...editForm, categoryId: e.target.value })}
                     >
-                      {data.rawCategories.filter(cat => {
-                          //Check if this category already has a budget assigned
-                          const isAssigned = data.budgets.some(b => b.categoryId === cat.categoryId);
-                          //Check if this is the category currently being edited
-                          const isCurrentEdit = cat.categoryId === editForm.categoryId;
-                          //Check if it is an income category
-                          const isIncome = cat.type === 'income';
-                          return (!isAssigned || isCurrentEdit) && !isIncome;
-                        }).map(cat => (
+                      {unusedCategoriesWithSelected().map(cat => (
                         <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
                       ))}
                     </select>
 
-                    <div className="EditAmountWrapper">
-                      <span className="EditCurrencySymbol">$</span>
+                    <div className="BudgetsAmountWrapper">
+                      <span className="BudgetsCurrencySymbol">$</span>
                       <input 
                         type="number" 
                         className="EditAmountInput"
@@ -116,7 +131,7 @@ function Budgets() {
                       />
                     </div>
 
-                    <div className="BudgetsActions">
+                    <div className="EditActions">
                       <button className= "EditSubmitBtn" onClick={handleEditSubmit}>
                         Submit
                       </button>
@@ -139,6 +154,18 @@ function Budgets() {
             );
           })
         )}
+        <form id="BudgetAddForm" class="BudgetAddForm">
+          <select id="AddCategorySelect" className= "AddCategorySelect" required>
+            {unusedCategories().map(cat => (
+              <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
+            ))}
+          </select>
+          <div className= "BudgetsAmountWrapper">
+            <span className= "BudgetsCurrencySymbol">$</span>
+            <input type="number" id="AddAmountInput" className= "AddAmountInput" placeholder="Amount" step="0.01" required/>
+          </div>
+          <button type="submit" className= "AddBtn" id="AddBtn">Add</button>
+        </form>
       </div>
     </div>
   )
