@@ -153,15 +153,11 @@
     font-family: 'Outfit', sans-serif;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
-    margin-right: 20px;
-}
-
-.EditBtn {
-    margin-right: 10px;
 }
 
 .DeleteBtn {
   color: red;
+  margin-right: 20px;
 }
 
 .EditBtn:hover, .DeleteBtn:hover {

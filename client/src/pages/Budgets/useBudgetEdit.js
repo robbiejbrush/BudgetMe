@@ -4,7 +4,7 @@ import { useUserId } from '../../hooks/useAuth.js';
 export const useBudgetEdit = (budgetId, setBudgets) => {
   const userId = useUserId();
 
-  const onSubmit = async (values) => {
+  const onEditSubmit = async (values) => {
     
     const updatedData = {
       ...values,
@@ -27,5 +27,5 @@ export const useBudgetEdit = (budgetId, setBudgets) => {
     }
   };
 
-  return { onSubmit };
+  return { onEditSubmit };
 };

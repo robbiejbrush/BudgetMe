@@ -9,10 +9,15 @@ import SpendMetrics from '../../components/Budgets/SpendMetrics';
 import useBudgetDelete from './useBudgetDelete';
 import { useState } from 'react';
 import { useBudgetEdit } from './useBudgetEdit';
+import { useBudgetAdd } from './useBudgetAdd';
 
 function Budgets() {
   const { data, filters, isLoading } = useBudgetsData();
   const m = useBudgetsMetrics(data, filters);
+
+  const {
+    onAddSubmit
+  } = useBudgetAdd(data.setBudgets);
 
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({ categoryId: '', monthlyLimit: '' });
@@ -23,11 +28,11 @@ function Budgets() {
   };
   //Hook for put request
   const {
-    onSubmit
+    onEditSubmit
   } = useBudgetEdit(editingId, data.setBudgets);
   //Handles closing edit mode and calling hook
   const handleEditSubmit = async () => {
-    const success = await onSubmit(editForm);
+    const success = await onEditSubmit(editForm);
     if (success) {
       setEditingId(null); // Close the edit inputs on success
     }
@@ -132,12 +137,8 @@ function Budgets() {
                     </div>
 
                     <div className="EditActions">
-                      <button className= "EditSubmitBtn" onClick={handleEditSubmit}>
-                        Submit
-                      </button>
-                      <button className= "EditCancelBtn" onClick={() => setEditingId(null)}>
-                        Cancel
-                      </button>
+                      <button className= "EditSubmitBtn" onClick={handleEditSubmit}>Submit</button>
+                      <button className= "EditCancelBtn" onClick={() => setEditingId(null)}>Cancel</button>
                     </div>
                   </>
                 ) : (
@@ -154,7 +155,7 @@ function Budgets() {
             );
           })
         )}
-        <form id="BudgetAddForm" class="BudgetAddForm">
+        <form id="BudgetAddForm" class="BudgetAddForm" onSubmit={onAddSubmit}>
           <select id="AddCategorySelect" className= "AddCategorySelect" required>
             {unusedCategories().map(cat => (
               <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
