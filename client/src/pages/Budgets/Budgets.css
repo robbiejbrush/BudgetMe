@@ -1,38 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-/*Header Div*/
-.BudgetsHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px 0 20px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.EmptyDiv {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  padding-left: 20px;
-}
-
-.BudgetsHeading {
-    font-size: 30px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
-    margin: 0;
-    padding: 0;
-    flex: 0 0 auto;
-    text-align: center;
-    line-height: 1;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    align-self: center;
-}
-
-/*Budgets Div*/
 /*Budgets Info Div*/
 .BudgetsOverview {
     background-color: #1b1919;

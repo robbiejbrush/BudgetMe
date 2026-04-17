@@ -7,6 +7,7 @@ import FilterBar from '../../components/FilterBar/FilterBar';
 import { useNavigate } from 'react-router-dom';
 import { useCategories } from '../../hooks/useCategories';
 import { useTransactions } from '../../hooks/useTransactions';
+import { PageHeader } from '../../components/PageHeader/PageHeader';
 
 function Transactions() {
   const navigate = useNavigate();
@@ -40,7 +41,16 @@ function Transactions() {
 
   return (
     <div>
-      <div className= "HeaderDiv">
+      <PageHeader 
+        title="Transactions"
+        actions= {
+          <button 
+            className= "AddTransBtn"
+            onClick={() => navigate('/addTransactions')}>
+            Add Transaction
+          </button>
+        }
+      >
         <FilterBar
           selectedMonth={selectedMonth} 
           setSelectedMonth={setSelectedMonth} 
@@ -52,15 +62,7 @@ function Transactions() {
           setSelectedCategory={setSelectedCategory}
           categories={visibleCategories}
         />
-        <h1 className= "TransHeading">Transactions</h1>
-        <div className= "ButtonDiv">
-          <button 
-            className= "AddTransBtn"
-            onClick={() => navigate('/addTransactions')}>
-            Add Transaction
-          </button>
-        </div>
-      </div>
+      </PageHeader>
       {filteredTransactions.length === 0 ? (
         <div className="NoDataMessage">
           <h2>There are no transactions for this time.</h2>

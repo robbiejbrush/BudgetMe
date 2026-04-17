@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.AddTransHeading {
-    font-size: 30px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
-    margin-top: 0;
-    margin-bottom: 0px;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
 .FieldsDiv {
     display: flex;
     align-items: center;
@@ -19,6 +8,10 @@
     padding-bottom: 20px;
     margin-top: 20px;
 
+}
+
+.CountSelector {
+    padding-top: 20px;
 }
 
 .FieldInput {

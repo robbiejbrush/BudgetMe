@@ -6,6 +6,7 @@ import SummaryStats from '../../components/Overview/SummaryStats';
 import CategoriesBreakdown from '../../components/Overview/CategoriesBreakdown';
 import { useOverviewData } from '../Overview/useOverviewData.js'
 import { useUserId } from '../../hooks/useAuth';
+import { PageHeader } from '../../components/PageHeader/PageHeader';
 
 function Overview() {
   const userId = useUserId();
@@ -28,16 +29,14 @@ function Overview() {
 
   return (
     <div>
-      <div className= "HeaderDiv">
+      <PageHeader title= "Overview">
         <FilterBar
           selectedMonth={selectedMonth} 
           setSelectedMonth={setSelectedMonth} 
           selectedYear={selectedYear} 
           setSelectedYear={setSelectedYear}
         />
-        <h1 className= "OverviewHeading">Overview</h1>
-        <div className= "EmptyDiv"/>
-      </div>
+      </PageHeader>
       {displayCategories.length === 0 ? (
         <div className="NoDataMessage">
           <h2>There are no transactions for this time.</h2>

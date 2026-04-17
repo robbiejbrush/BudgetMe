@@ -5,6 +5,7 @@ import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
 import { useTransactionAdd } from './useTransactionAdd.js';
 import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
+import { PageHeader } from '../../components/PageHeader/PageHeader.js';
 
 const singleTransaction = {
   amount: "",
@@ -31,9 +32,7 @@ function AddTransactions() {
 
   return (
     <div>
-      <div>
-        <h1 className= "AddTransHeading">Add Transactions</h1>
-      </div>
+      <PageHeader title= "Add Transactions"/>
       <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {transactionSchema}>
          {({ values, errors, setFieldValue }) => {
           return(

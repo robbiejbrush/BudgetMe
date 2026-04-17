@@ -7,6 +7,7 @@ import { useTransactionEdit } from './useTransactionEdit.js';
 import TransactionFieldGroup from '../../components/AddEditTransactions/TransactionFieldGroup.js';
 import { useParams } from 'react-router-dom';
 import { useTransaction } from './useTransaction.js';
+import { PageHeader } from '../../components/PageHeader/PageHeader.js';
 
 function EditTransactions() {
     const { 
@@ -37,9 +38,7 @@ function EditTransactions() {
 
     return (
         <div>
-        <div>
-            <h1 className= "EditTransHeading">Edit Transaction</h1>
-        </div>
+        <PageHeader title= "Edit Transactions"/>
         <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {transactionSchema} enableReinitialize={true}>
             {({ values, errors }) => {
             return(

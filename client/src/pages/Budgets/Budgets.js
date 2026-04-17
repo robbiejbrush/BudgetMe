@@ -10,6 +10,7 @@ import useBudgetDelete from './useBudgetDelete';
 import { useBudgetEdit } from './useBudgetEdit';
 import { useBudgetAdd } from './useBudgetAdd';
 import BudgetList from '../../components/Budgets/BudgetList';
+import { PageHeader } from '../../components/PageHeader/PageHeader';
 
 function Budgets() {
   //Data helpers and hooks
@@ -45,9 +46,8 @@ function Budgets() {
 
   return (
     <div>
-      <div className= "BudgetsHeader">
-        <div className= "FilterDiv">
-          <FilterBar
+      <PageHeader title= "Budgets">
+        <FilterBar
             selectedMonth={filters.selectedMonth} 
             setSelectedMonth={filters.setSelectedMonth} 
             selectedYear={filters.selectedYear} 
@@ -56,10 +56,7 @@ function Budgets() {
             setSelectedCategory={filters.setSelectedCategory}
             categories={m.expenseCategories}
           />
-        </div>
-          <h1 className= "BudgetsHeading">Budgets</h1>
-          <div className= "EmptyDiv"/>
-      </div>
+      </PageHeader>
       <div className= "BudgetsOverview">
         <h2 className= "MonthHeading">{m.dateHeading}</h2>
         <BudgetStatus m= {m} filters= {filters}/>

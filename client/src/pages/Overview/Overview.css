@@ -1,32 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-/*Heading Div*/
-.HeaderDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  width: 100%;
-}
-
-.EmptyDiv {
-  flex: 1;
-  display: flex;
-}
-
-.OverviewHeading {
-    font-size: 30px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
-    margin-top: 0;
-    flex: 1;
-    margin-bottom: 0px;
-    flex: 0 0 auto;
-    text-align: center;
-}
-
 /*Net Income Div*/
 .IncomeText, .ExpensesText, .NetText {
     font-size: 20px;
