@@ -1,3 +1,5 @@
+import '../ProgressBar/ProgressBar.css';
+
 const ProgressBar = ({ width, color }) => {
   return (
     <div 

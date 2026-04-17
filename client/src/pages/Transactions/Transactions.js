@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Transactions/Transactions.css'
 import { useUserId } from '../../hooks/useAuth';
-import TransDisplay from '../../components/Transactions/TransDisplay';
+import TransDisplay from '../../components/Transactions/TransDisplay/TransDisplay';
 import { useTransactionFilter } from '../../hooks/useTransactionFilter';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import { useNavigate } from 'react-router-dom';

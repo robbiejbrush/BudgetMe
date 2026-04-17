@@ -4,12 +4,12 @@ import FilterBar from '../../components/FilterBar/FilterBar';
 import { formatCurrency } from '../../utils/dateHelpers';
 import { useBudgetsData } from './useBudgetsData';
 import { useBudgetsMetrics } from './useBudgetsMetrics';
-import BudgetStatus from '../../components/Budgets/BudgetStatus';
-import SpendMetrics from '../../components/Budgets/SpendMetrics';
+import BudgetStatus from '../../components/Budgets/BudgetStatus/BudgetStatus';
+import SpendMetrics from '../../components/Budgets/SpendMetrics/SpendMetrics';
 import useBudgetDelete from './useBudgetDelete';
 import { useBudgetEdit } from './useBudgetEdit';
 import { useBudgetAdd } from './useBudgetAdd';
-import BudgetList from '../../components/Budgets/BudgetList';
+import BudgetList from '../../components/Budgets/BudgetList/BudgetList';
 import { PageHeader } from '../../components/PageHeader/PageHeader';
 
 function Budgets() {

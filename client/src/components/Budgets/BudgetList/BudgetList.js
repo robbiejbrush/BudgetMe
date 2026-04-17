@@ -1,5 +1,6 @@
 import React from 'react';
-import BudgetItem from './BudgetItem';
+import BudgetItem from '../BudgetItem/BudgetItem';
+import '../BudgetList/BudgetList.css';
 
 function BudgetList({ 
   budgets, 

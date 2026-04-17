@@ -1,7 +1,8 @@
 import React from 'react';
-import { formatCurrency } from '../../utils/dateHelpers';
+import { formatCurrency } from '../../../utils/dateHelpers';
 import useTransactionDelete from './useTransactionDelete';
 import { useNavigate } from 'react-router-dom';
+import '../TransDisplay/TransDisplay.css';
 
 function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
 

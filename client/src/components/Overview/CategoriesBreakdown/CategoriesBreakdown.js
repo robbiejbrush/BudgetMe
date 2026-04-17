@@ -1,4 +1,5 @@
 import React from 'react';
+import '../CategoriesBreakdown/CategoriesBreakdown.css';
 
 function CategoriesBreakdown({ categories }) {
   

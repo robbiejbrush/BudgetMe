@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../BudgetItem/BudgetItem.css';
 
 function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, formatCurrency }) {
   const [isEditing, setIsEditing] = useState(false);

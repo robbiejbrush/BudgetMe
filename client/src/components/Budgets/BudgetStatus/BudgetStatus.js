@@ -1,5 +1,6 @@
 import React from 'react';
-import ProgressBar from './ProgressBar'; // Recommended to extract this too!
+import ProgressBar from '../ProgressBar/ProgressBar';
+import '../BudgetStatus/BudgetStatus.css';
 
 const BudgetStatus = ({ m, filters }) => {
   const categoryName = filters.selectedCategory === 'all' ? 'Total' : m.activeCategory?.name;
@@ -22,7 +23,7 @@ const BudgetStatus = ({ m, filters }) => {
 
   return (
     <>
-      <div className="BudgetInfo">
+      <div>
         <span className="PercentOutput">
           {categoryName} Budget: <span style={{color: m.barColor}}>{m.percentage.toFixed(0)}%</span>
         </span>

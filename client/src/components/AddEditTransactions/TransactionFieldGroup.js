@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
-import '../../pages/AddEditTransactions/AddEditTransactions.css'
+import '../../pages/AddEditTransactions/AddEditTransactions.css';
+import '../AddEditTransactions/TransactionFieldGroup.css';
 
 function TransactionFieldGroup( {index, transaction, errors, rawCategories, categoriesLoading, showHeading = true} ) {
     const filteredCategories = transaction.type 

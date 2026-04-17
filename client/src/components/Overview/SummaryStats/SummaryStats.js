@@ -1,5 +1,6 @@
 import React from 'react';
-import { formatCurrency } from '../../utils/dateHelpers';
+import { formatCurrency } from '../../../utils/dateHelpers';
+import '../SummaryStats/SummaryStats.css';
 
 function SummaryStats({ totalIncome, totalExpenses, net }) {
 

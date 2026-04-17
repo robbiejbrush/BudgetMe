@@ -1,4 +1,5 @@
 import React from 'react';
+import '../SpendMetrics/SpendMetrics.css';
 
 const SpendMetrics = ({ metrics, formatCurrency }) => {
   const { typical, diff, isAbove } = metrics;
