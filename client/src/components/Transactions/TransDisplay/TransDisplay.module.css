@@ -1,6 +1,6 @@
 .transDiv {
     justify-content: center;
-    background-color: #1b1919;
+    background-color: var(--background-color);
     border-radius: 15px;
     padding-bottom: 20px;
     padding-right: 20px;
@@ -13,16 +13,16 @@
 }
 
 .transRow {
-    color: white;
+    color: var(--third-color);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr auto;
     gap: 15px;
     width: 100%;
     text-align: left;
     padding: 10px 0;
-    border-bottom: 1px solid orange;
+    border-bottom: 1px solid var(--primary-color);
     font-size: 20px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-main);
     align-items: center;
     justify-content: start;
 }
@@ -36,18 +36,18 @@
 
 .header {
   font-weight: bold;
-  border-bottom: 3px solid orange;
-  color: orange;
+  border-bottom: 3px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
 .monthHeader {
-    color: orange;
+    color: var(--primary-color);
     font-size: 18px;
     font-weight: bold;
     padding: 20px 0 10px 5px;
     border-bottom: 2px solid #333;
     margin-top: 10px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-main);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -59,20 +59,12 @@
   gap: 10px;
 }
 
-.editBtn, .deleteBtn {
-  background-color: #1b1919;
-  color: orange;
-  border-radius: 5px;
-  font-family: 'Outfit', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  border: none;
+.editBtn {
+  composes: btnBase from '../../../styles/shared.module.css';
 }
 .deleteBtn {
+  composes: btnBase from '../../../styles/shared.module.css';
   color: red;
-}
-
-.editBtn:hover, .deleteBtn:hover {
-  cursor: pointer;
 }
 
 .emptySpan {
@@ -98,14 +90,14 @@
 
   .transRow span::before {
     font-weight: bold;
-    color: orange;   
+    color: var(--primary-color)   
   }
 
   .transRow {
     display: flex;
     flex-direction: column; 
     padding: 10px;
-    border-bottom: 1px solid orange;
+    border-bottom: 1px solid var(--primary-color);
     align-items: center;
   }
 

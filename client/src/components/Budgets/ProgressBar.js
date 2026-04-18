@@ -2,7 +2,7 @@ const ProgressBar = ({ width, color }) => {
   return (
     <div 
       style={{
-        backgroundColor: '#e0e0e0',
+        backgroundColor: 'var(--third-color)',
         borderRadius: '8px',
         height: '20px',
         overflow: 'hidden',

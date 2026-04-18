@@ -5,14 +5,14 @@
 
 .heading {
     font-size: 30px;
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    color: var(--third-color);
+    font-family: var(--font-main);
 }
 
 .appTitle {
     font-size: 60px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
+    color: var(--primary-color);
+    font-family: var(--font-main);
 }
 
 .loginPromptDiv {

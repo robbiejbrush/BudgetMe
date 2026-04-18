@@ -1,8 +1,8 @@
 .filterDiv {
   flex: 1;
   border-radius: 15px;
-  color: orange;
-  font-family: 'Outfit', sans-serif;
+  color: var(--primary-color);
+  font-family: var(--font-main);
   justify-content: flex-start;
   display: flex;
   gap: 10px;
@@ -10,17 +10,7 @@
 }
 
 .monthSelect, .yearSelect, .typeSelect, .categorySelect {
-  background-color: #1b1919;
-  color: orange;
-  border-radius: 5px;
-  font-family: 'Outfit', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  border: none;
-  width: auto;
-}
-
-.monthSelect:hover, .yearSelect:hover, .typeSelect:hover, .categorySelect:hover {
-  cursor: pointer;
+  composes: selectBase from '../../styles/shared.module.css';
 }
 
 @media (max-width: 1000px) {

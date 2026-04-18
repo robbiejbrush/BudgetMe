@@ -15,7 +15,7 @@ body, html {
 }
 
 .LoadingText, .NoDataMessage, .ErrorText {
-    color: white;
+    color: var(--third-color);
     font-family: 'Outfit', sans-serif;
     margin-top: 0;
     width: 100%;

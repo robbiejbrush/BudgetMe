@@ -2,32 +2,27 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-top: 2px solid orange;
+    border-top: 2px solid var(--primary-color);
     padding-bottom: 20px;
     margin-top: 20px;
 }
 
 .heading {
     font-size: 25px;
-    font-family: 'Outfit', sans-serif;
-    color: orange;
+    font-family: var(--font-main);
+    color: var(--primary-color);
     margin-bottom: 0px;
 }
 
 .fieldInput {
-    background-color: #1b1919;
-    color: orange;
-    border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: none;
+    composes: inputBase from '../../styles/shared.module.css';
 }
 
 .label {
-    color: white;
+    color: var(--third-color);
     padding-bottom: 10px;
     padding-top: 20px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-main);
     font-weight: bold;
 }
 
@@ -38,7 +33,7 @@
 
 .error {
     color: red;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-main);
     padding-top: 10px;
 }
 
@@ -54,8 +49,8 @@
   left: 2px;        
   top: 50%;           
   transform: translateY(-50%);
-  color: orange;
-  font-family: 'Outfit', sans-serif;
+  color: var(--primary-color);
+  font-family: var(--font-main);
   pointer-events: none;
   line-height: 1;
 }

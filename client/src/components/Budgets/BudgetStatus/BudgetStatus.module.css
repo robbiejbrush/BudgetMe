@@ -1,6 +1,6 @@
 .percentOutput {
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    color: var(--third-color);
+    font-family: var(--font-main);
     font-size: 20px;
     display: inline-block;
     padding-bottom: 20px;
@@ -8,8 +8,8 @@
 }
 
 .budgetTotals {
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    color: var(--third-color);
+    font-family: var(--font-main);
     font-size: 20px;
     padding-bottom: 20px;
     font-weight: bold;

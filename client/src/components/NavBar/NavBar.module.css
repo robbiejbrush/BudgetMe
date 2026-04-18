@@ -5,16 +5,16 @@
   flex-direction: row; 
   align-items: center;
   justify-content: space-between; 
-  background-color: black;
+  background-color: var(--secondary-color);
   padding: 0 20px; 
-  border-bottom: 2px solid orange;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .sideBarDiv {
   flex: 1;
-  position: relative; /* Establish positioning context for the child */
-  height: 100%;       /* Match the parent's height */
-  display: flex;      /* Allows for flex-based centering */
+  position: relative; 
+  height: 100%;       
+  display: flex;      
   align-items: center; 
 }
 
@@ -37,13 +37,13 @@
 
 .headingH1 {
   font-size: 60px;
-  color: orange;
-  font-family: 'Outfit', sans-serif;
+  color: var(--primary-color);
+  font-family: var(--font-main);
 }
 .userH1 {
   font-size: 30px;
-  color: white;
-  font-family: 'Outfit', sans-serif;
+  color: var(--third-color);
+  font-family: var(--font-main);
   margin-right: 0px;
 }
 

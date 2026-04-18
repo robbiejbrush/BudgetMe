@@ -1,5 +1,5 @@
 .graphsDiv {
-    background-color: #1b1919;
+    background-color: var(--background-color);
     border-radius: 15px;
     padding: 20px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);

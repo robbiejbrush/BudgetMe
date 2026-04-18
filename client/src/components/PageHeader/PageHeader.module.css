@@ -18,8 +18,8 @@
 
 .headerCenter {
     font-size: 30px;
-    color: orange;
-    font-family: 'Outfit', sans-serif;
+    color: var(--primary-color);
+    font-family: var(--font-main);
     margin: 0;
     padding: 0;
     flex: 0 0 auto;

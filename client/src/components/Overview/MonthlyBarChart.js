@@ -6,14 +6,14 @@ const CustomToolTip = ({ active, payload }) => {
     const data = payload[0].payload;
     return ( 
       <div style={{
-        backgroundColor: '#1b1919',
+        backgroundColor: 'var(--background-color)',
         padding: '10px',
-        border: '1px solid orange',
+        border: '1px solid var(--primary-color)',
         borderRadius: '8px',
-        color: 'white',
-        fontFamily: 'Outfit, sans-serif'
+        color: 'var(--third-color)',
+        fontFamily: 'var(--font-main)'
       }}>
-        <p style={{ margin: 0, fontWeight: 'bold', color: 'orange' }}>{data.name}</p>
+        <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>{data.name}</p>
         <p style={{ margin: 0 }}>Amount: ${data.expenses.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2

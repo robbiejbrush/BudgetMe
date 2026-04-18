@@ -1,9 +1,9 @@
 .breakdownDiv {
-    background-color: #1b1919;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    margin: 20px;
+  background-color: var(--background-color);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 20px;
 }
 
 .categoryRow {
@@ -20,15 +20,15 @@
 .label {
   width: 200px;
   font-weight: bold;
-  color: white;
-  font-family: 'Outfit', sans-serif;
+  color: var(--third-color);
+  font-family: var(--font-main);
   font-size: 20px;
   text-align: left;
 }
 
 .barBackground {
   flex-grow: 1;
-  background-color: #eee;
+  background-color: var(--third-color);
   height: 12px;
   border-radius: 6px;
   overflow: hidden;
@@ -38,7 +38,7 @@
 
 .barFill {
   height: 100%;
-  background-color: orange;
+  background-color: var(--primary-color);
   width: var(--percent);
   transition: width 0.5s ease-in-out;
   height: 100%;
@@ -48,7 +48,7 @@
   width: 40px;
   font-size: 0.9rem;
   text-align: right;
-  color: orange;
-  font-family: 'Outfit', sans-serif;
+  color: var(--primary-color);
+  font-family: var(--font-main);
   font-weight: bold;
 }

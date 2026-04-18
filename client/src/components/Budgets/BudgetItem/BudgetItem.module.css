@@ -6,8 +6,8 @@
     margin: 0;
     padding-left: 20px;
     display: block;
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    color: var(--third-color);
+    font-family: var(--font-main);
     text-align: left;
     font-size: 20px;
     min-width: 0;
@@ -21,50 +21,33 @@
     justify-self: end;     
 }
 
-.editBtn, .deleteBtn {
-    background-color: #1b1919;
-    color: orange;
-    border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: none;
+.editBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
 }
 
 .deleteBtn {
-  color: red;
-  margin-right: 20px;
-}
-
-.editBtn:hover, .deleteBtn:hover {
-  cursor: pointer;
+    composes: btnBase from '../../../styles/shared.module.css';
+    color: red;
+    margin-right: 20px;
 }
 
 /*Editing Budget*/
-.submitBtn, .cancelBtn {
-    background-color: #1b1919;
-    color: orange;
-    border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: none;
+.submitBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
 }
 
 .cancelBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
     margin-right: 20px;
 }
 
 .amountInput {
+    composes: inputBase from '../../../styles/shared.module.css';
     width: 100%;
     height: 30px;
     font-size: 20px;
     box-sizing: border-box;
     margin-left: 15px;
-    background-color: #1b1919;
-    color: orange;
-    border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: none;
     width: 100%;
     min-width: 70px;
     margin: 0;
@@ -72,12 +55,7 @@
 }
 
 .categorySelect {
-    background-color: #1b1919;
-    color: orange;
-    border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: none;
+    composes: selectBase from '../../../styles/shared.module.css';
     width: 100%;
     height: 30px;
     font-size: 20px;
@@ -91,18 +69,18 @@
     align-items: center;
     margin-left: 15px;
     padding-left: 5px;
-    background-color: #1b1919;
-    color: orange;
+    background-color: var(--background-color);
+    color: var(--primary-color);
     border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-main);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
     min-width: 0;
 }
 
 .currencySymbol {
-    color: orange;
-    font-family: 'Outfit', sans-serif;
+    color: var(--primary-color);
+    font-family: var(--font-main);
     font-size: 20px;
 }
 

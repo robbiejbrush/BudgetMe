@@ -1,22 +1,22 @@
 .bm-burger-button {
-    position: absolute;
-    width: 30px;
-    height: 24px;
-    left: 0;          
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  width: 30px;
+  height: 24px;
+  left: 0;          
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .bm-burger-bars {
-  background: white;
+  background: var(--third-color);
   border-radius: 15px;
 }
 .bm-burger-bars-hover {
-  background: orange;
+  background: var(--primary-color);
 }
 
 .bm-cross {
-  background: white;
+  background: var(--third-color);
 }
 
 .bm-menu-wrap {
@@ -26,12 +26,12 @@
 }
 
 .bm-menu {
-  background: #1b1919;
+  background: var(--background-color);
   border-radius: 15px;
   width: fit-content;
   height: fit-content;
   padding: 20px;
-  border: 1px solid orange;
+  border: 1px solid var(--primary-color);
 }
 
 .bm-item-list {
@@ -42,9 +42,9 @@
 }
 
 .menu-item {
-    color: orange;
-    font-family: 'Outfit', sans-serif;
-    font-size: 20px;
-    text-decoration: none !important;
-    font-weight: bold;
+  color: var(--primary-color);
+  font-family: var(--font-main);
+  font-size: 20px;
+  text-decoration: none !important;
+  font-weight: bold;
 }
