@@ -29,11 +29,11 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
             ))}
           </select>
 
-          <div className={styles.amountWrapper}>
+          <div className={styles.inputWrapper}>
             <span className={styles.currencySymbol}>$</span>
             <input 
               type="number" 
-              className={styles.amountInput}
+              className={styles.textInput}
               value={editForm.monthlyLimit}
               onChange={(e) => setEditForm({ ...editForm, monthlyLimit: e.target.value })}
             />

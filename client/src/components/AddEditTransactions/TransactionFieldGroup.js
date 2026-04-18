@@ -16,7 +16,7 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
             <label className= {styles.label} htmlFor="AmountInput">Amount:</label>
             <div className={styles.inputWrapper}>
                 <span className={styles.currencySymbol}>$</span>
-                <Field className = {`${styles.fieldInput} ${styles.amountInput}`} id= {`amount-${index}`} name= {`transactions.${index}.amount`} placeholder= "0.00"/>
+                <Field className = {`${styles.fieldInput} ${styles.textInput}`} id= {`amount-${index}`} name= {`transactions.${index}.amount`} placeholder= "0.00"/>
             </div>
             {errors.transactions?.[index]?.amount && (
                 <span className={styles.error}>{errors.transactions[index].amount}</span>

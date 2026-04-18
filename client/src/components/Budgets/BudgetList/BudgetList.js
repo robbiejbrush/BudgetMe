@@ -58,9 +58,9 @@ function BudgetList({
             <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
           ))}
         </select>
-        <div className={styles.amountWrapper}>
+        <div className={styles.inputWrapper}>
           <span className={styles.currencySymbol}>$</span>
-          <input type="number" id="AddAmountInput" className={styles.amountInput} placeholder="Amount" step="0.01" required/>
+          <input type="number" id="AddAmountInput" className={styles.textInput} placeholder="Amount" step="0.01" required/>
         </div>
         <button type="submit" className={styles.addBtn} id="AddBtn">Add</button>
       </form>

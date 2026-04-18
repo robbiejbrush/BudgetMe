@@ -41,7 +41,7 @@
     margin-right: 20px;
 }
 
-.amountInput {
+.textInput {
     composes: inputBase from '../../../styles/shared.module.css';
     width: 100%;
     height: 30px;
@@ -64,7 +64,7 @@
     min-width: 0px;
 }
 
-.amountWrapper {
+.inputWrapper {
     display: flex !important;
     align-items: center;
     margin-left: 15px;
@@ -86,7 +86,7 @@
 
 /* Mobile Adjustments */
 @media (max-width: 800px) {
-    .budgetItem span, .currencySymbol, .categorySelect, .amountInput {                 
+    .budgetItem span, .currencySymbol, .categorySelect, .textInput {                 
         font-size: 12px;
     }
 }

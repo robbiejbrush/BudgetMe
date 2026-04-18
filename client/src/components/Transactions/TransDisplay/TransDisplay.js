@@ -74,7 +74,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
                   </span>
                   <span className={styles.counterparty}>{transaction.counterparty}</span>
                   <span className={styles.category}>{category?.name || 'Uncategorized'}</span>
-                  <div className={styles.actions}>
+                  <div className={styles.actionsDiv}>
                     <button 
                       onClick={() => onEdit(transaction)} 
                       className={styles.editBtn}

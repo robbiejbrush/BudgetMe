@@ -34,7 +34,7 @@ const BudgetStatus = ({ m, filters }) => {
         color={m.barColor} 
       />
 
-      <div className={styles.budgetTotals}>
+      <div className={styles.budgetTotalsDiv}>
         <p>${m.totalSpent.toLocaleString()} <span style={{color: 'orange'}}>spent of</span> ${m.currentBudget.toLocaleString()}</p>
       </div>
     </>

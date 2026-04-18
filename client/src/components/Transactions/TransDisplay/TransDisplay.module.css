@@ -52,7 +52,7 @@
     letter-spacing: 1px;
 }
 
-.actions {
+.actionsDiv {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;

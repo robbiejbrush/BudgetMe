@@ -48,7 +48,7 @@
     width: 100%;
 }
 
-.amountWrapper {
+.inputWrapper {
     display: flex !important;
     align-items: center;
     margin-left: 15px;
@@ -68,7 +68,7 @@
     font-family: var(--font-main);
 }
 
-.amountInput {
+.textInput {
     composes: inputBase from '../../../styles/shared.module.css';
     min-width: 0;
     font-size: 20px;
@@ -87,7 +87,7 @@
 
 /* Mobile Adjustments */
 @media (max-width: 800px) {
-    .currencySymbol, .categorySelect, .amountInput {
+    .currencySymbol, .categorySelect, .textInput {
         font-size: 12px;
     }
 }

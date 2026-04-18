@@ -57,7 +57,7 @@ function Budgets() {
             categories={m.expenseCategories}
           />
       </PageHeader>
-      <div className= {styles.budgetsOverview}>
+      <div className= {styles.budgetsOverviewDiv}>
         <h2 className= {styles.monthHeading}>{m.dateHeading}</h2>
         <BudgetStatus m= {m} filters= {filters}/>
         <SpendMetrics metrics= {m.typicalSpendMetrics} formatCurrency= {formatCurrency}/>

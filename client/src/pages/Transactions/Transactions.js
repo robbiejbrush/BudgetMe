@@ -45,7 +45,7 @@ function Transactions() {
         title="Transactions"
         actions= {
           <button 
-            className= {styles.addTransBtn}
+            className= {styles.addBtn}
             onClick={() => navigate('/addTransactions')}>
             Add Transaction
           </button>
