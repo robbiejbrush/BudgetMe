@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../BudgetItem/BudgetItem.css';
+import styles from '../BudgetItem/BudgetItem.module.css';
 
 function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, formatCurrency }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -16,11 +16,11 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
   };
 
   return (
-    <div className="BudgetItem">
+    <div className={styles.budgetItem}>
       {isEditing ? (
         <>
           <select 
-            className="EditCategorySelect"
+            className={styles.categorySelect}
             value={editForm.categoryId}
             onChange={(e) => setEditForm({ ...editForm, categoryId: e.target.value })}
           >
@@ -29,28 +29,28 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
             ))}
           </select>
 
-          <div className="BudgetsAmountWrapper">
-            <span className="BudgetsCurrencySymbol">$</span>
+          <div className={styles.amountWrapper}>
+            <span className={styles.currencySymbol}>$</span>
             <input 
               type="number" 
-              className="EditAmountInput"
+              className={styles.amountInput}
               value={editForm.monthlyLimit}
               onChange={(e) => setEditForm({ ...editForm, monthlyLimit: e.target.value })}
             />
           </div>
 
-          <div className="EditActions">
-            <button className="EditSubmitBtn" onClick={handleSubmit}>Submit</button>
-            <button className="EditCancelBtn" onClick={() => setIsEditing(false)}>Cancel</button>
+          <div className={styles.actionsDiv}>
+            <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
+            <button className={styles.cancelBtn} onClick={() => setIsEditing(false)}>Cancel</button>
           </div>
         </>
       ) : (
         <>
-          <span className="BudgetItemSpan">{category?.name || 'Unknown'}</span>
-          <span className="BudgetItemSpan">${formatCurrency(budget.monthlyLimit)}</span>
-          <div className="EditActions">
-            <button onClick={() => setIsEditing(true)} className="EditBtn">Edit</button>
-            <button onClick={() => onDelete(budget.budgetId)} className="DeleteBtn">Delete</button>
+          <span className={styles.itemSpan}>{category?.name || 'Unknown'}</span>
+          <span className={styles.itemSpan}>${formatCurrency(budget.monthlyLimit)}</span>
+          <div className={styles.actionsDiv}>
+            <button onClick={() => setIsEditing(true)} className={styles.editBtn}>Edit</button>
+            <button onClick={() => onDelete(budget.budgetId)} className={styles.deleteBtn}>Delete</button>
           </div>
         </>
       )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './AddEditTransactions.css';
+import styles from './AddEditTransactions.module.css';
 import { Formik, Form } from 'formik';
 import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
@@ -41,19 +41,19 @@ function EditTransactions() {
         <PageHeader title= "Edit Transactions"/>
         <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {transactionSchema} enableReinitialize={true}>
             {({ values, errors }) => {
-            return(
-                <Form>
-                <TransactionFieldGroup
-                    index= {0}
-                    transaction= {values.transactions[0]}
-                    errors= {errors}
-                    rawCategories= {rawCategories}
-                    categoriesLoading= {categoriesLoading}
-                    showHeading= {false}
-                />
-                <button className= "SubmitButton" type= "submit">Save Changes</button>
-                </Form>
-            );
+                return(
+                    <Form>
+                    <TransactionFieldGroup
+                        index= {0}
+                        transaction= {values.transactions[0]}
+                        errors= {errors}
+                        rawCategories= {rawCategories}
+                        categoriesLoading= {categoriesLoading}
+                        showHeading= {false}
+                    />
+                    <button className={styles.submitBtn} type= "submit">Save Changes</button>
+                    </Form>
+                );
             }}
         </Formik>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { formatCurrency } from '../../../utils/dateHelpers';
 import useTransactionDelete from './useTransactionDelete';
 import { useNavigate } from 'react-router-dom';
-import '../TransDisplay/TransDisplay.css';
+import styles from '../TransDisplay/TransDisplay.module.css';
 
 function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
 
@@ -31,13 +31,13 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
     }
 
     return (
-        <div className="TransDiv">
-        <div className="TransactionRow Header">
+        <div className={styles.transDiv}>
+        <div className={`${styles.transRow} ${styles.header}`}>
           <span>Date</span>
           <span>Amount</span>
           <span>Counterparty</span>
           <span>Category</span>
-          <span className= "EmptySpan"></span>
+          <span className= {styles.emptySpan}></span>
         </div>
         {(() => {
           let lastMonth = "";
@@ -59,7 +59,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
             if (currentMonth !== lastMonth) {
               lastMonth = currentMonth;
               monthHeader = (
-                <div key={`header-${currentMonth}`} className="MonthHeader">
+                <div key={`header-${currentMonth}`} className={styles.monthHeader}>
                   {currentMonth}
                 </div>
               );
@@ -67,23 +67,23 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
             return (
               <React.Fragment key={transaction.transactionId}>
                 {monthHeader}
-                <div className="TransactionRow">
-                  <span className="Date">{transaction.date}</span>
-                  <span className="Amount" style={{ color: isExpense ? 'red' : 'green' }}>
+                <div className={styles.transRow}>
+                  <span className={styles.date}>{transaction.date}</span>
+                  <span className={styles.amount} style={{ color: isExpense ? 'red' : 'green' }}>
                     {isExpense ? '-' : '+'}${formatCurrency(transaction.amount)}
                   </span>
-                  <span className="Counterparty">{transaction.counterparty}</span>
-                  <span className="Category">{category?.name || 'Uncategorized'}</span>
-                  <div className="Actions">
+                  <span className={styles.counterparty}>{transaction.counterparty}</span>
+                  <span className={styles.category}>{category?.name || 'Uncategorized'}</span>
+                  <div className={styles.actions}>
                     <button 
                       onClick={() => onEdit(transaction)} 
-                      className="EditBtn"
+                      className={styles.editBtn}
                     >
                       Edit
                     </button>
                     <button 
                       onClick={() => onDelete(transaction.transactionId)} 
-                      className="DeleteBtn"
+                      className={styles.deleteBtn}
                     >
                       Delete
                     </button>

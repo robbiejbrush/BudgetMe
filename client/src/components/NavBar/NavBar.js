@@ -1,18 +1,18 @@
 import React from 'react';
-import '../NavBar/NavBar.css'
+import styles from '../NavBar/NavBar.module.css'
 import Sidebar from '../SidebarMenu/SidebarMenu';
 
 function NavBar({ pageName, userName }) {
   return (
-        <div className="NavBar">
-          <div className= "SideBarDiv">
+        <div className={styles.navBarDiv}>
+          <div className={styles.sideBarDiv}>
             <Sidebar />
           </div>
           <div>
-            <h1 className= "AppBarHeading"> { pageName } </h1>
+            <h1 className={styles.headingH1}> { pageName } </h1>
           </div>
           <div style={{ flex: 1, textAlign: 'right' }}>
-            <h1 className= "AppBarUser"> { userName } </h1>
+            <h1 className={styles.userH1}> { userName } </h1>
           </div>
         </div>
   )

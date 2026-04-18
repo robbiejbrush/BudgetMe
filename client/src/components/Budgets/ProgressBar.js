@@ -1,19 +1,17 @@
-import '../ProgressBar/ProgressBar.css';
-
 const ProgressBar = ({ width, color }) => {
   return (
     <div 
-      className="ProgressBarContainer"
       style={{
         backgroundColor: '#e0e0e0',
         borderRadius: '8px',
         height: '20px',
         overflow: 'hidden',
-        marginTop: '10px'
+        marginTop: '0px',
+        marginLeft: '20px',
+        marginRight: '20px'
       }}
     >
       <div 
-        className="ProgressBarFiller"
         style={{
           width: `${width}%`,
           height: '100%',

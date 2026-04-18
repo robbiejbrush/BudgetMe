@@ -1,4 +1,4 @@
-import '../Overview/Overview.css'
+import styles from '../Overview/Overview.module.css'
 import ExpensesPieChart from '../../components/Overview/ExpensesPieChart';
 import MonthlyBarChart from '../../components/Overview/MonthlyBarChart';
 import FilterBar from '../../components/FilterBar/FilterBar';
@@ -44,7 +44,7 @@ function Overview() {
       ) : (
         <div>
         <SummaryStats totalIncome={ totalIncome } totalExpenses={ totalExpenses } net={ net }/>
-        <div className= "GraphsDiv">
+        <div className= {styles.graphsDiv}>
           <ExpensesPieChart data= { displayCategories }/>
           <MonthlyBarChart data= { monthlyExpenses }/>
         </div>

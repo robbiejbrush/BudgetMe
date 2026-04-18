@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.FieldsDiv {
+.fieldsDiv {
     display: flex;
     align-items: center;
     flex-direction: column;
     border-top: 2px solid orange;
     padding-bottom: 20px;
     margin-top: 20px;
-
 }
 
-.TranHeading {
+.heading {
     font-size: 25px;
     font-family: 'Outfit', sans-serif;
     color: orange;
+    margin-bottom: 0px;
 }
 
-.FieldInput {
+.fieldInput {
     background-color: #1b1919;
     color: orange;
     border-radius: 5px;
@@ -25,26 +25,33 @@
     border: none;
 }
 
-.Label {
+.label {
     color: white;
     padding-bottom: 10px;
     padding-top: 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
 }
 
-.Error {
+.amountInput {
+  padding-left: 25px !important;
+  width: 75px;
+}
+
+.error {
     color: red;
     font-family: 'Outfit', sans-serif;
     padding-top: 10px;
 }
 
-.InputWrapper {
+.inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
   width: fit-content;
 }
 
-.CurrencySymbol {
+.currencySymbol {
   position: absolute;
   left: 2px;        
   top: 50%;           
@@ -53,9 +60,4 @@
   font-family: 'Outfit', sans-serif;
   pointer-events: none;
   line-height: 1;
-}
-
-.AmountInput {
-  padding-left: 25px !important;
-  width: 75px;
 }

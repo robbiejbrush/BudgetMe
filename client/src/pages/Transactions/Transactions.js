@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Transactions/Transactions.css'
+import styles from '../Transactions/Transactions.module.css'
 import { useUserId } from '../../hooks/useAuth';
 import TransDisplay from '../../components/Transactions/TransDisplay/TransDisplay';
 import { useTransactionFilter } from '../../hooks/useTransactionFilter';
@@ -45,7 +45,7 @@ function Transactions() {
         title="Transactions"
         actions= {
           <button 
-            className= "AddTransBtn"
+            className= {styles.addTransBtn}
             onClick={() => navigate('/addTransactions')}>
             Add Transaction
           </button>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field } from 'formik';
-import '../../pages/AddEditTransactions/AddEditTransactions.css';
-import '../AddEditTransactions/TransactionFieldGroup.css';
+import styles from '../AddEditTransactions/TransactionFieldGroup.module.css';
 
 function TransactionFieldGroup( {index, transaction, errors, rawCategories, categoriesLoading, showHeading = true} ) {
     const filteredCategories = transaction.type 
@@ -9,38 +8,38 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
         : rawCategories;
                         
     return(
-        <div key={index} className= "FieldsDiv">
+        <div key={index} className= {styles.fieldsDiv}>
             {showHeading && (
-                <h3 className="TranHeading">Transaction #{index + 1}</h3>
+                <h3 className={styles.heading}>Transaction #{index + 1}</h3>
             )}
 
-            <label className= "Label" htmlFor="AmountInput">Amount:</label>
-            <div className="InputWrapper">
-                <span className="CurrencySymbol">$</span>
-                <Field className = "FieldInput AmountInput" id= {`amount-${index}`} name= {`transactions.${index}.amount`} placeholder= "0.00"/>
+            <label className= {styles.label} htmlFor="AmountInput">Amount:</label>
+            <div className={styles.inputWrapper}>
+                <span className={styles.currencySymbol}>$</span>
+                <Field className = {`${styles.fieldInput} ${styles.amountInput}`} id= {`amount-${index}`} name= {`transactions.${index}.amount`} placeholder= "0.00"/>
             </div>
             {errors.transactions?.[index]?.amount && (
-                <span className="Error">{errors.transactions[index].amount}</span>
+                <span className={styles.error}>{errors.transactions[index].amount}</span>
             )}
 
-            <label className= "Label" htmlFor="CounterpartyInput">Counterparty:</label>
-            <Field className = "FieldInput" id= {`counterparty-${index}`} name= {`transactions.${index}.counterparty`} placeholder= "Counterparty"/>
+            <label className= {styles.label} htmlFor="CounterpartyInput">Counterparty:</label>
+            <Field className = {styles.fieldInput} id= {`counterparty-${index}`} name= {`transactions.${index}.counterparty`} placeholder= "Counterparty"/>
             {errors.transactions?.[index]?.counterparty && (
-                <span className="Error">{errors.transactions[index].counterparty}</span>
+                <span className={styles.error}>{errors.transactions[index].counterparty}</span>
             )}
 
-            <label className= "Label" htmlFor="TypeInput">Type:</label>
-            <Field className = "FieldInput" id= {`type-${index}`} name= {`transactions.${index}.type`} as="select">
+            <label className= {styles.label} htmlFor="TypeInput">Type:</label>
+            <Field className = {styles.fieldInput} id= {`type-${index}`} name= {`transactions.${index}.type`} as="select">
                 <option value= "" hidden>Select a Type</option>
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </Field>  
             {errors.transactions?.[index]?.type && (
-                <span className="Error">{errors.transactions[index].type}</span>
+                <span className={styles.error}>{errors.transactions[index].type}</span>
             )}
 
-            <label className= "Label" htmlFor="CategoryInput">Category:</label>
-            <Field className= "FieldInput" id= {`category-${index}`} name= {`transactions.${index}.category`} as="select" disabled={categoriesLoading}>
+            <label className= {styles.label} htmlFor="CategoryInput">Category:</label>
+            <Field className= {styles.fieldInput} id= {`category-${index}`} name= {`transactions.${index}.category`} as="select" disabled={categoriesLoading}>
                 {categoriesLoading ? (
                     <option>Loading...</option>
                 ) : (
@@ -53,13 +52,13 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
                     )}
             </Field> 
             {errors.transactions?.[index]?.category && (
-                <span className="Error">{errors.transactions[index].category}</span>
+                <span className={styles.error}>{errors.transactions[index].category}</span>
             )}
 
-            <label className= "Label" htmlFor="DateInput">Date:</label>
-            <Field className = "FieldInput" id= {`date-${index}`} name= {`transactions.${index}.date`} type= "date" placeholder= "Date"/>
+            <label className= {styles.label} htmlFor="DateInput">Date:</label>
+            <Field className = {styles.fieldInput} id= {`date-${index}`} name= {`transactions.${index}.date`} type= "date" placeholder= "Date"/>
             {errors.transactions?.[index]?.date && (
-                <span className="Error">{errors.transactions[index].date}</span>
+                <span className={styles.error}>{errors.transactions[index].date}</span>
             )}
         </div>
     );

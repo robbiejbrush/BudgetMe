@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Budgets/Budgets.css'
+import styles from '../Budgets/Budgets.module.css'
 import FilterBar from '../../components/FilterBar/FilterBar';
 import { formatCurrency } from '../../utils/dateHelpers';
 import { useBudgetsData } from './useBudgetsData';
@@ -57,8 +57,8 @@ function Budgets() {
             categories={m.expenseCategories}
           />
       </PageHeader>
-      <div className= "BudgetsOverview">
-        <h2 className= "MonthHeading">{m.dateHeading}</h2>
+      <div className= {styles.budgetsOverview}>
+        <h2 className= {styles.monthHeading}>{m.dateHeading}</h2>
         <BudgetStatus m= {m} filters= {filters}/>
         <SpendMetrics metrics= {m.typicalSpendMetrics} formatCurrency= {formatCurrency}/>
       </div>

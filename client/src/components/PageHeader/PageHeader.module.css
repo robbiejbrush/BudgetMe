@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.HeaderDiv {
+.headerDiv {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,14 +11,14 @@
   box-sizing: border-box;
 }
 
-.HeaderRight {
+.headerRight {
   flex: 1;
   display: flex;
   justify-content: flex-end;
   padding-left: 20px;
 }
 
-.HeaderCenter {
+.headerCenter {
     font-size: 30px;
     color: orange;
     font-family: 'Outfit', sans-serif;
@@ -33,6 +33,6 @@
     align-self: center;
 }
 
-.HeaderLeft {
+.headerLeft {
     flex: 1;
 }

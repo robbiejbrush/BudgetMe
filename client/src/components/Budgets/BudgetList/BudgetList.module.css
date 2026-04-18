@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.BudgetsList {
+.budgetsListDiv {
     background-color: #1b1919;
     border-radius: 15px;
     margin-top: 20px;
@@ -9,7 +9,7 @@
     margin-right: auto;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto auto;
     gap: 20px;
     align-items: center;
     padding-bottom: 20px;
@@ -18,23 +18,18 @@
     width: min(600px, calc(100% - 40px));
 }
 
-.Header span{
+.itemsHeading {                 
+    margin: 0;
+    padding-left: 20px;
+    display: block;
     color: orange;
+    font-family: 'Outfit', sans-serif;
+    text-align: left;
     font-size: 20px;
     font-weight: bold;
 }
 
-.BudgetItemsHeading {                 
-    margin: 0;
-    padding-left: 20px;
-    display: block;
-    color: white;
-    font-family: 'Outfit', sans-serif;
-    text-align: left;
-    font-size: 20px;
-}
-
-.BudgetsHeaderDivider {
+.headerDivider {
     grid-column: 1 / -1;
     border-bottom: 3px solid orange;
     height: 0; 
@@ -42,39 +37,65 @@
 }
 
 /*Add Budget*/
-.BudgetAddForm {
+.addForm {
     display: contents;
 }
 
-.AddAmountInput, 
-.AddCategorySelect {
+.categorySelect {
     min-width: 0;
-}
-
-.AddCategorySelect, .AddAmountInput, .AddBtn{
     background-color: #1b1919;
     color: orange;
     border-radius: 5px;
     font-family: 'Outfit', sans-serif;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
-}
-
-.AddCategorySelect, .AddAmountInput {
     font-size: 20px;
     height: 30px;
-}
-
-.AddCategorySelect {
     margin-left: 15px;
+    width: 100%;
 }
 
-.AddAmountInput {
+.amountWrapper {
+    display: flex !important;
+    align-items: center;
+    margin-left: 15px;
+    padding-left: 5px;
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    min-width: 0;
+}
+
+.currencySymbol {
+    font-size: 20px;
+    color: orange;
+    font-family: 'Outfit', sans-serif;
+}
+
+.amountInput {
+    min-width: 0;
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 20px;
+    height: 30px;
     width: 100%;
     min-width: 70px;
 }
 
-.AddBtn {
+.addBtn{
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
     margin-right: 20px;
     display: flex;   
     justify-content: flex-end; 
@@ -83,11 +104,7 @@
 
 /* Mobile Adjustments */
 @media (max-width: 800px) {
-    .BudgetsCurrencySymbol {
-        font-size: 12px;
-    }
-
-    .AddCategorySelect, .AddAmountInput {
+    .currencySymbol, .categorySelect, .amountInput {
         font-size: 12px;
     }
 }

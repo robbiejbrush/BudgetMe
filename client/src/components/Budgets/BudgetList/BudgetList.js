@@ -1,6 +1,6 @@
 import React from 'react';
 import BudgetItem from '../BudgetItem/BudgetItem';
-import '../BudgetList/BudgetList.css';
+import styles from '../BudgetList/BudgetList.module.css';
 
 function BudgetList({ 
   budgets, 
@@ -30,13 +30,11 @@ function BudgetList({
   };
 
   return (
-    <div className="BudgetsList">
-      <div className="BudgetItem Header">
-        <span className="BudgetItemsHeading">Category</span>
-        <span className="BudgetItemsHeading">Monthly Limit</span>
+    <div className={styles.budgetsListDiv}>
+        <span className={styles.itemsHeading}>Category</span>
+        <span className={styles.itemsHeading}>Monthly Limit</span>
         <span></span>
-      </div>
-      <div className="BudgetsHeaderDivider"></div>
+      <div className={styles.headerDivider}></div>
 
       {budgets.length === 0 ? (
         <div className="NoDataMessage">No budgets are set.</div>
@@ -54,17 +52,17 @@ function BudgetList({
         ))
       )}
 
-      <form id="BudgetAddForm" className="BudgetAddForm" onSubmit={onAddSubmit}>
-        <select id="AddCategorySelect" className="AddCategorySelect" required>
+      <form id="BudgetAddForm" className={styles.addForm} onSubmit={onAddSubmit}>
+        <select id="AddCategorySelect" className={styles.categorySelect} required>
           {getUnusedForAdd().map(cat => (
             <option key={cat.categoryId} value={cat.categoryId}>{cat.name}</option>
           ))}
         </select>
-        <div className="BudgetsAmountWrapper">
-          <span className="BudgetsCurrencySymbol">$</span>
-          <input type="number" id="AddAmountInput" className="AddAmountInput" placeholder="Amount" step="0.01" required/>
+        <div className={styles.amountWrapper}>
+          <span className={styles.currencySymbol}>$</span>
+          <input type="number" id="AddAmountInput" className={styles.amountInput} placeholder="Amount" step="0.01" required/>
         </div>
-        <button type="submit" className="AddBtn" id="AddBtn">Add</button>
+        <button type="submit" className={styles.addBtn} id="AddBtn">Add</button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 /*Heading Button*/
-.AddTransBtn {
+.addTransBtn {
   background-color: #1b1919;
   color: orange;
   border-radius: 5px;
@@ -11,6 +11,6 @@
   width: auto;
 }
 
-.AddTransBtn:hover {
+.addTransBtn:hover {
   cursor: pointer;
 }

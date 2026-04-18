@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.LoginHeading {
+.loginDiv {
+    align-content: center;
+    height: 100vh;
+}
+
+.heading {
     font-size: 30px;
     color: white;
     font-family: 'Outfit', sans-serif;
 }
 
-.LoginAppTitle {
+.appTitle {
     font-size: 60px;
     color: orange;
     font-family: 'Outfit', sans-serif;
 }
 
-.LoginPrompt {
+.loginPromptDiv {
     display: flex;
     justify-content: center;
     padding-top: 25px;
-}
-
-.LoginDiv {
-    align-content: center;
-    height: 100vh;
 }

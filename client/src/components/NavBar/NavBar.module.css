@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 /*Nav Bar*/
-.NavBar {
+.navBarDiv {
   width: 100%;
   min-height: 100px;
   display: flex;
@@ -13,7 +13,7 @@
   border-bottom: 2px solid orange;
 }
 
-.SideBarDiv {
+.sideBarDiv {
   flex: 1;
   position: relative; /* Establish positioning context for the child */
   height: 100%;       /* Match the parent's height */
@@ -21,29 +21,29 @@
   align-items: center; 
 }
 
-.NavBar > div {
+.navBarDiv > div {
   display: flex;
   align-items: center;
 }
 
-.NavBar > div:nth-child(2) {
+.navBarDiv > div:nth-child(2) {
   justify-content: center;
   flex: 2;
 }
 
-.NavBar > div:nth-child(3) {
+.navBarDiv > div:nth-child(3) {
   flex: 1;
   display: flex;             
   justify-content: flex-end; 
   text-align: right;
 }
 
-.AppBarHeading {
+.headingH1 {
   font-size: 60px;
   color: orange;
   font-family: 'Outfit', sans-serif;
 }
-.AppBarUser {
+.userH1 {
   font-size: 30px;
   color: white;
   font-family: 'Outfit', sans-serif;
@@ -52,11 +52,11 @@
 
 /* Mobile Adjustments */
 @media (max-width: 600px) {
-  .AppBarUser {
+  .userH1 {
     font-size: 1.0rem;
   }
 
-  .AppBarHeading {
+  .headingH1 {
     font-size: 30px;
   }
 }

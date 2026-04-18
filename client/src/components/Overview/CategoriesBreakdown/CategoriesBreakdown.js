@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CategoriesBreakdown/CategoriesBreakdown.css';
+import styles from '../CategoriesBreakdown/CategoriesBreakdown.module.css';
 
 function CategoriesBreakdown({ categories }) {
   
@@ -8,18 +8,18 @@ function CategoriesBreakdown({ categories }) {
     .sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage));
 
     return (
-        <div className= "BreakdownDiv">
+        <div className= {styles.breakdownDiv}>
           {sortedData.filter((cat) => cat.type?.toLowerCase() !== 'income').sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage)).map((cat) => (
-            <div key={cat.categoryId} className="CategoryRow">
-              <span className="Label">{cat.name}</span>
+            <div key={cat.categoryId} className={styles.categoryRow}>
+              <span className={styles.label}>{cat.name}</span>
               
-              <div className="BarBackground">
+              <div className={styles.barBackground}>
                 <div 
-                  className="BarFill" 
+                  className={styles.barFill} 
                   style={{ "--percent": `${parseFloat(cat.percentage)}%` }} 
                 />
               </div>
-              <span className="Percentage">{cat.percentage}%</span>
+              <span className={styles.percentage}>{cat.percentage}%</span>
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../FilterBar/FilterBar.css'
+import styles from '../FilterBar/FilterBar.module.css'
 import { monthNamesFull, getYearOptions } from '../../utils/dateHelpers';
 
 const FilterBar = ({ 
@@ -13,9 +13,9 @@ const FilterBar = ({
   const yearOptions = getYearOptions(5); 
 
   return (
-        <div className= "FilterDiv">
+        <div className={styles.filterDiv}>
           <select 
-            className= "MonthSelect"
+            className={styles.monthSelect}
             value={selectedMonth} 
             onChange={(e) => {
               const val = e.target.value;
@@ -28,7 +28,7 @@ const FilterBar = ({
           </select>
 
           <select 
-            className= "YearSelect"
+            className={styles.yearSelect}
             value={selectedYear} 
             onChange={(e) => setSelectedYear(parseInt(e.target.value))}>
             {yearOptions.map(y => (
@@ -37,7 +37,7 @@ const FilterBar = ({
           </select>
           {setSelectedType && (
             <select 
-              className= "TypeSelect"
+              className={styles.typeSelect}
               value={selectedType} 
               onChange={(e) => setSelectedType(e.target.value)}>
               <option value="all">All Types</option>
@@ -48,7 +48,7 @@ const FilterBar = ({
 
           {setSelectedCategory && (
             <select 
-              className= "CategorySelect"
+              className={styles.categorySelect}
               value={selectedCategory} 
               onChange={(e) => {
                 const val = e.target.value;

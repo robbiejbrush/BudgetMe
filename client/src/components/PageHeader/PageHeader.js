@@ -1,14 +1,14 @@
 import React from "react";
-import '../PageHeader/PageHeader.css';
+import styles from '../PageHeader/PageHeader.module.css';
 
 export const PageHeader = ({ title, children, actions }) => {
   return (
-    <div className= "HeaderDiv">
-      <div className="HeaderLeft">{children}</div>
+    <div className={styles.headerDiv}>
+      <div className={styles.headerLeft}>{children}</div>
       
-      <h1 className="HeaderCenter">{title}</h1>
+      <h1 className={styles.headerCenter}>{title}</h1>
 
-      <div className="HeaderRight">
+      <div className={styles.headerRight}>
         {actions || <div className="EmptyDiv" />}
       </div>
     </div>

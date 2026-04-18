@@ -1,18 +1,18 @@
 import React from 'react';
 import { formatCurrency } from '../../../utils/dateHelpers';
-import '../SummaryStats/SummaryStats.css';
+import styles from '../SummaryStats/SummaryStats.module.css';
 
 function SummaryStats({ totalIncome, totalExpenses, net }) {
 
     return (
-        <div className= "NetDiv">
-          <h1 className= "IncomeText">
+        <div className= {styles.netDiv}>
+          <h1 className= {styles.incomeText}>
             Income: <span style= {{ color: 'orange' }}>${formatCurrency(totalIncome)}</span>
           </h1>
-          <h1 className= "ExpensesText">
+          <h1 className= {styles.expensesText}>
             Expenses: <span style= {{ color: 'orange' }}>${formatCurrency(totalExpenses)}</span>
           </h1>
-          <h1 className= "NetText">
+          <h1 className= {styles.netText}>
             Net: <span style={{ color: net >= 0 ? 'green' : 'red' }}>
               ${formatCurrency(net)}
             </span>

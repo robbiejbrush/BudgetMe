@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.FilterDiv {
+.filterDiv {
   flex: 1;
   border-radius: 15px;
   color: orange;
@@ -11,7 +11,7 @@
   padding-right: 20px;
 }
 
-.MonthSelect, .YearSelect, .TypeSelect, .CategorySelect {
+.monthSelect, .yearSelect, .typeSelect, .categorySelect {
   background-color: #1b1919;
   color: orange;
   border-radius: 5px;
@@ -21,21 +21,21 @@
   width: auto;
 }
 
-.MonthSelect:hover, .YearSelect:hover, .TypeSelect:hover, .CategorySelect:hover {
+.monthSelect:hover, .yearSelect:hover, .typeSelect:hover, .categorySelect:hover {
   cursor: pointer;
 }
 
 @media (max-width: 1000px) {
-  .FilterDiv {
+  .filterDiv {
     flex-direction: column; 
     align-items: flex-start;   
   }
 
-  .FilterDiv select {
+  .filterDiv select {
     width: auto;          
   }
 
- .CategorySelect {
+ .categorySelect {
   max-width: 110px;
  }
 }

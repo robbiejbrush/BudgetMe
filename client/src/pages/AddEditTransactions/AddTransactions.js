@@ -1,5 +1,5 @@
 import React from 'react';
-import './AddEditTransactions.css';
+import styles from './AddEditTransactions.module.css';
 import {Formik, Form, FieldArray} from 'formik';
 import { useCategories } from '../../hooks/useCategories.js';
 import { transactionSchema } from './TransactionSchema.js';
@@ -37,10 +37,10 @@ function AddTransactions() {
          {({ values, errors, setFieldValue }) => {
           return(
             <Form>
-              <div className="CountSelector">
-                <label className= "Label HowMany" >How many transactions?</label>
+              <div className={styles.countSelectorDiv}>
+                <label className={styles.label}>How many transactions?</label>
                 <input 
-                  className= "FieldInput HowManyInput"
+                  className={styles.fieldInput}
                   type="number" 
                   min="1" 
                   onChange={(e) => handleCountChange(e, values, setFieldValue, singleTransaction)} 
@@ -62,7 +62,7 @@ function AddTransactions() {
                   </div>
                 )}
               </FieldArray>
-              <button className= "SubmitButton" type= "submit">Add Transaction(s)</button>
+              <button className={styles.submitBtn} type= "submit">Add Transaction(s)</button>
             </Form>
           );
          }}

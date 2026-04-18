@@ -1,6 +1,6 @@
 import React from 'react';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import '../BudgetStatus/BudgetStatus.css';
+import ProgressBar from '../ProgressBar';
+import styles from '../BudgetStatus/BudgetStatus.module.css';
 
 const BudgetStatus = ({ m, filters }) => {
   const categoryName = filters.selectedCategory === 'all' ? 'Total' : m.activeCategory?.name;
@@ -24,7 +24,7 @@ const BudgetStatus = ({ m, filters }) => {
   return (
     <>
       <div>
-        <span className="PercentOutput">
+        <span className={styles.percentOutput}>
           {categoryName} Budget: <span style={{color: m.barColor}}>{m.percentage.toFixed(0)}%</span>
         </span>
       </div>
@@ -34,7 +34,7 @@ const BudgetStatus = ({ m, filters }) => {
         color={m.barColor} 
       />
 
-      <div className="BudgetTotals">
+      <div className={styles.budgetTotals}>
         <p>${m.totalSpent.toLocaleString()} <span style={{color: 'orange'}}>spent of</span> ${m.currentBudget.toLocaleString()}</p>
       </div>
     </>

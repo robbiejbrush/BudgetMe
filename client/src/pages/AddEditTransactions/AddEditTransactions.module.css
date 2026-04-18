@@ -1,18 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.CountSelector {
+.countSelectorDiv {
     padding-top: 20px;
 }
 
-.HowMany {
+.label {
     padding-right: 20px;
 }
 
-.HowManyInput {
+.fieldInput {
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
     width: 50px;
 }
 
-.SubmitButton {
+.submitBtn {
     margin-top: 20px;
     background-color: #1b1919;
     color: orange;
@@ -25,6 +31,6 @@
     font-weight: bold;
 }
 
-.SubmitButton:hover {
+.submitBtn:hover {
     cursor: pointer;
 }
