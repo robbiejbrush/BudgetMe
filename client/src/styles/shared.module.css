@@ -1,0 +1,17 @@
+.btnBase {
+    background-color: #1b1919;
+    color: orange;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+.btnBase:hover {
+    cursor: pointer;
+}
+
+.selectBase {
+
+}
+
