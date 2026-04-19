@@ -29,8 +29,10 @@
     justify-content: center;
     display: flex;
     align-self: center;
+    flex: 1;
 }
 
 .headerLeft {
     flex: 1;
+    padding-right: 20px;
 }

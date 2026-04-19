@@ -109,11 +109,9 @@
     margin: 2px auto;
   }
   
-  .actions {
-    margin-top: 10px;
+  .actionsDiv {
     display: flex;
     justify-content: center;
     width: 100%;
-    gap: 20px;
   }
 }

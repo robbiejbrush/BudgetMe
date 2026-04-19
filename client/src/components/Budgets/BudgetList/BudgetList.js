@@ -31,9 +31,10 @@ function BudgetList({
 
   return (
     <div className={styles.budgetsListDiv}>
-        <span className={styles.itemsHeading}>Category</span>
-        <span className={styles.itemsHeading}>Monthly Limit</span>
-        <span></span>
+      <span className={styles.itemsHeading}>Category</span>
+      <span className={styles.itemsHeading}>Monthly Limit</span>
+      <span></span>
+      
       <div className={styles.headerDivider}></div>
 
       {budgets.length === 0 ? (
