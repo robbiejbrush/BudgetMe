@@ -6,7 +6,7 @@ import Login from './pages/Login/Login.js'
 import Overview from './pages/Overview/Overview.js';
 import Transactions from './pages/Transactions/Transactions.js';
 import Budgets from './pages/Budgets/Budgets.js';
-import Settings from './pages/Settings.js';
+import Settings from './pages/Settings/Settings.js';
 import NavBar from './components/NavBar/NavBar.js';
 import AddTransactions from './pages/AddEditTransactions/AddTransactions.js';
 import EditTransactions from './pages/AddEditTransactions/EditTransactions.js';

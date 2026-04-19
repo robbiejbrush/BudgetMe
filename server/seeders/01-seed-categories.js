@@ -7,6 +7,7 @@ const categoryList = [
   { name: "Gifts", type: "income" },
   { name: "Interest & Fees", type: "income" },
   { name: "Other (Income)", type: "income"},
+  { name: "Uncategorized (Income)", type: "income" },
 
   // Expense Categories
   { name: "Housing & Rent", type: "expense" },
@@ -25,7 +26,8 @@ const categoryList = [
   { name: "Taxes", type: "expense" },
   { name: "Shopping & Retail", type: "expense" },
   { name: "Charity & Donations", type: "expense" },
-  { name: "Other (Expense)", type: "expense"}
+  { name: "Other (Expense)", type: "expense" },
+  { name: "Uncategorized (Expense)", type: "expense" }
 ];
 
 module.exports = {
