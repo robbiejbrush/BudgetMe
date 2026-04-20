@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useUserId } from '../../hooks/useAuth.js';
+import { useUserId } from './useAuth.js';
 
 export const useTransactionEdit = (transactionId, { onSuccess } = {}) => {
   const userId = useUserId();
@@ -27,4 +27,11 @@ export const useTransactionEdit = (transactionId, { onSuccess } = {}) => {
   };
 
   return { userId, onSubmit };
+};
+
+export const useTransactionUpdate = () => {
+  const updateTransaction = async (transactionId, updatedData) => {
+    return await axios.put(`http://localhost:3001/transactions/edit/${transactionId}`, updatedData);
+  };
+  return { updateTransaction };
 };
