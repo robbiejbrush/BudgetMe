@@ -1,0 +1,33 @@
+.form {
+    display: contents;
+}
+
+.fieldInput {
+    composes: inputBase from '../../../styles/shared.module.css';
+    margin-left: 15px;
+    width: auto;
+    text-align: left;
+    font-size: 16px;
+}
+
+.fieldSelect {
+    composes: selectBase from '../../../styles/shared.module.css';
+    text-align: left;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+.addBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
+    margin-right: 20px;
+    display: flex;   
+    justify-content: flex-end; 
+    justify-self: end; 
+    align-self: center;
+}
+
+.errorSpan {
+    color: red;
+    font-family: var(--font-main);
+    padding-left: 20px;
+}
