@@ -83,6 +83,7 @@
 .errorSpan {
     color: red;
     font-family: var(--font-main);
+    padding-left: 20px;
 }
 
 .addBtn {

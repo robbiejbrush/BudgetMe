@@ -6,20 +6,45 @@ import { useUserId } from '../../hooks/useAuth';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useCategoryAdd } from './useCategoryAdd';
+import useCategoryDelete from './useCategoryDelete';
 
 function Settings() {
+  //Get current userId
   const userId = useUserId();
+
+  //Get all categories
   const {
     rawCategories,
     setRawCategories,
     loading: categoriesLoading
   } = useCategories(userId);
 
+  //Add categories
   const {
     addCategory,
     loading: addLoading
   } = useCategoryAdd(userId, setRawCategories);
 
+  //Delete categories
+  const {
+    deleteCategory,
+    loading: deleteLoading
+  } = useCategoryDelete();
+
+  const handleDelete = async (categoryId) => {
+    const confirmed = window.confirm("Are you sure you want to delete this category?");
+    if (!confirmed) return;
+    
+    try {
+      await deleteCategory(categoryId);
+      setRawCategories((prev) => prev.filter(cat => cat.categoryId !== categoryId));
+    } catch (err) {
+      console.error("Failed to delete category:", err);
+      alert("Could not delete category. Please try again.");
+    }
+  };
+
+  //Filter for non default categories (userId != null)
   const filteredUserCategories = rawCategories.filter(category => 
     category.userId === userId
   );
@@ -34,7 +59,7 @@ function Settings() {
     typeSelect: Yup.string().required("Type is required.").notOneOf([""], "Type is required.")
 });
   
-  if (addLoading || categoriesLoading) return <div className= "LoadingText">Loading data...</div>;
+  if (addLoading || deleteLoading || categoriesLoading) return <div className= "LoadingText">Loading data...</div>;
 
   return (
     <div>
@@ -53,10 +78,10 @@ function Settings() {
         <div className={styles.headerDivider}></div>
 
         {filteredUserCategories.map((category) => (
-            <div key={category.id} className={styles.categoryItem}>
+            <div key={category.categoryId} className={styles.categoryItem}>
               <span className={styles.itemSpan}>{category?.name || 'Unknown'}</span>
               <span className={styles.itemSpan}>{category?.type.charAt(0).toUpperCase() + category?.type.slice(1) || 'Unknown'}</span>
-              <button onClick={""} className={styles.deleteBtn}>Delete</button>
+              <button onClick={() => handleDelete(category.categoryId)} className={styles.deleteBtn} disabled={deleteLoading}>Delete</button>
             </div>      
           ))
         }
