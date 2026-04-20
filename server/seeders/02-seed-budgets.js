@@ -7,7 +7,10 @@ module.exports = {
         await queryInterface.bulkDelete('Budgets', null, {});
 
         const [categories] = await queryInterface.sequelize.query(
-        `SELECT categoryId from Categories;`
+          `SELECT categoryId 
+            FROM Categories 
+            WHERE type = 'expense' 
+            AND name != 'Other (Expense)';`
         );
         
         const categoryIds = categories.map(c => c.categoryId);
