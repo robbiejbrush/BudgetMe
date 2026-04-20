@@ -7,10 +7,13 @@ module.exports = {
         await queryInterface.bulkDelete('RecurringTransactions', null, {});
 
         const [categories] = await queryInterface.sequelize.query(
-        `SELECT categoryId, type from Categories;`
+            `SELECT categoryId, type 
+            FROM Categories 
+            WHERE type = 'expense' 
+            AND name != 'Other (Expense)';`
         );
 
-        const recurringTransactions = Array.from({ length: 15 }, () => {
+        const recurringTransactions = Array.from({ length: 5 }, () => {
             const category = faker.helpers.arrayElement(categories);
 
             const endDateFrom = new Date();
