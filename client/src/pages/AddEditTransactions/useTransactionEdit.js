@@ -1,9 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js';
 
-export const useTransactionEdit = (transactionId) => {
-  const navigate = useNavigate();
+export const useTransactionEdit = (transactionId, { onSuccess } = {}) => {
   const userId = useUserId();
 
   const onSubmit = async (values, { setSubmitting }) => {
@@ -18,8 +16,8 @@ export const useTransactionEdit = (transactionId) => {
     try {
       const response = await axios.put(`http://localhost:3001/transactions/edit/${transactionId}`, updatedData);
       
-      if (response.status === 200) {
-        navigate('/transactions'); 
+      if (response.status === 200 && onSuccess) {
+        onSuccess(response.data); 
       }
     } catch (error) {
       console.error('Update Error:', error);

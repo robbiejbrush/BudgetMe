@@ -12,5 +12,5 @@ export const useCategories = (userId) => {
       .finally(() => setLoading(false));
   }, [userId]);
 
-  return { rawCategories, loading };
+  return { rawCategories, loading, setRawCategories };
 };

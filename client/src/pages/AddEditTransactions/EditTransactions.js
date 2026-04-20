@@ -8,8 +8,11 @@ import TransactionFieldGroup from '../../components/AddEditTransactions/Transact
 import { useParams } from 'react-router-dom';
 import { useTransaction } from './useTransaction.js';
 import { PageHeader } from '../../components/PageHeader/PageHeader.js';
+import { useNavigate } from 'react-router-dom';
 
 function EditTransactions() {
+    const navigate = useNavigate();
+    
     const { 
         transactionId 
     } = useParams();
@@ -17,7 +20,9 @@ function EditTransactions() {
     const {
         userId,
         onSubmit
-    } = useTransactionEdit(transactionId);
+    } = useTransactionEdit(transactionId, {
+        onSuccess: () => navigate('/transactions')
+    });
     
     const {
         rawCategories,
@@ -43,15 +48,15 @@ function EditTransactions() {
             {({ values, errors }) => {
                 return(
                     <Form>
-                    <TransactionFieldGroup
-                        index= {0}
-                        transaction= {values.transactions[0]}
-                        errors= {errors}
-                        rawCategories= {rawCategories}
-                        categoriesLoading= {categoriesLoading}
-                        showHeading= {false}
-                    />
-                    <button className={styles.submitBtn} type= "submit">Save Changes</button>
+                        <TransactionFieldGroup
+                            index= {0}
+                            transaction= {values.transactions[0]}
+                            errors= {errors}
+                            rawCategories= {rawCategories}
+                            categoriesLoading= {categoriesLoading}
+                            showHeading= {false}
+                        />
+                        <button className={styles.submitBtn} type= "submit">Save Changes</button>
                     </Form>
                 );
             }}
