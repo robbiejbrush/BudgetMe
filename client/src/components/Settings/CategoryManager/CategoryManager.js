@@ -71,10 +71,6 @@ export function CategoryManager({ userId }) {
 
     return (
         <div className={styles.categoriesListDiv}>
-            <h2 className={styles.categoriesHeader}>Custom Categories</h2>
-            <span></span>
-            <span></span>
-
             <span className={styles.itemsHeading}>Name</span>
             <span className={styles.itemsHeading}>Type</span>
             <span></span>

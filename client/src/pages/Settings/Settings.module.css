@@ -1,3 +1,4 @@
+/*Currency Div*/
 .currencyDiv {
     background-color: var(--background-color);
     border-radius: 15px;
@@ -51,57 +52,25 @@
     padding-left: 20px;
 }
 
-.recTransListDiv {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto;
-    gap: 20px;
+/*Categories Div*/
+.categoriesDiv {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 800px;
+    width: min(800px, calc(100% - 40px));
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.itemHeading {
-    text-align: left;
+.categoriesHeader {
     color: var(--primary-color);
+    margin: 0;
     font-family: var(--font-main);
-    font-weight: bold;
-    font-size: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.headerDivider {
-    grid-column: 1 / -1;
-    border-bottom: 3px solid var(--primary-color);
-    height: 0; 
-    width: 100%;
-}
-
-.recTransItem {
-    display: contents;
-}
-
-.itemSpan {
     text-align: left;
     padding-left: 20px;
-    padding-right: 20px;
-    align-self: center;
-    font-family: var(--font-main);
-    color: var(--third-color);
-}
-
-.actionsDiv {
-    display: flex;
-}
-
-.editBtn {
-    composes: btnBase from '../../styles/shared.module.css';
-    margin-right: 10px;
-    flex: 1;
-    align-self: center;
-}
-
-.deleteBtn {
-    composes: btnBase from '../../styles/shared.module.css';
-    margin-right: 10px;
-    flex: 1;
-    align-self: center;
-    color: red;
+    padding-bottom: 20px;
 }

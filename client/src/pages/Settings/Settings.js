@@ -4,10 +4,9 @@ import styles from '../Settings/Settings.module.css';
 import { useUserId } from '../../hooks/useAuth';
 import { CategoryManager } from '../../components/Settings/CategoryManager/CategoryManager';
 import { useRecurringTransactions } from './useRecurringTransactions';
-import { formatCurrency } from '../../utils/dateHelpers';
 import { useCategories } from '../../hooks/useCategories';
 import { useMemo } from 'react';
-import useRecurringTransactionDelete from './useRecurringTransactionDelete';
+import { RecurringTransactionList } from '../../components/Settings/RecurringTransactionList/RecurringTransactionList';
 
 function Settings() {
   //Get current userId
@@ -34,27 +33,6 @@ function Settings() {
     }, {});
   }, [rawCategories]);
 
-  //Delete recurring transaction
-  const {
-    deleteRecurringTransaction,
-    loading: recTransDeleteLoading
-  } = useRecurringTransactionDelete();
-
-  const handleDelete = async (recurringTransactionId) => {
-    if (window.confirm("Are you sure you want to delete this recurring transaction?")) {
-      try {
-        await deleteRecurringTransaction(recurringTransactionId);
-
-        setRecurringTransactions(prev => 
-          prev.filter(tx => tx.recurringTransactionId !== recurringTransactionId)
-        );
-      } catch (err) {
-        console.error("Failed to delete:", err);
-        alert("Could not delete the transaction. Please try again.");
-      }
-    }
-  };
-
   return (
     <div>
       <PageHeader title= "Settings"/>
@@ -66,40 +44,18 @@ function Settings() {
       </div>
       <div className={styles.recTransDiv}>
         <h2 className={styles.recTransHeader}>Recurring Transactions</h2>
-        <div className={styles.recTransListDiv}>
-          <span className={styles.itemHeading}>Amount</span>
-          <span className={styles.itemHeading}>Type</span>
-          <span className={styles.itemHeading}>Category</span>
-          <span className={styles.itemHeading}>Counterparty</span>
-          <span className={styles.itemHeading}>Frequency</span>
-          <span className={styles.itemHeading}>Start Date</span>
-          <span className={styles.itemHeading}>End Date</span>
-
-          <div className={styles.headerDivider}></div>
-
-          {recurringTransactions.map((tx) => (
-            <div key={tx.recurringTransactionId} className={styles.recTransItem}>
-              <span className={styles.itemSpan}>${formatCurrency(tx.amount)}</span>
-              <span className={styles.itemSpan}>{tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}</span>
-              <span className={styles.itemSpan}>{categoryLookup[tx.categoryId]}</span>
-              <span className={styles.itemSpan}>{tx.counterparty}</span>
-              <span className={styles.itemSpan}>{tx.frequency.charAt(0).toUpperCase() + tx.frequency.slice(1)}</span>
-              <span className={styles.itemSpan}>{tx.startDate}</span>
-              <span className={styles.itemSpan}>{tx.endDate || 'N/A'}</span>
-              <div className={styles.actionsDiv}>
-                <button className={styles.editBtn}>Edit</button>
-                <button 
-                  className={styles.deleteBtn}
-                  onClick={() => handleDelete(tx.recurringTransactionId)}
-                  disabled={recTransDeleteLoading}>
-                    Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <RecurringTransactionList
+          recurringTransactions={recurringTransactions}
+          categoryLookup={categoryLookup}
+          setRecurringTransactions={setRecurringTransactions}
+          recTransLoading={recTransLoading}
+          catsLoading={catsLoading}
+        />
       </div>
-      <CategoryManager userId={userId}/>
+      <div className={styles.categoriesDiv}>
+        <h2 className={styles.categoriesHeader}>Custom Categories</h2>
+        <CategoryManager userId={userId}/>
+      </div>
     </div>
   )
 }
