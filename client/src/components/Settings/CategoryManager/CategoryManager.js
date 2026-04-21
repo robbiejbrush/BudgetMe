@@ -13,11 +13,13 @@ export function CategoryManager({ userId }) {
         setRawCategories,
         loading: categoriesLoading
     } = useCategories(userId);
+
     //Add categories
     const {
         addCategory,
         loading: addLoading
     } = useCategoryAdd(userId, setRawCategories);
+
     //Delete categories
     const {
         deleteCategory,
@@ -26,6 +28,7 @@ export function CategoryManager({ userId }) {
 
     //Get all transactions
     const { rawTransactions, loading: transLoading } = useTransactions(userId); 
+    
     //Updating transaction
     const { updateTransaction } = useTransactionUpdate();
 

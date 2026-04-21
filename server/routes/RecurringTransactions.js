@@ -4,7 +4,7 @@ const router = express.Router();
 const { RecurringTransactions } = require('../models');
 
 //Get all recurring transactions by userId, ordered by soonest next charge date, with optional type and category filters
-router.get("/:userId", async (req, res) => {
+router.get("/getAll/:userId", async (req, res) => {
     try {
         const { userId } = req.params;
         const { categoryId, type } = req.query;
