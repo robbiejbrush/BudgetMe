@@ -24,7 +24,7 @@
 
 .deleteBtn {
     composes: btnBase from '../../../styles/shared.module.css';
-    margin-right: 10px;
+    margin-right: 20px;
     flex: 1;
     align-self: center;
     color: red;

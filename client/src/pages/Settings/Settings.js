@@ -2,7 +2,7 @@ import React from 'react';
 import { PageHeader } from '../../components/PageHeader/PageHeader';
 import styles from '../Settings/Settings.module.css';
 import { useUserId } from '../../hooks/useAuth';
-import { CategoryManager } from '../../components/Settings/CategoryManager/CategoryManager';
+import { CategoryList } from '../../components/Settings/CategoryList/CategoryList';
 import { useRecurringTransactions } from './useRecurringTransactions';
 import { useCategories } from '../../hooks/useCategories';
 import { useMemo } from 'react';
@@ -50,11 +50,12 @@ function Settings() {
           setRecurringTransactions={setRecurringTransactions}
           recTransLoading={recTransLoading}
           catsLoading={catsLoading}
+          rawCategories={rawCategories}
         />
       </div>
       <div className={styles.categoriesDiv}>
         <h2 className={styles.categoriesHeader}>Custom Categories</h2>
-        <CategoryManager userId={userId}/>
+        <CategoryList userId={userId}/>
       </div>
     </div>
   )

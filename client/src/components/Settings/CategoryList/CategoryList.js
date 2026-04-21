@@ -4,9 +4,9 @@ import { useCategoryAdd } from './useCategoryAdd';
 import useCategoryDelete from './useCategoryDelete';
 import { useTransactionUpdate } from '../../../hooks/useTransactionEdit';
 import { useTransactions } from '../../../hooks/useTransactions';
-import styles from '../CategoryManager/CategoryManager.module.css';
+import styles from './CategoryList.module.css';
 
-export function CategoryManager({ userId }) {
+export function CategoryList({ userId }) {
     //Get all categories
     const {
         rawCategories,
