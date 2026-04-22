@@ -2,12 +2,25 @@ import styles from '../RecurringTransactionList/RecurringTransactionList.module.
 import { RecurringTransactionItem } from '../RecurringTransactionItem/RecurringTransactionItem';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { moneyRegex } from '../../../pages/AddEditTransactions/TransactionSchema';
 
 export function RecurringTransactionList({ recurringTransactions, categoryLookup, setRecurringTransactions, recTransLoading, catsLoading, rawCategories }) {
-    
+  
   const validationSchema = Yup.object({
-      nameInput: Yup.string().min(3, "Name must be over 3 characters.").max(20, "Name must be under 20 characters.").required("Name is required."),
-      typeSelect: Yup.string().required("Type is required.").notOneOf([""], "Type is required.")
+      amountInput: Yup.number()
+                .positive("Amount must be positive.")
+                .typeError("Please enter a valid number.")
+                .test(
+                  "is-decimal",
+                  "Invalid amount: use up to 2 decimal places (ex. $12.50).",
+                  (val) => val === undefined || moneyRegex.test(val.toString())
+                )
+                .required("Amount is required."),
+      typeSelect: Yup.string().required("Type is required."),
+      categorySelect: Yup.string().required("Category is required.").notOneOf([""], "Category is required."),
+      counterpartyInput: Yup.string().required("Counterparty is required.").min(3, "Must be at least 3 characters.").max(50, "Must be maximum 50 characetrs."),
+      frequencySelect: Yup.string().required("Frequency is required.").notOneOf([""], "Frequency is required."),
+      startDateInput: Yup.date().required("Start date is required.")
   });
   
   const initialValues = {
@@ -46,49 +59,57 @@ export function RecurringTransactionList({ recurringTransactions, categoryLookup
       <Formik initialValues= {initialValues} onSubmit= {""} validationSchema= {validationSchema} enableReinitialize={true}>
         {({ isSubmitting, values }) => (
           <Form className={styles.form}>
-            <div className={styles.inputWrapper}>
-              <span className={styles.currencySymbol}>$</span>
-              <Field className={styles.fieldInput} id="amountInput" name="amountInput" disabled={isSubmitting}/>
+            <div className={styles.amountWrapper}>
+              <div className={styles.currencyWrapper}>
+                <span className={styles.currencySymbol}>$</span>
+                <Field className={`${styles.fieldInput} ${styles.amountInput}`} id="amountInput" name="amountInput" disabled={isSubmitting}/>
+              </div>
+              <ErrorMessage className={styles.errorSpan} name="amountInput" component="div"/>
             </div>
             
-            <Field className={styles.fieldSelect} id="typeSelect" name="typeSelect" as="select" disabled={isSubmitting}>
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>  
-            </Field>
+            <div className={styles.typeWrapper}>
+              <Field className={styles.fieldSelect} id="typeSelect" name="typeSelect" as="select" disabled={isSubmitting}>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>  
+              </Field>
+            </div>
             
-            <Field className={styles.fieldSelect} id="categorySelect" name="categorySelect" as="select" disabled={isSubmitting}>
-              <option value="" hidden>Select a Category</option> 
-              {rawCategories
-                .filter(cat => cat.type === values.typeSelect)
-                .map(cat => (
-                  <option key={cat.categoryId} value={cat.categoryId}>
-                    {cat.name}
-                  </option>
-                ))
-              }
-            </Field>
+            <div className={styles.categoriesWrapper}>
+              <Field className={styles.fieldSelect} id="categorySelect" name="categorySelect" as="select" disabled={isSubmitting}>
+                <option value="" hidden>Select a Category</option> 
+                {rawCategories
+                  .filter(cat => cat.type === values.typeSelect)
+                  .map(cat => (
+                    <option key={cat.categoryId} value={cat.categoryId}>
+                      {cat.name}
+                    </option>
+                  ))
+                }
+              </Field>
+            </div>
             
-            <Field className={styles.fieldInput} id="counterpartyInput" name="counterpartyInput" disabled={isSubmitting}/>
+            <div className={styles.counterpartyWrapper}>
+              <Field className={styles.fieldInput} id="counterpartyInput" name="counterpartyInput" disabled={isSubmitting}/>
+            </div>
             
-            <Field className={styles.fieldSelect} id="frequencySelect" name="frequencySelect" as="select" disabled={isSubmitting}>
-              <option value="" hidden>Select a Frequency</option>
-              <option value="weekly">Weekly</option>
-              <option value="biweekly">Biweekly</option> 
-              <option value="monthly">Monthly</option> 
-            </Field>
+            <div className={styles.frequencyWrapper}>
+              <Field className={styles.fieldSelect} id="frequencySelect" name="frequencySelect" as="select" disabled={isSubmitting}>
+                <option value="" hidden>Select a Frequency</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Biweekly</option> 
+                <option value="monthly">Monthly</option> 
+              </Field>
+            </div>
             
-            <Field className={styles.fieldInput} id="startDateInput" name="startDateInput" type="date" disabled={isSubmitting}/>
+            <div className={styles.startDateWrapper}>
+              <Field className={styles.fieldInput} id="startDateInput" name="startDateInput" type="date" disabled={isSubmitting}/>
+            </div>
 
-            <Field className={styles.fieldInput} id="endDateInput" name="endDateInput" type="date" disabled={isSubmitting}/>
+            <div className= {styles.endDateWrapper}>
+              <Field className={styles.fieldInput} id="endDateInput" name="endDateInput" type="date" disabled={isSubmitting}/>
+            </div>
             
             <button className={styles.addBtn} type="submit" disabled={isSubmitting}>Add</button>
-
-            <div>
-              <ErrorMessage className={styles.errorSpan} name="nameInput" component="span"/>
-            </div>
-            <div>
-              <ErrorMessage className={styles.errorSpan} name="typeSelect" component="span"/>
-            </div>
           </Form>
         )}
       </Formik>

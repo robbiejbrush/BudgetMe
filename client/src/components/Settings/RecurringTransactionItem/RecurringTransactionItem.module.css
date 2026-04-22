@@ -41,7 +41,7 @@
     
     .itemSpan {
         text-align: center;
-        padding-bottom: 20px;
+        padding-bottom: 20px;  
     }
   
     .amount::before { content: "Amount: "; }
