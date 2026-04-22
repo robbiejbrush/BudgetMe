@@ -24,9 +24,9 @@ export function RecurringTransactionList({ recurringTransactions, categoryLookup
   
   return (
     <div className={styles.recTransListDiv}>
-      <span className={`${styles.itemHeading} ${styles.amount}`}>Amount</span>
-      <span className={`${styles.itemHeading} ${styles.type}`}>Type</span>
-      <span className={`${styles.itemHeading} ${styles.category}`}>Category</span>
+      <span className={styles.itemHeading}>Amount</span>
+      <span className={styles.itemHeading}>Type</span>
+      <span className={styles.itemHeading}>Category</span>
       <span className={styles.itemHeading}>Counterparty</span>
       <span className={styles.itemHeading}>Frequency</span>
       <span className={styles.itemHeading}>Start Date</span>

@@ -13,13 +13,14 @@
 
 .actionsDiv {
     display: flex;
+    gap: 10px;
 }
 
 .editBtn {
     composes: btnBase from '../../../styles/shared.module.css';
-    margin-right: 10px;
     flex: 1;
     align-self: center;
+    margin-left: 20px;
 }
 
 .deleteBtn {
@@ -28,4 +29,40 @@
     flex: 1;
     align-self: center;
     color: red;
+}
+
+/*Mobile Adjustments*/
+@media (max-width: 1500px) {
+    .recTransItem {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid var(--primary-color);
+    }
+    
+    .itemSpan {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+  
+    .amount::before { content: "Amount: "; }
+    .type::before { content: "Type: "; }
+    .category::before { content: "Category: "; }
+    .counterparty::before { content: "Counterparty: "; }
+    .frequency::before { content: "Frequency: "; }
+    .startDate::before { content: "Start Date: "; }
+    .endDate::before { content: "End Date: "; }
+
+    .recTransItem span::before {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .actionsDiv {
+        margin-bottom: 20px;
+        justify-content: center;
+    }
+
+    .editBtn, .deleteBtn {
+        flex: none;
+    }
 }
