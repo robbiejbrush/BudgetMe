@@ -2,8 +2,39 @@ import styles from '../RecurringTransactionList/RecurringTransactionList.module.
 import { RecurringTransactionItem } from '../RecurringTransactionItem/RecurringTransactionItem';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
 import { initialValues, validationSchema } from '../RecurringTransactionSchema';
+import { useUserId } from '../../../hooks/useAuth';
+import { useRecurringTransactions } from '../RecurringTransactionList/useRecurringTransactions';
+import { useRecurringTransactionAdd } from '../RecurringTransactionList/useRecurringTransactionAdd';
+import { useCategories } from '../../../hooks/useCategories';
+import { useMemo } from 'react';
 
-export function RecurringTransactionList({ recurringTransactions, categoryLookup, setRecurringTransactions, recTransLoading, catsLoading, rawCategories, onAddSubmit }) {
+export function RecurringTransactionList() {
+  //Get current userId
+  const userId = useUserId();
+  
+  //Get all recurring transactions
+  const {
+    recurringTransactions,
+    loading: recTransLoading,
+    setRecurringTransactions
+  } = useRecurringTransactions(userId);
+  
+  //Get all categories
+  const { 
+    rawCategories,
+    loading: catsLoading
+  } = useCategories(userId);
+  
+  //Helper function to find category name by Id
+  const categoryLookup = useMemo(() => {
+    return rawCategories.reduce((acc, cat) => {
+      acc[cat.categoryId] = cat.name;
+      return acc;
+    }, {});
+  }, [rawCategories]);
+
+  //Add recurring transaction hook
+  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions, rawCategories);
 
   if (recTransLoading || catsLoading) return <div className= "LoadingText">Loading data...</div>;
   

@@ -4,9 +4,9 @@ import useRecurringTransactionDelete from './useRecurringTransactionDelete';
 import { validationSchema } from '../RecurringTransactionSchema';
 import { useState } from 'react';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
+import { useRecurringTransactionEdit } from './useRecurringTransactionEdit';
 
 export function RecurringTransactionItem({tx, categoryName, setRecurringTransactions, rawCategories}) {
-    
     //Delete recurring transaction
     const {
         deleteRecurringTransaction,
@@ -30,6 +30,10 @@ export function RecurringTransactionItem({tx, categoryName, setRecurringTransact
 
     //Editing recurring transaction
     const [isEditing, setIsEditing] = useState(false);
+    const { onEditSubmit } = useRecurringTransactionEdit(
+        setRecurringTransactions,
+        setIsEditing
+    );
     const initialValues = {
         amountInput: tx.amount,
         typeSelect: tx.type,
@@ -40,25 +44,16 @@ export function RecurringTransactionItem({tx, categoryName, setRecurringTransact
         endDateInput: tx.endDate || ''
     };
 
-    const onEditSubmit = async (values) => {
-        const submissionData = {
-            ...values
-        };
-        
-        //axios call here
-        setIsEditing(false);
-    };
-
     return (
         <div className={styles.recTransItem}>
             {isEditing ? (
                 <RecurringTransactionForm
                     initialValues={initialValues}
-                    onSubmit={onEditSubmit}
+                    onSubmit={(values) => onEditSubmit(values, tx.recurringTransactionId)}
                     validationSchema={validationSchema}
                     onCancel={() => setIsEditing(false)}
                     rawCategories={rawCategories}
-                    buttonText='Save'
+                    buttonText='Submit'
                 />
             ) : (
                 <>

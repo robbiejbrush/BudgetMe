@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useUserId } from '../../hooks/useAuth.js'
+import { useUserId } from '../../../hooks/useAuth.js'
 
 export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategories) => {
     const userId = useUserId();
@@ -25,13 +25,12 @@ export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategori
                     const updatedList = [...prev, response.data];
 
                     updatedList.sort((a, b) => {
-                        const nameA = rawCategories.find(c => c.categoryId === a.categoryId)?.name || "";
-                        const nameB = rawCategories.find(c => c.categoryId === b.categoryId)?.name || "";
+                        const dateA = new Date(a.startDate);
+                        const dateB = new Date(b.startDate);
 
-                        return nameA.localeCompare(nameB);
+                        return dateA - dateB; 
                     });
-
-                    return [...updatedList]; 
+                    return updatedList; 
                 });
                 resetForm();
             }
