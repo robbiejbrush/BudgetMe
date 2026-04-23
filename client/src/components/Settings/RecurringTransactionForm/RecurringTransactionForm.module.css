@@ -1,0 +1,93 @@
+.form {
+    display: contents;
+}
+
+.amountWrapper {
+    position: relative;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.currencySymbol {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    left: 5px;
+}
+
+.fieldInput {
+    composes: inputBase from '../../../styles/shared.module.css';
+    font-size: 16px;
+}
+
+.fieldSelect {
+    composes: selectBase from '../../../styles/shared.module.css';
+    font-size: 16px;
+}
+
+.amountInput {
+    padding-left: 20px;
+}
+
+.currencyWrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.errorSpan {
+    color: red;
+    font-family: var(--font-main);
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+.addBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
+    margin-right: 20px;
+    justify-content: flex-end; 
+    justify-self: end; 
+    align-self: center;
+}
+
+/*Mobile Adjustments*/
+@media (max-width: 1500px) {
+    .amountWrapper {
+        justify-self: center;
+        padding: 0;
+    }
+
+    .currencySymbol {
+        padding: 0px;
+        left: 25px;
+        color: var(--third-color)
+    }
+
+    .fieldInput, .fieldSelect {
+        margin-left: 20px;
+        margin-right: 20px;
+        justify-self: center;
+        color: var(--third-color);
+    }
+
+    .amountWrapper::before { content: "Amount:"; }
+    .typeWrapper::before { content: "Type:"; }
+    .categoriesWrapper::before { content: "Category:"; }
+    .counterpartyWrapper::before { content: "Counterparty:"; }
+    .frequencyWrapper::before { content: "Frequency:"; }
+    .startDateWrapper::before { content: "Start Date:"; }
+    .endDateWrapper::before { content: "End Date:"; }
+
+    .form div[class*="Wrapper"]::before {
+        font-weight: bold;
+        color: var(--primary-color);
+        font-family: var(--font-main);
+    }
+
+    .addBtn {
+        justify-self: center;
+        margin: 0px;
+    }
+}

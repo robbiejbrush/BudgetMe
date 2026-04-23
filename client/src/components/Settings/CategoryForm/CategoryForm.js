@@ -1,16 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import styles from '../CategoryForm/CategoryForm.module.css';
-
-const validationSchema = Yup.object({
-    nameInput: Yup.string().min(3, "Name must be over 3 characters.").max(20, "Name must be under 20 characters.").required("Name is required."),
-    typeSelect: Yup.string().required("Type is required.").notOneOf([""], "Type is required.")
-});
-
-const initialValues = {
-    nameInput: '',
-    typeSelect: ''
-};
+import { validationSchema, initialValues } from './CategorySchema';
 
 export function CategoryForm({ onSubmit }) {
     return (
