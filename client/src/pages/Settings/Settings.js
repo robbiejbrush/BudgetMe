@@ -7,6 +7,7 @@ import { useRecurringTransactions } from './useRecurringTransactions';
 import { useCategories } from '../../hooks/useCategories';
 import { useMemo } from 'react';
 import { RecurringTransactionList } from '../../components/Settings/RecurringTransactionList/RecurringTransactionList';
+import { useRecurringTransactionAdd } from './useRecurringTransactionAdd';
 
 function Settings() {
   //Get current userId
@@ -25,13 +26,16 @@ function Settings() {
     loading: catsLoading
   } = useCategories(userId);
   
-  //Helper function to find the name by Id
+  //Helper function to find category name by Id
   const categoryLookup = useMemo(() => {
     return rawCategories.reduce((acc, cat) => {
       acc[cat.categoryId] = cat.name;
       return acc;
     }, {});
   }, [rawCategories]);
+
+  //Add recurring transaction hook
+  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions);
 
   return (
     <div>
@@ -51,6 +55,7 @@ function Settings() {
           recTransLoading={recTransLoading}
           catsLoading={catsLoading}
           rawCategories={rawCategories}
+          onAddSubmit={onAddSubmit}
         />
       </div>
       <div className={styles.categoriesDiv}>

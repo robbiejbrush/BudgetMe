@@ -5,6 +5,7 @@
 .fieldInput {
     composes: inputBase from '../../../styles/shared.module.css';
     margin-left: 15px;
+    min-width: 175px;
     width: auto;
     text-align: left;
     font-size: 16px;
@@ -15,6 +16,7 @@
     text-align: left;
     margin-left: 15px;
     font-size: 16px;
+    width: auto;
 }
 
 .addBtn {

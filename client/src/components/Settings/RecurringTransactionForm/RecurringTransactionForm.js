@@ -2,9 +2,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../RecurringTransactionForm/RecurringTransactionForm.module.css';
 import { initialValues, validationSchema } from './RecurringTransactionSchema';
 
-export function RecurringTransactionForm( {rawCategories, onSubmit} ) {
+export function RecurringTransactionForm( {rawCategories, onAddSubmit} ) {
     return (
-        <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {validationSchema} enableReinitialize={true}>
+        <Formik initialValues= {initialValues} onSubmit= {onAddSubmit} validationSchema= {validationSchema} enableReinitialize={true}>
             {({ isSubmitting, values }) => (
             <Form className={styles.form}>
                 <div className={styles.amountWrapper}>

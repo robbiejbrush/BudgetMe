@@ -2,7 +2,7 @@ import styles from '../RecurringTransactionList/RecurringTransactionList.module.
 import { RecurringTransactionItem } from '../RecurringTransactionItem/RecurringTransactionItem';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
 
-export function RecurringTransactionList({ recurringTransactions, categoryLookup, setRecurringTransactions, recTransLoading, catsLoading, rawCategories }) {
+export function RecurringTransactionList({ recurringTransactions, categoryLookup, setRecurringTransactions, recTransLoading, catsLoading, rawCategories, onAddSubmit }) {
 
   if (recTransLoading || catsLoading) return <div className= "LoadingText">Loading data...</div>;
   
@@ -26,7 +26,7 @@ export function RecurringTransactionList({ recurringTransactions, categoryLookup
             setRecurringTransactions={setRecurringTransactions}
         />
       ))}
-      <RecurringTransactionForm rawCategories={rawCategories} onSubmit={(values) => console.log(values)}/>
+      <RecurringTransactionForm rawCategories={rawCategories} onAddSubmit={onAddSubmit}/>
     </div>
   );
 }
