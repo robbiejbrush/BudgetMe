@@ -1,6 +1,7 @@
 import styles from '../RecurringTransactionList/RecurringTransactionList.module.css';
 import { RecurringTransactionItem } from '../RecurringTransactionItem/RecurringTransactionItem';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
+import { initialValues, validationSchema } from '../RecurringTransactionSchema';
 
 export function RecurringTransactionList({ recurringTransactions, categoryLookup, setRecurringTransactions, recTransLoading, catsLoading, rawCategories, onAddSubmit }) {
 
@@ -24,9 +25,15 @@ export function RecurringTransactionList({ recurringTransactions, categoryLookup
             tx={tx}
             categoryName={categoryLookup[tx.categoryId]}
             setRecurringTransactions={setRecurringTransactions}
+            rawCategories={rawCategories}
         />
       ))}
-      <RecurringTransactionForm rawCategories={rawCategories} onAddSubmit={onAddSubmit}/>
+      <RecurringTransactionForm 
+        initialValues={initialValues}
+        onSubmit={onAddSubmit}
+        validationSchema={validationSchema}
+        rawCategories={rawCategories} 
+      />
     </div>
   );
 }

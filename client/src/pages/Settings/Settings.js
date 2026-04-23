@@ -35,7 +35,7 @@ function Settings() {
   }, [rawCategories]);
 
   //Add recurring transaction hook
-  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions);
+  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions, rawCategories);
 
   return (
     <div>

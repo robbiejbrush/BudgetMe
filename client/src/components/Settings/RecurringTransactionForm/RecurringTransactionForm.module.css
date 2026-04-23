@@ -44,9 +44,22 @@
     padding-top: 10px;
 }
 
+.actionsDiv {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 20px;
+}
+
 .addBtn {
     composes: btnBase from '../../../styles/shared.module.css';
-    margin-right: 20px;
+    justify-content: flex-end; 
+    justify-self: end; 
+    align-self: center;
+}
+
+.cancelBtn {
+    composes: btnBase from '../../../styles/shared.module.css';
     justify-content: flex-end; 
     justify-self: end; 
     align-self: center;
@@ -78,7 +91,7 @@
     .counterpartyWrapper::before { content: "Counterparty:"; }
     .frequencyWrapper::before { content: "Frequency:"; }
     .startDateWrapper::before { content: "Start Date:"; }
-    .endDateWrapper::before { content: "End Date:"; }
+    .endDateWrapper::before { content: "End Date (Optional):"; }
 
     .form div[class*="Wrapper"]::before {
         font-weight: bold;
@@ -89,5 +102,10 @@
     .addBtn {
         justify-self: center;
         margin: 0px;
+    }
+
+    .actionsDiv {
+        justify-content: center;
+        padding-bottom: 20px;
     }
 }

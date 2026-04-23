@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js'
 
-export const useRecurringTransactionAdd = (setRecurringTransactions) => {
+export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategories) => {
     const userId = useUserId();
 
     const onAddSubmit = async (values, { resetForm }) => {
@@ -9,21 +9,32 @@ export const useRecurringTransactionAdd = (setRecurringTransactions) => {
         const endDate = endDateInput?.trim() || null;
 
         try {
-        const response = await axios.post('http://localhost:3001/recurringTransactions/create', {
-            userId,
-            amount: parseFloat(amountInput),
-            type: typeSelect,
-            categoryId: parseInt(categorySelect, 10),
-            counterparty: counterpartyInput,
-            frequency: frequencySelect,
-            startDate: startDateInput,
-            endDate: endDate
-        });
-        
-        if (response.status === 200 || response.status === 201) {
-            setRecurringTransactions(prev => [...prev, response.data]);
-            resetForm();
-        }
+            const response = await axios.post('http://localhost:3001/recurringTransactions/create', {
+                userId,
+                amount: parseFloat(amountInput),
+                type: typeSelect,
+                categoryId: parseInt(categorySelect, 10),
+                counterparty: counterpartyInput,
+                frequency: frequencySelect,
+                startDate: startDateInput,
+                endDate: endDate
+            });
+            
+            if (response.status === 200 || response.status === 201) {
+                setRecurringTransactions(prev => {
+                    const updatedList = [...prev, response.data];
+
+                    updatedList.sort((a, b) => {
+                        const nameA = rawCategories.find(c => c.categoryId === a.categoryId)?.name || "";
+                        const nameB = rawCategories.find(c => c.categoryId === b.categoryId)?.name || "";
+
+                        return nameA.localeCompare(nameB);
+                    });
+
+                    return [...updatedList]; 
+                });
+                resetForm();
+            }
         } catch (error) {
             console.error('Add Recurring Transaction Error:', error);
         }

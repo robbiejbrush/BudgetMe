@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { moneyRegex } from '../../../pages/AddEditTransactions/TransactionSchema';
+import { moneyRegex } from '../../pages/AddEditTransactions/TransactionSchema';
 
 export const validationSchema = Yup.object({
     amountInput: Yup.number()
