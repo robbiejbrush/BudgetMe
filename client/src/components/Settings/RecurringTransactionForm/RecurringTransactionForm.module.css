@@ -99,13 +99,13 @@
         font-family: var(--font-main);
     }
 
-    .addBtn {
-        justify-self: center;
-        margin: 0px;
-    }
-
     .actionsDiv {
         justify-content: center;
         padding-bottom: 20px;
+    }
+
+    .addBtn {
+        justify-self: center;
+        margin: 0px;
     }
 }

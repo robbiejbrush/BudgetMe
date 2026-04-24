@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
            allowNull: true 
         },
 
+        nextChargeDate: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
+
         lastChargedDate: {
            type: DataTypes.DATEONLY,
            allowNull: true 

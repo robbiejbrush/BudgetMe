@@ -36,6 +36,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding-top: 20px;
+    padding-bottom: 20px;
     max-width: 1600px;
     width: min(1600px, calc(100% - 40px));
     margin-left: auto;
@@ -72,4 +73,10 @@
     text-align: left;
     padding-left: 20px;
     padding-bottom: 20px;
+}
+/*Mobile Adjustments*/
+@media (max-width: 1500px) {
+    .recTransDiv {
+        padding-bottom: 0px;
+    }
 }

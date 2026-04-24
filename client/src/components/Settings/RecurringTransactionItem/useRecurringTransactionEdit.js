@@ -1,8 +1,26 @@
 import axios from 'axios';
+import { addWeeks, addMonths, isToday, parseISO, isBefore } from 'date-fns';
 
 export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditing) => {
 
     const onEditSubmit = async (values, recurringTransactionId) => {
+        
+        const startDate = parseISO(values.startDateInput);
+        const today = new Date();
+        let nextChargeDate = startDate;
+
+        if (isToday(startDate) || isBefore(startDate, today)) {
+            let tempDate = startDate;
+            while (isBefore(tempDate, today) || isToday(tempDate)) {
+                if (values.frequencySelect === 'weekly') tempDate = addWeeks(tempDate, 1);
+                else if (values.frequencySelect === 'biweekly') tempDate = addWeeks(tempDate, 2);
+                else if (values.frequencySelect === 'monthly') tempDate = addMonths(tempDate, 1);
+            }
+            nextChargeDate = tempDate;
+        } else {
+            nextChargeDate = startDate;
+        }
+        
         const submissionData = {
             type: values.typeSelect,
             amount: values.amountInput,
@@ -10,6 +28,8 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
             frequency: values.frequencySelect,
             startDate: values.startDateInput,
             endDate: values.endDateInput.trim() || null,
+            nextChargeDate: nextChargeDate.toISOString,
+            lastChargedDate: null,
             categoryId: values.categorySelect
         };
         
@@ -22,13 +42,7 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
                         //Merge the existing item with the new values
                         return {
                             ...item,
-                            amount: values.amountInput,
-                            type: values.typeSelect,
-                            categoryId: values.categorySelect,
-                            counterparty: values.counterpartyInput,
-                            frequency: values.frequencySelect,
-                            startDate: values.startDateInput,
-                            endDate: values.endDateInput
+                            ...submissionData
                         };
                     }
                     return item;

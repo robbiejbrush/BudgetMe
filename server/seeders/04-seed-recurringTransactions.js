@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+const { addWeeks, addMonths, isToday, parseISO } = require('date-fns');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -13,7 +14,7 @@ module.exports = {
             AND name != 'Other (Expense)';`
         );
 
-        const recurringTransactions = Array.from({ length: 5 }, () => {
+        const recurringTransactions = Array.from({ length: 3 }, () => {
             const category = faker.helpers.arrayElement(categories);
 
             const endDateFrom = new Date();
@@ -22,13 +23,31 @@ module.exports = {
             const endDateTo = new Date();
             endDateTo.setMonth(endDateTo.getMonth() + 6);
 
+            const startDate = faker.date.soon({ days: 30 });
+            let nextChargeDate = null;
+            const frequency = faker.helpers.arrayElement(['weekly', 'biweekly', 'monthly']);
+
+            if (isToday(startDate)) {
+                if (frequency === 'weekly') {
+                    nextChargeDate = addWeeks(startDate, 1);
+                } else if (frequency === 'biweekly') {
+                    nextChargeDate = addWeeks(startDate, 2);
+                } else if (frequency === 'monthly') {
+                    nextChargeDate = addMonths(startDate, 1);
+                }
+            } else {
+                nextChargeDate = startDate;
+            }
+
             return{
                 type: category.type,
                 amount: faker.number.float( {min: 50, max: 5000, fractionDigits: 2} ),
                 counterparty: faker.company.name(),
-                frequency: faker.helpers.arrayElement(['weekly', 'biweekly', 'monthly']),
-                startDate: faker.date.soon({ days: 30 }),
+                frequency: frequency,
+                startDate: startDate,
                 endDate: faker.helpers.arrayElement([null, faker.date.between({ from: endDateFrom, to: endDateTo })]),
+                nextChargeDate: nextChargeDate,
+                lastChargedDate: null,
                 categoryId: category.categoryId,
                 userId: 1,
                 createdAt: new Date(),
