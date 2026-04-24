@@ -1,10 +1,10 @@
 const cron = require('node-cron');
-const { addWeeks, addMonths, isBefore, isToday, parseISO, isAfter } = require('date-fns');
+const { startOfDay, addWeeks, addMonths, isBefore, isToday, parseISO, isAfter } = require('date-fns');
 const db = require('../models');
 
 const processRecurringTransactions = async () => {
     console.log('--- Checking for due recurring transactions ---');
-    const today = new Date();
+    const today = startOfDay(new Date());
 
     try {
         //Get all recurring transactions due today or earlier
@@ -15,9 +15,8 @@ const processRecurringTransactions = async () => {
         });
 
         for (const item of dueItems) {
-            const today = new Date();
-            const endDate = item.endDate ? new Date(item.endDate) : null;
-            let currentNextDate = new Date(item.nextChargeDate);
+            const endDate = item.endDate ? parseISO(item.endDate) : null;
+            let currentNextDate = startOfDay(parseISO(item.nextChargeDate));
 
             //If nextChargeDate is after the endDate, stop and delete
             if (endDate && isAfter(currentNextDate, endDate)) {
@@ -40,8 +39,7 @@ const processRecurringTransactions = async () => {
                     type: item.type,
                     categoryId: item.categoryId,
                     counterparty: item.counterparty,
-                    date: currentNextDate,
-                    recurringId: item.id
+                    date: currentNextDate
                 });
 
                 //Update tracker for the next iteration
