@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useUserId } from '../../../hooks/useAuth.js';
-import { addWeeks, addMonths, isToday, parseISO, isBefore } from 'date-fns';
+import { startOfToday, addWeeks, addMonths, parseISO, isBefore } from 'date-fns';
 
 export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategories) => {
     const userId = useUserId();
@@ -10,19 +10,19 @@ export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategori
         const endDate = endDateInput?.trim() || null;
 
         const startDate = parseISO(startDateInput);
-        const today = new Date();
+        const today = startOfToday();
         let nextChargeDate = startDate;
 
-        if (isToday(startDate) || isBefore(startDate, today)) {
+        if (isBefore(startDate, today)) {
             let tempDate = startDate;
 
-            while (isBefore(tempDate, today) || isToday(tempDate)) {
+            while (isBefore(tempDate, today)) {
                 if (frequencySelect === 'weekly') {
-                    tempDate = addWeeks(startDateInput, 1);
+                    tempDate = addWeeks(tempDate, 1);
                 } else if (frequencySelect === 'biweekly') {
-                    tempDate = addWeeks(startDateInput, 2);
+                    tempDate = addWeeks(tempDate, 2);
                 } else if (frequencySelect === 'monthly') {
-                    tempDate = addMonths(startDateInput, 1);
+                    tempDate = addMonths(tempDate, 1);
                 }
             }
             nextChargeDate = tempDate;

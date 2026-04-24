@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { addWeeks, addMonths, isToday, parseISO, isBefore } from 'date-fns';
+import { startOfToday, addWeeks, addMonths, parseISO, isBefore } from 'date-fns';
 
 export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditing) => {
 
     const onEditSubmit = async (values, recurringTransactionId) => {
         
         const startDate = parseISO(values.startDateInput);
-        const today = new Date();
+        const today = startOfToday();
         let nextChargeDate = startDate;
 
-        if (isToday(startDate) || isBefore(startDate, today)) {
+        if (isBefore(startDate, today)) {
             let tempDate = startDate;
-            while (isBefore(tempDate, today) || isToday(tempDate)) {
+            while (isBefore(tempDate, today)) {
                 if (values.frequencySelect === 'weekly') tempDate = addWeeks(tempDate, 1);
                 else if (values.frequencySelect === 'biweekly') tempDate = addWeeks(tempDate, 2);
                 else if (values.frequencySelect === 'monthly') tempDate = addMonths(tempDate, 1);
