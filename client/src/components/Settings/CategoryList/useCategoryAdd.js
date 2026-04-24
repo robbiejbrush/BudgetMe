@@ -13,7 +13,10 @@ export const useCategoryAdd = (userId, setRawCategories) => {
         userId: userId,
       });
 
-      setRawCategories((prev) => [...prev, response.data]);
+      setRawCategories((prev) => {
+        const newList = [...prev, response.data];
+        return newList.sort((a, b) => a.name.localeCompare(b.name));
+      });
 
       resetForm();
     } catch (error) {

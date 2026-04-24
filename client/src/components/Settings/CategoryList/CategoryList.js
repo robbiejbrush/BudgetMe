@@ -1,36 +1,25 @@
 import { CategoryForm } from '../CategoryForm/CategoryForm';
-import { useCategories } from '../../../hooks/useCategories';
 import { useCategoryAdd } from './useCategoryAdd';
 import useCategoryDelete from './useCategoryDelete';
 import { useTransactionUpdate } from '../../../hooks/useTransactionEdit';
-import { useTransactions } from '../../../hooks/useTransactions';
 import styles from './CategoryList.module.css';
+import { useRecurringTransactionUpdate } from '../../../hooks/useRecurringTransactionEdit';
+import { useUserId } from '../../../hooks/useAuth';
 
-export function CategoryList({ userId }) {
-    //Get all categories
-    const {
-        rawCategories,
-        setRawCategories,
-        loading: categoriesLoading
-    } = useCategories(userId);
+export function CategoryList({
+    rawCategories,
+    setRawCategories,
+    recurringTransactions,
+    setRecurringTransactions,
+    rawTransactions,
+    loading
+}) {
+    const userId = useUserId();
 
-    //Add categories
-    const {
-        addCategory,
-        loading: addLoading
-    } = useCategoryAdd(userId, setRawCategories);
-
-    //Delete categories
-    const {
-        deleteCategory,
-        loading: deleteLoading
-    } = useCategoryDelete();
-
-    //Get all transactions
-    const { rawTransactions, loading: transLoading } = useTransactions(userId); 
-    
-    //Updating transaction
+    const { addCategory, loading: addLoading } = useCategoryAdd(userId, setRawCategories);
+    const { deleteCategory, loading: deleteLoading } = useCategoryDelete();
     const { updateTransaction } = useTransactionUpdate();
+    const { updateRecurringTransaction } = useRecurringTransactionUpdate();
 
     const handleDelete = async (categoryId, categoryType) => {
         const confirmed = window.confirm("Are you sure you want to delete this category?");
@@ -43,13 +32,34 @@ export function CategoryList({ userId }) {
             //If there are transactions for that category
             if (affectedTransactions.length > 0) {
                 //Figure out whether to update category to Other (Income) or Other (Expense)
-                const otherIncomeId = 69; 
-                const otherExpenseId = 86;
+                const otherIncomeId = 166; 
+                const otherExpenseId = 183;
                 const targetId = categoryType === 'income' ? otherIncomeId : otherExpenseId;
 
                 //Update each transaction
                 await Promise.all(affectedTransactions.map(t => 
                     updateTransaction(t.transactionId, { ...t, categoryId: targetId })
+                ));
+                
+                //Updates the recurring transactions state
+                setRecurringTransactions(prev => prev.map(t => 
+                    t.categoryId === categoryId ? { ...t, categoryId: targetId } : t
+                ));
+            }
+
+            //Find recurring transactions belonging to this category
+            const affectedRecTransactions = recurringTransactions.filter(t => t.categoryId === categoryId);
+            
+            //If there are recurring transactions for that category
+            if (affectedRecTransactions.length > 0) {
+                //Figure out whether to update category to Other (Income) or Other (Expense)
+                const otherIncomeId = 166; 
+                const otherExpenseId = 183;
+                const targetId = categoryType === 'income' ? otherIncomeId : otherExpenseId;
+
+                //Update each recurring transaction
+                await Promise.all(affectedRecTransactions.map(t => 
+                    updateRecurringTransaction(t.recurringTransactionId, { ...t, categoryId: targetId })
                 ));
             }
 
@@ -67,7 +77,7 @@ export function CategoryList({ userId }) {
         category.userId === userId
     );
     
-    if (addLoading || deleteLoading || categoriesLoading || transLoading) return <div className= "LoadingText">Loading data...</div>;
+    if (addLoading || deleteLoading || loading) return <div className= "LoadingText">Loading data...</div>;
 
     return (
         <div className={styles.categoriesListDiv}>

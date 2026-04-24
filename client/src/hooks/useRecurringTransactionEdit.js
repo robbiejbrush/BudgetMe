@@ -58,3 +58,10 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
 
     return { onEditSubmit };
 };
+
+export const useRecurringTransactionUpdate = () => {
+  const updateRecurringTransaction = async (recurringTransactionId, updatedData) => {
+    return await axios.put(`http://localhost:3001/recurringTransactions/edit/${recurringTransactionId}`, updatedData);
+  };
+  return { updateRecurringTransaction };
+};

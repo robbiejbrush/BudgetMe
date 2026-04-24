@@ -4,10 +4,17 @@ import styles from '../Settings/Settings.module.css';
 import { useUserId } from '../../hooks/useAuth';
 import { CategoryList } from '../../components/Settings/CategoryList/CategoryList';
 import { RecurringTransactionList } from '../../components/Settings/RecurringTransactionList/RecurringTransactionList';
+import { useRecurringTransactions } from './useRecurringTransactions';
+import { useCategories } from '../../hooks/useCategories';
+import { useTransactions } from '../../hooks/useTransactions';
 
 function Settings() {
-  //Get current userId
+  
   const userId = useUserId();
+
+  const { recurringTransactions, loading: recTransLoading, setRecurringTransactions } = useRecurringTransactions(userId);
+  const { rawCategories, setRawCategories, loading: catsLoading } = useCategories(userId);
+  const { rawTransactions, loading: transLoading } = useTransactions(userId); 
 
   return (
     <div>
@@ -20,11 +27,23 @@ function Settings() {
       </div>
       <div className={styles.recTransDiv}>
         <h2 className={styles.recTransHeader}>Recurring Transactions</h2>
-        <RecurringTransactionList/>
+        <RecurringTransactionList
+          recurringTransactions={recurringTransactions}
+          setRecurringTransactions={setRecurringTransactions}
+          rawCategories={rawCategories}
+          loading={recTransLoading || catsLoading}
+        />
       </div>
       <div className={styles.categoriesDiv}>
         <h2 className={styles.categoriesHeader}>Custom Categories</h2>
-        <CategoryList userId={userId}/>
+        <CategoryList 
+          rawCategories={rawCategories}
+          setRawCategories={setRawCategories}
+          recurringTransactions={recurringTransactions}
+          setRecurringTransactions={setRecurringTransactions}
+          rawTransactions={rawTransactions}
+          loading={recTransLoading || catsLoading || transLoading}
+        />
       </div>
     </div>
   )

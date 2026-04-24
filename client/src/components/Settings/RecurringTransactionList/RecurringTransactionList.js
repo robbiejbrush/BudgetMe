@@ -2,29 +2,18 @@ import styles from '../RecurringTransactionList/RecurringTransactionList.module.
 import { RecurringTransactionItem } from '../RecurringTransactionItem/RecurringTransactionItem';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
 import { initialValues, validationSchema } from '../RecurringTransactionSchema';
-import { useUserId } from '../../../hooks/useAuth';
-import { useRecurringTransactions } from '../RecurringTransactionList/useRecurringTransactions';
 import { useRecurringTransactionAdd } from '../RecurringTransactionList/useRecurringTransactionAdd';
-import { useCategories } from '../../../hooks/useCategories';
 import { useMemo } from 'react';
 
-export function RecurringTransactionList() {
-  //Get current userId
-  const userId = useUserId();
+export function RecurringTransactionList( {
+  recurringTransactions,
+  setRecurringTransactions,
+  rawCategories,
+  loading
+}) {
   
-  //Get all recurring transactions
-  const {
-    recurringTransactions,
-    loading: recTransLoading,
-    setRecurringTransactions
-  } = useRecurringTransactions(userId);
-  
-  //Get all categories
-  const { 
-    rawCategories,
-    loading: catsLoading
-  } = useCategories(userId);
-  
+  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions, rawCategories);
+
   //Helper function to find category name by Id
   const categoryLookup = useMemo(() => {
     return rawCategories.reduce((acc, cat) => {
@@ -33,10 +22,7 @@ export function RecurringTransactionList() {
     }, {});
   }, [rawCategories]);
 
-  //Add recurring transaction hook
-  const { onAddSubmit } = useRecurringTransactionAdd(setRecurringTransactions, rawCategories);
-
-  if (recTransLoading || catsLoading) return <div className= "LoadingText">Loading data...</div>;
+  if (loading) return <div className= "LoadingText">Loading data...</div>;
   
   return (
     <div className={styles.recTransListDiv}>
@@ -54,7 +40,7 @@ export function RecurringTransactionList() {
         <RecurringTransactionItem 
             key={tx.recurringTransactionId}
             tx={tx}
-            categoryName={categoryLookup[tx.categoryId]}
+            categoryName={categoryLookup[tx.categoryId] || (tx.type === 'income' ? 'Other (Income)' : 'Other (Expense)')}
             setRecurringTransactions={setRecurringTransactions}
             rawCategories={rawCategories}
         />

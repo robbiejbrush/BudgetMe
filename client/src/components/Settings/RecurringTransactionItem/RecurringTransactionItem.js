@@ -4,7 +4,7 @@ import useRecurringTransactionDelete from './useRecurringTransactionDelete';
 import { validationSchema } from '../RecurringTransactionSchema';
 import { useState } from 'react';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
-import { useRecurringTransactionEdit } from './useRecurringTransactionEdit';
+import { useRecurringTransactionEdit } from '../../../hooks/useRecurringTransactionEdit';
 
 export function RecurringTransactionItem({tx, categoryName, setRecurringTransactions, rawCategories}) {
     //Delete recurring transaction
