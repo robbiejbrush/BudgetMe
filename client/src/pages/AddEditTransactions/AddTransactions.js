@@ -16,15 +16,8 @@ const singleTransaction = {
 };
 
 function AddTransactions() {
-  const {
-    onSubmit, 
-    handleCountChange, 
-    userId
-  } = useTransactionAdd();
-  const {
-    rawCategories,
-    loading: categoriesLoading
-  } = useCategories(userId);
+  const { onSubmit, handleCountChange, userId } = useTransactionAdd();
+  const { rawCategories, loading: categoriesLoading } = useCategories(userId);
 
   const initialValues = {
     transactions: [singleTransaction]

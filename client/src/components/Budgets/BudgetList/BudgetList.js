@@ -11,7 +11,7 @@ function BudgetList({
   formatCurrency 
 }) {
   
-  //Helper for the add Form dropdown
+  //Helper for the add Form dropdown, gathers unused categories
   const getUnusedForAdd = () => {
     return rawCategories.filter(cat => {
       const isAssigned = budgets.some(b => b.categoryId === cat.categoryId);
@@ -20,7 +20,7 @@ function BudgetList({
     });
   };
 
-  //Helper for each row's dropdown (must include the current category)
+  //Helper for each row's dropdown, gathers unused categories (must include the current category)
   const getUnusedForEdit = (currentCategoryId) => {
     return rawCategories.filter(cat => {
       const isAssigned = budgets.some(b => b.categoryId === cat.categoryId);
@@ -38,7 +38,9 @@ function BudgetList({
       <div className={styles.headerDivider}></div>
 
       {budgets.length === 0 ? (
-        <div className="NoDataMessage">No budgets are set.</div>
+        <div className={styles.noneSetDiv}>
+          <div className="NoDataMessage">No budgets are set.</div>
+        </div>
       ) : (
         budgets.map((budget) => (
           <BudgetItem 

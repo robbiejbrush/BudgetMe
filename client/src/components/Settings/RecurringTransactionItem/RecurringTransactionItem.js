@@ -34,6 +34,7 @@ export function RecurringTransactionItem({tx, categoryName, setRecurringTransact
         setRecurringTransactions,
         setIsEditing
     );
+    
     const initialValues = {
         amountInput: tx.amount,
         typeSelect: tx.type,

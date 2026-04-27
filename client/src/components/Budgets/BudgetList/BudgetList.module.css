@@ -34,6 +34,11 @@
     width: 100%;
 }
 
+.noneSetDiv {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
 /*Add Budget*/
 .addForm {
     display: contents;
@@ -88,6 +93,6 @@
 /* Mobile Adjustments */
 @media (max-width: 800px) {
     .currencySymbol, .categorySelect, .textInput {
-        font-size: 12px;
+        font-size: 16px;
     }
 }

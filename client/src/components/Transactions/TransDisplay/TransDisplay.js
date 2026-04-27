@@ -7,10 +7,13 @@ import styles from '../TransDisplay/TransDisplay.module.css';
 function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
 
     const navigate = useNavigate();
+
+    //On edit, navigate back to transactions
     const onEdit = (transaction) => {
       navigate(`/editTransaction/${transaction.transactionId}`);
     }
 
+    //Delete transaction
     const { deleteTransaction, loading } = useTransactionDelete();
     const onDelete = async (transactionId) => {
       if (!window.confirm("Are you sure you want to delete this transaction?")) return;

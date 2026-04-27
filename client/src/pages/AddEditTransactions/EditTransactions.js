@@ -13,33 +13,19 @@ import { useNavigate } from 'react-router-dom';
 function EditTransactions() {
     const navigate = useNavigate();
     
-    const { 
-        transactionId 
-    } = useParams();
-    
-    const {
-        userId,
-        onSubmit
-    } = useTransactionEdit(transactionId, {
+    const { transactionId } = useParams();
+    const { userId, onSubmit } = useTransactionEdit(transactionId, {
         onSuccess: () => navigate('/transactions')
     });
-    
-    const {
-        rawCategories,
-        loading: categoriesLoading
-    } = useCategories(userId);
-
-    const {
-        transaction,
-        loading
-    } = useTransaction(transactionId);
-
-    if (loading) return <div className= "LoadingText">Loading transaction...</div>;
-    if (!transaction) return <div className= "ErrorText">Transaction not found.</div>;
+    const { rawCategories, loading: categoriesLoading } = useCategories(userId);
+    const { transaction, loading } = useTransaction(transactionId);
 
     const initialValues = {
         transactions: [transaction]
     };
+
+    if (loading) return <div className= "LoadingText">Loading transaction...</div>;
+    if (!transaction) return <div className= "ErrorText">Transaction not found.</div>;
 
     return (
         <div>

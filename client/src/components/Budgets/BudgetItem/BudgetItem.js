@@ -3,11 +3,7 @@ import styles from '../BudgetItem/BudgetItem.module.css';
 
 function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, formatCurrency }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState({ 
-    categoryId: budget.categoryId, 
-    monthlyLimit: budget.monthlyLimit 
-  });
-
+  const [editForm, setEditForm] = useState({ categoryId: budget.categoryId, monthlyLimit: budget.monthlyLimit });
   const category = categories.find(cat => cat.categoryId === budget.categoryId);
 
   const handleSubmit = async () => {

@@ -3,6 +3,7 @@ import styles from '../CategoriesBreakdown/CategoriesBreakdown.module.css';
 
 function CategoriesBreakdown({ categories }) {
   
+    //filters for only expense categories
     const sortedData = [...categories]
     .filter((cat) => cat.type?.toLowerCase() !== 'income')
     .sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage));

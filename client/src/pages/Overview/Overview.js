@@ -38,8 +38,8 @@ function Overview() {
         />
       </PageHeader>
       {displayCategories.length === 0 ? (
-        <div className="NoDataMessage">
-          <h2>There are no transactions for this time.</h2>
+        <div className="NoDataDiv">
+          <h2 className="NoDataMessage">There are no transactions for this time.</h2>
         </div>
       ) : (
         <div>
