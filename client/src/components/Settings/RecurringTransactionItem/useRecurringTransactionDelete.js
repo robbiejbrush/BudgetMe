@@ -5,15 +5,12 @@ const useRecurringTransactionDelete = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const deleteRecurringTransaction = useCallback(async (recurringTransactionId, options = {}) => {
+  const deleteRecurringTransaction = useCallback(async (recurringTransactionId = {}) => {
     setLoading(true);
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/recurringTransactions/${recurringTransactionId}`, {
-        headers: options.headers || {},
-        data: options.body || null 
-      });
+      const response = await axios.delete(`http://localhost:3001/recurringTransactions/${recurringTransactionId}`);
 
       setSuccess(true);
       return response.data;

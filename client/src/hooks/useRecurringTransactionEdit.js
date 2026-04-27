@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useState } from 'react';
+import { useCallback } from 'react';
 import { startOfToday, addWeeks, addMonths, parseISO, isBefore } from 'date-fns';
 
 export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditing) => {
@@ -60,8 +62,27 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
 };
 
 export const useRecurringTransactionUpdate = () => {
-  const updateRecurringTransaction = async (recurringTransactionId, updatedData) => {
-    return await axios.put(`http://localhost:3001/recurringTransactions/edit/${recurringTransactionId}`, updatedData);
-  };
-  return { updateRecurringTransaction };
+  const [loading, setLoading] = useState(false);
+
+  const updateRecurringTransaction = useCallback(async (recurringTransactionId, updatedData) => {
+    setLoading(true);
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/recurringTransactions/edit/${recurringTransactionId}`, 
+        updatedData
+      );
+      return response.data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "Failed to update recurring transaction.";
+      
+      console.error("Update Error:", error);
+      alert(errorMessage); 
+      
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { updateRecurringTransaction, loading };
 };

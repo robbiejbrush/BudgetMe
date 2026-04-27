@@ -5,15 +5,12 @@ const useCategoryDelete = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const deleteCategory = useCallback(async (categoryId, options = {}) => {
+  const deleteCategory = useCallback(async (categoryId = {}) => {
     setLoading(true);
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/categories/${categoryId}`, {
-        headers: options.headers || {},
-        data: options.body || null 
-      });
+      const response = await axios.delete(`http://localhost:3001/categories/${categoryId}`);
 
       setSuccess(true);
       return response.data;

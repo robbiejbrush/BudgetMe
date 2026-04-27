@@ -30,7 +30,6 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
 
             <label className= {styles.label} htmlFor="TypeInput">Type:</label>
             <Field className = {styles.fieldInput} id= {`type-${index}`} name= {`transactions.${index}.type`} as="select">
-                <option value= "" hidden>Select a Type</option>
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </Field>  

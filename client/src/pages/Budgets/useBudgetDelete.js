@@ -5,15 +5,12 @@ const useBudgetDelete = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const deleteBudget = useCallback(async (budgetId, options = {}) => {
+  const deleteBudget = useCallback(async (budgetId = {}) => {
     setLoading(true);
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/budgets/${budgetId}`, {
-        headers: options.headers || {},
-        data: options.body || null 
-      });
+      const response = await axios.delete(`http://localhost:3001/budgets/${budgetId}`);
 
       setSuccess(true);
       return response.data;

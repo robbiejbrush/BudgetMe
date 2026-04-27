@@ -10,7 +10,7 @@ import { PageHeader } from '../../components/PageHeader/PageHeader.js';
 const singleTransaction = {
   amount: "",
   counterparty: "",
-  type: "",
+  type: "income",
   category: "",
   date: ""
 };

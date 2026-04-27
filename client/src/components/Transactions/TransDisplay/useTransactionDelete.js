@@ -5,15 +5,12 @@ const useTransactionDelete = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const deleteTransaction = useCallback(async (transactionId, options = {}) => {
+  const deleteTransaction = useCallback(async (transactionId = {}) => {
     setLoading(true);
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/transactions/${transactionId}`, {
-        headers: options.headers || {},
-        data: options.body || null 
-      });
+      const response = await axios.delete(`http://localhost:3001/transactions/${transactionId}`);
 
       setSuccess(true);
       return response.data;
