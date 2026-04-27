@@ -59,6 +59,7 @@ router.put("/edit/:budgetId", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "Error updating budget", details: error.message });
+    console.error("Error creating budget: ", error);
   }
 });
 
@@ -77,7 +78,7 @@ router.delete("/:budgetId", async (req, res) => {
       res.status(404).json({ message: "Budget not found" });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting budget", error);
     res.status(500).send({error: "Error deleting budget", details: error.message});
   }
 });

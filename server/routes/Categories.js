@@ -60,6 +60,7 @@ router.put("/edit/:categoryId", async (req, res) => {
       res.status(404).json({ message: "Category not found" });
     }
   } catch (error) {
+    console.error("Error updating category: ", error);
     res.status(500).json({ error: "Error updating category", details: error.message });
   }
 });
@@ -79,7 +80,7 @@ router.delete("/:categoryId", async (req, res) => {
       res.status(404).json({ message: "Category not found" });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting category", error);
     res.status(500).send({error: "Error deleting category", details: error.message});
   }
 });

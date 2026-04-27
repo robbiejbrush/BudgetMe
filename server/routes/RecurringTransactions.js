@@ -84,6 +84,7 @@ router.put("/edit/:recurringTransactionId", async (req, res) => {
       res.status(404).json({ message: "Recurring Transaction not found" });
     }
   } catch (error) {
+    console.error("Error updating recurring transactions: ", error);
     res.status(500).json({ error: "Error updating recurring transaction", details: error.message });
   }
 });
@@ -103,7 +104,7 @@ router.delete("/:recurringTransactionId", async (req, res) => {
       res.status(404).json({ message: "Recurring Transaction not found" });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting recurring transaction", error);
     res.status(500).send({error: "Error deleting recurring transaction", details: error.message});
   }
 });

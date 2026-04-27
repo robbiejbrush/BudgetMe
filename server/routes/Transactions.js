@@ -54,7 +54,7 @@ router.post("/create", async (req, res) => {
         res.json(newTransactions);
     } catch (error) {
         console.error("Error creating transactions: ", error);
-        res.status(500).json({ error: "Failed to create transactions." });
+        res.status(500).json({ error: "Failed to create transactions.", details: error.message });
     }
 });
 
@@ -81,6 +81,7 @@ router.put("/edit/:transactionId", async (req, res) => {
       res.status(404).json({ message: "Transaction not found" });
     }
   } catch (error) {
+    console.error("Error updating transactions: ", error);
     res.status(500).json({ error: "Error updating transaction", details: error.message });
   }
 });
@@ -100,7 +101,7 @@ router.delete("/:transactionId", async (req, res) => {
       res.status(404).json({ message: "Transaction not found" });
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting transaction", error);
     res.status(500).send({error: "Error deleting transaction", details: error.message});
   }
 });
