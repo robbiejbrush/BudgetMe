@@ -8,6 +8,7 @@ import { useRecurringTransactions } from './useRecurringTransactions';
 import { useCategories } from '../../hooks/useCategories';
 import { useTransactions } from '../../hooks/useTransactions';
 import { useNavigate } from 'react-router-dom';
+import { useCurrencies } from './CurrencyContext';
 
 function Settings({ setToken }) {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ function Settings({ setToken }) {
   const { recurringTransactions, loading: recTransLoading, setRecurringTransactions } = useRecurringTransactions(userId);
   const { rawCategories, setRawCategories, loading: catsLoading } = useCategories(userId);
   const { rawTransactions, loading: transLoading } = useTransactions(userId); 
-
+  const { rates, selectedCurrency, setSelectedCurrency, loading } = useCurrencies();
+  
   //Logout function
   const logOut = () => {
     document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
@@ -29,8 +31,19 @@ function Settings({ setToken }) {
       <PageHeader title= "Settings"/>
       <div className={styles.currencyDiv}>
         <h2 className={styles.currencyHeader}>Change Currency</h2>
-        <select className={styles.currencySelect}>
-          <option>CAD</option>
+        <select 
+          className={styles.currencySelect}
+          value={selectedCurrency}
+          onChange={(e) => setSelectedCurrency(e.target.value)}
+          disabled={loading}
+        >
+          {loading ? (
+            <option>Loading...</option>
+          ) : (
+            Object.keys(rates).map(code => (
+              <option key={code} value={code}>{code}</option>
+            ))
+          )}
         </select>
       </div>
       <div className={styles.recTransDiv}>

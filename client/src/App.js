@@ -11,6 +11,7 @@ import NavBar from './components/NavBar/NavBar.js';
 import AddTransactions from './pages/AddEditTransactions/AddTransactions.js';
 import EditTransactions from './pages/AddEditTransactions/EditTransactions.js';
 import './styles/globals.css';
+import { CurrencyProvider } from './pages/Settings/CurrencyContext.js';
 
 //Get access token from cookies method
 const getAccessToken = () => document.cookie.split('; ').find(row => row.startsWith('accessToken='))?.split('=')[1];
@@ -50,45 +51,47 @@ function App() {
   const isAuthenticated = !!token;
   
   return (
-    <div className="App">
-      <Router>
-        <Navigation setToken={ setToken }/>
-          <Routes>
-            <Route 
-              path="/" 
-              element={isAuthenticated ? <Navigate to="/overview" replace /> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/login" 
-              element={!isAuthenticated ? <Login setToken={setToken} /> : <Navigate to="/overview" replace />} 
-            />
-            <Route 
-              path="/overview" 
-              element={isAuthenticated ? <Overview /> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/transactions" 
-              element={isAuthenticated ? <Transactions /> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/budgets" 
-              element={isAuthenticated ? <Budgets /> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/settings" 
-              element={isAuthenticated ? <Settings setToken={setToken}/> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/addTransactions" 
-              element={isAuthenticated ? <AddTransactions /> : <Navigate to="/login" replace />} 
-            />
-            <Route 
-              path="/editTransaction/:transactionId" 
-              element={isAuthenticated ? <EditTransactions /> : <Navigate to="/login" replace />} 
-            />
-          </Routes>
-      </Router>
-    </div>
+    <CurrencyProvider isAuthenticated={isAuthenticated}>
+      <div className="App">
+        <Router>
+          <Navigation setToken={ setToken }/>
+            <Routes>
+              <Route 
+                path="/" 
+                element={isAuthenticated ? <Navigate to="/overview" replace /> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/login" 
+                element={!isAuthenticated ? <Login setToken={setToken} /> : <Navigate to="/overview" replace />} 
+              />
+              <Route 
+                path="/overview" 
+                element={isAuthenticated ? <Overview /> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/transactions" 
+                element={isAuthenticated ? <Transactions /> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/budgets" 
+                element={isAuthenticated ? <Budgets /> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/settings" 
+                element={isAuthenticated ? <Settings setToken={setToken}/> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/addTransactions" 
+                element={isAuthenticated ? <AddTransactions /> : <Navigate to="/login" replace />} 
+              />
+              <Route 
+                path="/editTransaction/:transactionId" 
+                element={isAuthenticated ? <EditTransactions /> : <Navigate to="/login" replace />} 
+              />
+            </Routes>
+        </Router>
+      </div>
+    </CurrencyProvider>
   );
 }
 

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const cors = require('cors')
@@ -23,6 +24,9 @@ app.use("/categories", categoriesRouter);
 
 const budgetsRouter = require('./routes/Budgets')
 app.use("/budgets", budgetsRouter);
+
+const ratesRouter = require('./routes/CurrencyRates')
+app.use("/", ratesRouter);
 
 const PORT = 3001; //process.env.PORT || 3306;
 
