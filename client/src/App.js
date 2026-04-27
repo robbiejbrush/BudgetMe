@@ -76,7 +76,7 @@ function App() {
             />
             <Route 
               path="/settings" 
-              element={isAuthenticated ? <Settings /> : <Navigate to="/login" replace />} 
+              element={isAuthenticated ? <Settings setToken={setToken}/> : <Navigate to="/login" replace />} 
             />
             <Route 
               path="/addTransactions" 

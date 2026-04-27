@@ -74,6 +74,15 @@
     padding-left: 20px;
     padding-bottom: 20px;
 }
+
+/*Logout Div*/
+.logoutBtn {
+    composes: btnBase from '../../styles/shared.module.css';
+    color: red;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
 /*Mobile Adjustments*/
 @media (max-width: 1500px) {
     .recTransDiv {

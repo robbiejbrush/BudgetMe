@@ -7,14 +7,22 @@ import { RecurringTransactionList } from '../../components/Settings/RecurringTra
 import { useRecurringTransactions } from './useRecurringTransactions';
 import { useCategories } from '../../hooks/useCategories';
 import { useTransactions } from '../../hooks/useTransactions';
+import { useNavigate } from 'react-router-dom';
 
-function Settings() {
-  
+function Settings({ setToken }) {
+  const navigate = useNavigate();
   const userId = useUserId();
 
   const { recurringTransactions, loading: recTransLoading, setRecurringTransactions } = useRecurringTransactions(userId);
   const { rawCategories, setRawCategories, loading: catsLoading } = useCategories(userId);
   const { rawTransactions, loading: transLoading } = useTransactions(userId); 
+
+  //Logout function
+  const logOut = () => {
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
+    setToken(null);
+    navigate("/", { replace: true });
+  }
 
   return (
     <div>
@@ -44,6 +52,9 @@ function Settings() {
           rawTransactions={rawTransactions}
           loading={recTransLoading || catsLoading || transLoading}
         />
+      </div>
+      <div>
+        <button className={styles.logoutBtn} onClick={logOut}>Logout</button>
       </div>
     </div>
   )
