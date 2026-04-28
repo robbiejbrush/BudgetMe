@@ -1,15 +1,26 @@
 import axios from 'axios';
 import { useUserId } from '../../hooks/useAuth.js';
+import { useCurrencies } from '../Settings/CurrencyContext.js';
 
 export const useBudgetEdit = (setBudgets) => {
+  const { rates, selectedCurrency } = useCurrencies();
   const userId = useUserId();
 
   const onEditSubmit = async (budgetId, values) => {
-    
+    //Convert to CAD for DB storing
+    let amountInCAD = parseFloat(values.monthlyLimit);
+    if (selectedCurrency !== 'CAD') {
+        const rate = rates[selectedCurrency];
+        if (rate && rate !== 0) {
+            amountInCAD = amountInCAD / rate;
+        }
+    }
+
     const updatedData = {
       ...values,
       userId: userId,
-      categoryId: parseInt(values.categoryId, 10)
+      categoryId: parseInt(values.categoryId, 10),
+      monthlyLimit: Number(amountInCAD.toFixed(2))
     };
     
     try {

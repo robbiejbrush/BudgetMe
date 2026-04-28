@@ -1,7 +1,6 @@
 import React from 'react';
 import { PieChart, Pie, Tooltip, Sector, ResponsiveContainer } from 'recharts';
 import { formatCurrency } from '../../utils/dateHelpers';
-import { useCurrencies } from '../../pages/Settings/CurrencyContext';
 
 const colours = ['orange', 'black', 'white'];
 
@@ -11,7 +10,6 @@ const renderSlice = (props) => {
 };
 
 const CustomToolTip = ({ active, payload }) => {
-  const { convert } = useCurrencies();
 
   if (active && payload && payload.length) {
     const data = payload[0].payload;
@@ -25,7 +23,7 @@ const CustomToolTip = ({ active, payload }) => {
         fontFamily: 'var(--font-main)'
       }}>
         <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>{data.name}</p>
-        <p style={{ margin: 0 }}>Amount: ${formatCurrency(convert(data.total))}</p>
+        <p style={{ margin: 0 }}>Amount: ${formatCurrency(data.total)}</p>
         <p style={{ margin: 0 }}>Share: {data.percentage}%</p>
       </div>
     );

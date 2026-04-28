@@ -9,8 +9,10 @@ import { useParams } from 'react-router-dom';
 import { useTransaction } from './useTransaction.js';
 import { PageHeader } from '../../components/PageHeader/PageHeader.js';
 import { useNavigate } from 'react-router-dom';
+import { useCurrencies } from '../Settings/CurrencyContext.js';
 
 function EditTransactions() {
+    const { convert } = useCurrencies();
     const navigate = useNavigate();
     
     const { transactionId } = useParams();
@@ -20,16 +22,19 @@ function EditTransactions() {
     const { rawCategories, loading: categoriesLoading } = useCategories(userId);
     const { transaction, loading } = useTransaction(transactionId);
 
-    const initialValues = {
-        transactions: [transaction]
-    };
+    if (loading || !transaction) return <div className= "LoadingText">Loading transaction...</div>;
 
-    if (loading) return <div className= "LoadingText">Loading transaction...</div>;
-    if (!transaction) return <div className= "ErrorText">Transaction not found.</div>;
+    const transactionArray = Array.isArray(transaction) ? transaction : [transaction];
+    const initialValues = {
+        transactions: transactionArray.map((t) => ({
+            ...t,
+            amount: convert(t.amount).toFixed(2)
+        }))
+    };
 
     return (
         <div>
-        <PageHeader title= "Edit Transactions"/>
+        <PageHeader title= "Edit Transaction"/>
         <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {transactionSchema} enableReinitialize={true}>
             {({ values, errors }) => {
                 return(

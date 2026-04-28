@@ -3,8 +3,11 @@ import { monthNamesShort } from '../../utils/dateHelpers';
 import { useTransactionFilter } from '../../hooks/useTransactionFilter';
 import { useCategories } from '../../hooks/useCategories';
 import { useTransactions } from '../../hooks/useTransactions';
+import { useCurrencies } from '../../pages/Settings/CurrencyContext';
 
 export const useOverviewData = (userId) => {
+      const { convert } = useCurrencies();
+
       const [displayCategories, setDisplayCategories] = useState([]);    
       const [totalExpenses, setTotalExpenses] = useState(0);
       const [totalIncome, setTotalIncome] = useState(0);
@@ -37,43 +40,43 @@ export const useOverviewData = (userId) => {
 
             //Sum transactions per category
             const totalsLookup = filteredTransactions.filter(t => t.type === 'expense').reduce((acc, t) => {
-            acc[t.categoryId] = (acc[t.categoryId] || 0) + parseFloat(t.amount);
-            return acc;
+              acc[t.categoryId] = (acc[t.categoryId] || 0) + parseFloat(t.amount);
+              return acc;
             }, {});
 
             //Calculate total expenses
             const grandExpenses = Object.values(totalsLookup).reduce((sum, val) => sum + val, 0);
 
-            //Map to final category objects with percentages, omit $0 totals
+            //Map to final category objects with percentages for categories breakdown and pie chart, omit $0 totals
             const finalData = rawCategories.map(cat => {
-            const catTotal = totalsLookup[cat.categoryId] || 0;
-            return {
-                ...cat,
-                total: catTotal,
-                percentage: grandExpenses > 0 ? parseFloat(((catTotal / grandExpenses) * 100).toFixed(1)) : 0
-                };
-            }).filter(cat => cat.total > 0);
+              const catTotal = totalsLookup[cat.categoryId] || 0;
+                  return {
+                      ...cat,
+                      total: catTotal,
+                      percentage: grandExpenses > 0 ? parseFloat(((catTotal / grandExpenses) * 100).toFixed(2)) : 0
+                  };
+              }).filter(cat => cat.total > 0);
 
             //Calculate net
             const grandNet = grandIncome - grandExpenses;
                 
             //Generate month and expense objects for bar graph
             const monthlyDataMap = monthNamesShort.reduce((acc, month) => {
-            acc[month] = 0;
-            return acc;
+              acc[month] = 0;
+              return acc;
             }, {});
 
             //Sum up expenses per month
             rawTransactions.filter(t => t.type === 'expense' && new Date(t.date).getFullYear() === parseInt(selectedYear)).forEach(t => {
-            const date = new Date(t.date); // Assuming your DB has a 'date' field
-            const month = monthNamesShort[date.getMonth()];
-            monthlyDataMap[month] += parseFloat(t.amount);
+              const date = new Date(t.date);
+              const month = monthNamesShort[date.getMonth()];
+              monthlyDataMap[month] += parseFloat(t.amount);
             });
 
-            //Convert the map into the array Recharts needs
+            //Convert the map into the array Recharts needs for bar graph
             const barChartData = monthNamesShort.map(month => ({
-            month: month,
-            expenses: parseFloat(monthlyDataMap[month].toFixed(2))
+              month: month,
+              expenses: parseFloat(monthlyDataMap[month].toFixed(2))
             }));
                 
             setMonthlyExpenses(barChartData); 
@@ -84,11 +87,17 @@ export const useOverviewData = (userId) => {
         }, [rawTransactions, rawCategories, selectedMonth, selectedYear, filteredTransactions]);
 
       return {
-        displayCategories,
-        totalExpenses,
-        totalIncome,
-        net,
-        monthlyExpenses,
+        displayCategories: displayCategories.map(cat => ({
+            ...cat,
+            total: convert(cat.total)
+        })),
+        totalExpenses: convert(totalExpenses),
+        totalIncome: convert(totalIncome),
+        net: convert(net),
+        monthlyExpenses: monthlyExpenses.map(m => ({
+            ...m,
+            expenses: convert(m.expenses)
+        })),
         selectedMonth,    
         setSelectedMonth, 
         selectedYear,    

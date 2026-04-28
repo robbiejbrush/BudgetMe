@@ -2,17 +2,29 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { useUserId } from './useAuth.js';
+import { useCurrencies } from '../pages/Settings/CurrencyContext.js';
 
 export const useTransactionEdit = (transactionId, { onSuccess } = {}) => {
+  const { rates, selectedCurrency } = useCurrencies();
   const userId = useUserId();
 
   const onSubmit = async (values, { setSubmitting }) => {
     const t = values.transactions[0];
     
+    //Convert to CAD for DB storing
+    let amountInCAD = parseFloat(t.amount);
+    if (selectedCurrency !== 'CAD') {
+      const rate = rates[selectedCurrency];
+      if (rate && rate !== 0) {
+        amountInCAD = amountInCAD / rate;
+      }
+    }
+
     const updatedData = {
       ...t,
       userId: userId,
-      categoryId: t.category ? parseInt(t.category, 10) : null
+      categoryId: t.category ? parseInt(t.category, 10) : null,
+      amount: Number(amountInCAD.toFixed(2))
     };
     
     try {

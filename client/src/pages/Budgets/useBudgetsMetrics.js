@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import * as helpers from '../../utils/budgetsHelpers';
+import { useCurrencies } from "../Settings/CurrencyContext";
 
 export const useBudgetsMetrics = (data, filters) => {
+    const { convert } = useCurrencies();
+
     const { budgets, rawTransactions, rawCategories } = data;
     const { selectedMonth, selectedYear, selectedCategory, filteredTransactions } = filters;
 
@@ -41,12 +44,16 @@ export const useBudgetsMetrics = (data, filters) => {
     return {
         expenseCategories,
         activeCategory,
-        totalSpent,
-        currentBudget,
+        totalSpent: convert(totalSpent),
+        currentBudget: convert(currentBudget),
         dateHeading,
-        typicalSpendMetrics,
+        typicalSpendMetrics: {
+            typical: convert(typicalSpendMetrics.typical),
+            diff: convert(typicalSpendMetrics.diff),
+            isAbove: typicalSpendMetrics.isAbove
+        },
         hasNoTransactions,
         hasNoBudget,
-        ...progress //spreads percentage, barColor, displayWidth
+        ...progress
     };
 }

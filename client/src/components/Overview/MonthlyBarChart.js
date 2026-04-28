@@ -29,6 +29,9 @@ const CustomToolTip = ({ active, payload }) => {
 const MonthlyBarChart = ({ data }) => {
   if (!data || data.length === 0) return null;
 
+  const maxVal = Math.max(...data.map(d => d.expenses));
+  const dynamicWidth = maxVal.toLocaleString().length * 10;
+
   return (
     <div style={{ width: '100%', height: '100%', minWidth: '400px' }}>
       <ResponsiveContainer width="100%" height="100%">
@@ -39,7 +42,7 @@ const MonthlyBarChart = ({ data }) => {
                 stroke="white"
             />
             <YAxis 
-                width={ 80 }
+                width={ dynamicWidth }
                 tick={{ fill: 'white', fontSize: 14, fontFamily: 'Outfit' }} 
                 stroke="white" 
                 tickFormatter={(value) => `$${value.toLocaleString(undefined, {

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import styles from '../BudgetItem/BudgetItem.module.css';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, formatCurrency }) {
+  const { convert } = useCurrencies();
+  
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({ categoryId: budget.categoryId, monthlyLimit: budget.monthlyLimit });
   const category = categories.find(cat => cat.categoryId === budget.categoryId);
@@ -30,7 +33,7 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
             <input 
               type="number" 
               className={styles.textInput}
-              value={editForm.monthlyLimit}
+              value={convert(editForm.monthlyLimit).toFixed(2)}
               onChange={(e) => setEditForm({ ...editForm, monthlyLimit: e.target.value })}
             />
           </div>
@@ -43,7 +46,7 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
       ) : (
         <>
           <span className={styles.itemSpan}>{category?.name || 'Unknown'}</span>
-          <span className={styles.itemSpan}>${formatCurrency(budget.monthlyLimit)}</span>
+          <span className={styles.itemSpan}>${formatCurrency(convert(budget.monthlyLimit).toFixed(2))}</span>
           <div className={styles.actionsDiv}>
             <button onClick={() => setIsEditing(true)} className={styles.editBtn}>Edit</button>
             <button onClick={() => onDelete(budget.budgetId)} className={styles.deleteBtn}>Delete</button>
