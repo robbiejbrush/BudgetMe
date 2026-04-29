@@ -32,15 +32,26 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
             <span className={styles.currencySymbol}>$</span>
             <input 
               type="number" 
+              step="0.01"
               className={styles.textInput}
-              value={convert(editForm.monthlyLimit).toFixed(2)}
+              value={Math.round(convert(editForm.monthlyLimit) * 100) / 100}
               onChange={(e) => setEditForm({ ...editForm, monthlyLimit: e.target.value })}
             />
           </div>
 
           <div className={styles.actionsDiv}>
-            <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
-            <button className={styles.cancelBtn} onClick={() => setIsEditing(false)}>Cancel</button>
+            <button className={styles.submitBtn} onClick={() => {
+              setEditForm({ ...editForm, monthlyLimit: budget.monthlyLimit });
+              handleSubmit();
+            }}>
+              Submit
+            </button>
+            <button className={styles.cancelBtn} onClick={() => {
+              setEditForm({ ...editForm, monthlyLimit: budget.monthlyLimit });
+              setIsEditing(false);
+            }}>
+              Cancel
+            </button>
           </div>
         </>
       ) : (
@@ -48,7 +59,16 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
           <span className={styles.itemSpan}>{category?.name || 'Unknown'}</span>
           <span className={styles.itemSpan}>${formatCurrency(convert(budget.monthlyLimit).toFixed(2))}</span>
           <div className={styles.actionsDiv}>
-            <button onClick={() => setIsEditing(true)} className={styles.editBtn}>Edit</button>
+            <button onClick={() => {
+              setEditForm({ 
+                categoryId: budget.categoryId, 
+                monthlyLimit: budget.monthlyLimit 
+              });
+              setIsEditing(true);
+            }}
+              className={styles.editBtn}>
+              Edit
+            </button>
             <button onClick={() => onDelete(budget.budgetId)} className={styles.deleteBtn}>Delete</button>
           </div>
         </>
