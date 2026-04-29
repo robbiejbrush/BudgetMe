@@ -2,11 +2,21 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { startOfToday, addWeeks, addMonths, parseISO, isBefore } from 'date-fns';
+import { useCurrencies } from '../pages/Settings/CurrencyContext';
 
 export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditing) => {
+    const { rates, selectedCurrency } = useCurrencies();
 
     const onEditSubmit = async (values, recurringTransactionId) => {
-        
+        //Convert to CAD for DB storing
+        let amountInCAD = parseFloat(values.amountInput);
+        if (selectedCurrency !== 'CAD') {
+            const rate = rates[selectedCurrency];
+            if (rate && rate !== 0) {
+                amountInCAD = amountInCAD / rate;
+            }
+        }
+
         const startDate = parseISO(values.startDateInput);
         const today = startOfToday();
         let nextChargeDate = startDate;
@@ -25,7 +35,7 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
         
         const submissionData = {
             type: values.typeSelect,
-            amount: values.amountInput,
+            amount: amountInCAD,
             counterparty: values.counterpartyInput,
             frequency: values.frequencySelect,
             startDate: values.startDateInput,

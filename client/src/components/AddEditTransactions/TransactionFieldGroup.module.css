@@ -16,6 +16,7 @@
 
 .fieldInput {
     composes: inputBase from '../../styles/shared.module.css';
+    text-align: center;
 }
 
 .label {
@@ -27,7 +28,6 @@
 }
 
 .textInput {
-  padding-left: 15px !important;
   width: 150px;
 }
 

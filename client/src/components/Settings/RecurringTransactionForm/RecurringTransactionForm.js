@@ -1,15 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../RecurringTransactionForm/RecurringTransactionForm.module.css';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 export function RecurringTransactionForm( { initialValues, onSubmit, onCancel, validationSchema, rawCategories, buttonText = "Add" } ) {
+    const { currencySymbol } = useCurrencies();
+    
     return (
         <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {validationSchema} enableReinitialize={true}>
             {({ isSubmitting, values }) => (
             <Form className={styles.form}>
                 <div className={styles.amountWrapper}>
                     <div className={styles.currencyWrapper}>
-                        <span className={styles.currencySymbol}>$</span>
-                        <Field className={`${styles.fieldInput} ${styles.amountInput}`} id="amountInput" name="amountInput" disabled={isSubmitting}/>
+                        <span className={styles.currencySymbol}>{currencySymbol}</span>
+                        <Field className={styles.fieldInput} id="amountInput" name="amountInput" disabled={isSubmitting}/>
                     </div>
                     <ErrorMessage className={styles.errorSpan} name="amountInput" component="div"/>
                 </div>

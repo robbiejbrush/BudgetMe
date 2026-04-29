@@ -1,6 +1,7 @@
 import React from 'react';
 import BudgetItem from '../BudgetItem/BudgetItem';
 import styles from '../BudgetList/BudgetList.module.css';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 function BudgetList({ 
   budgets, 
@@ -11,6 +12,8 @@ function BudgetList({
   formatCurrency 
 }) {
   
+  const { currencySymbol } = useCurrencies();
+
   //Helper for the add Form dropdown, gathers unused categories
   const getUnusedForAdd = () => {
     return rawCategories.filter(cat => {
@@ -62,7 +65,7 @@ function BudgetList({
           ))}
         </select>
         <div className={styles.inputWrapper}>
-          <span className={styles.currencySymbol}>$</span>
+          <span className={styles.currencySymbol}>{currencySymbol}</span>
           <input type="number" id="AddAmountInput" className={styles.textInput} placeholder="Amount" step="0.01" required/>
         </div>
         <button type="submit" className={styles.addBtn} id="AddBtn">Add</button>

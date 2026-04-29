@@ -55,11 +55,25 @@ export const CurrencyProvider = ({ children, isAuthenticated }) => {
     fetchRates();
   }, [isAuthenticated]);
 
+  //Derive the symbol automatically from the current currency code
+  const getSymbol = (code) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: code,
+      currencyDisplay: 'narrowSymbol'
+    })
+      .formatToParts(0)
+      .find(part => part.type === 'currency').value;
+  };
+
+  const currencySymbol = getSymbol(selectedCurrency);
+
   return (
     <CurrencyContext.Provider value={{ 
       rates, 
       selectedCurrency, 
-      setSelectedCurrency, 
+      setSelectedCurrency,
+      currencySymbol, 
       convert: (amount) => (rates[selectedCurrency] ? amount * rates[selectedCurrency] : amount), 
       loading 
       }}>

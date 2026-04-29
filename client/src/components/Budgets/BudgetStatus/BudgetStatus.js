@@ -1,8 +1,12 @@
 import React from 'react';
 import ProgressBar from '../ProgressBar';
 import styles from '../BudgetStatus/BudgetStatus.module.css';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
+import { formatCurrency } from '../../../utils/dateHelpers';
 
 const BudgetStatus = ({ m, filters }) => {
+  const { currencySymbol } = useCurrencies();
+
   const categoryName = filters.selectedCategory === 'all' ? 'Total' : m.activeCategory?.name;
   
   if (m.hasNoBudget) {
@@ -35,7 +39,7 @@ const BudgetStatus = ({ m, filters }) => {
       />
 
       <div className={styles.budgetTotalsDiv}>
-        <p>${m.totalSpent.toLocaleString()} <span style={{color: 'orange'}}>spent of</span> ${m.currentBudget.toLocaleString()}</p>
+        <p>{currencySymbol}{formatCurrency(m.totalSpent.toFixed(2))} <span style={{color: 'orange'}}>spent of</span> {currencySymbol}{formatCurrency(m.currentBudget.toFixed(2))}</p>
       </div>
     </>
   );

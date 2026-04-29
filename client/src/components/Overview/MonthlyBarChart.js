@@ -1,7 +1,10 @@
 import React from 'react';
 import { BarChart, Bar, Tooltip, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { useCurrencies } from '../../pages/Settings/CurrencyContext';
 
 const CustomToolTip = ({ active, payload }) => {
+  const { currencySymbol } = useCurrencies();
+
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return ( 
@@ -14,7 +17,7 @@ const CustomToolTip = ({ active, payload }) => {
         fontFamily: 'var(--font-main)'
       }}>
         <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>{data.name}</p>
-        <p style={{ margin: 0 }}>Amount: ${data.expenses.toLocaleString(undefined, {
+        <p style={{ margin: 0 }}>Amount: {currencySymbol}{data.expenses.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         })
@@ -27,6 +30,8 @@ const CustomToolTip = ({ active, payload }) => {
 };
 
 const MonthlyBarChart = ({ data }) => {
+  const { currencySymbol } = useCurrencies();
+
   if (!data || data.length === 0) return null;
 
   const maxVal = Math.max(...data.map(d => d.expenses));
@@ -45,7 +50,7 @@ const MonthlyBarChart = ({ data }) => {
                 width={ dynamicWidth }
                 tick={{ fill: 'white', fontSize: 14, fontFamily: 'Outfit' }} 
                 stroke="white" 
-                tickFormatter={(value) => `$${value.toLocaleString(undefined, {
+                tickFormatter={(value) => `${currencySymbol}${value.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                 })

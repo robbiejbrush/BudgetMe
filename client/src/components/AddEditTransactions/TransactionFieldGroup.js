@@ -1,8 +1,11 @@
 import React from 'react';
 import { Field } from 'formik';
 import styles from '../AddEditTransactions/TransactionFieldGroup.module.css';
+import { useCurrencies } from '../../pages/Settings/CurrencyContext';
 
 function TransactionFieldGroup( {index, transaction, errors, rawCategories, categoriesLoading, showHeading = true} ) {
+    const { currencySymbol } = useCurrencies();
+    
     const filteredCategories = transaction.type 
         ? rawCategories.filter(cat => cat.type === transaction.type)
         : rawCategories;
@@ -15,7 +18,7 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
 
             <label className= {styles.label} htmlFor="AmountInput">Amount:</label>
             <div className={styles.inputWrapper}>
-                <span className={styles.currencySymbol}>$</span>
+                <span className={styles.currencySymbol}>{currencySymbol}</span>
                 <Field className = {`${styles.fieldInput} ${styles.textInput}`} id= {`amount-${index}`} name= {`transactions.${index}.amount`} placeholder= "0.00"/>
             </div>
             {errors.transactions?.[index]?.amount && (

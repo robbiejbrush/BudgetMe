@@ -21,15 +21,13 @@
 .fieldInput {
     composes: inputBase from '../../../styles/shared.module.css';
     font-size: 16px;
+    text-align: center;
 }
 
 .fieldSelect {
     composes: selectBase from '../../../styles/shared.module.css';
     font-size: 16px;
-}
-
-.amountInput {
-    padding-left: 20px;
+    text-align: center;
 }
 
 .currencyWrapper {

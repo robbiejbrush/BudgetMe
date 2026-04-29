@@ -6,7 +6,7 @@ import styles from '../TransDisplay/TransDisplay.module.css';
 import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions }) {
-    const { convert } = useCurrencies();
+    const { convert, currencySymbol } = useCurrencies();
     const navigate = useNavigate();
 
     //On edit, navigate back to transactions
@@ -74,7 +74,7 @@ function TransDisplay({ filteredTransactions, rawCategories, setRawTransactions 
                 <div className={styles.transRow}>
                   <span className={styles.date}>{transaction.date}</span>
                   <span className={styles.amount} style={{ color: isExpense ? 'red' : 'green' }}>
-                    {isExpense ? '-' : '+'}${formatCurrency(convert(transaction.amount))}
+                    {isExpense ? '-' : '+'}{currencySymbol}{formatCurrency(convert(transaction.amount))}
                   </span>
                   <span className={styles.counterparty}>{transaction.counterparty}</span>
                   <span className={styles.category}>{category?.name || 'Uncategorized'}</span>

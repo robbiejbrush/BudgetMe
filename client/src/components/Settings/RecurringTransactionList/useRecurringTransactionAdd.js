@@ -1,12 +1,24 @@
 import axios from 'axios';
 import { useUserId } from '../../../hooks/useAuth.js';
 import { startOfToday, addWeeks, addMonths, parseISO, isBefore } from 'date-fns';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext.js';
 
 export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategories) => {
+    const { rates, selectedCurrency } = useCurrencies();
     const userId = useUserId();
 
-    const onAddSubmit = async (values, { resetForm }) => {
+    const onAddSubmit = async (values, { resetForm }) => {    
         const { amountInput, typeSelect, categorySelect, counterpartyInput, frequencySelect, startDateInput, endDateInput } = values;
+        
+        //Convert to CAD for DB storing
+        let amountInCAD = parseFloat(amountInput);
+        if (selectedCurrency !== 'CAD') {
+            const rate = rates[selectedCurrency];
+            if (rate && rate !== 0) {
+                amountInCAD = amountInCAD / rate;
+            }
+        }
+
         const endDate = endDateInput?.trim() || null;
 
         const startDate = parseISO(startDateInput);
@@ -33,7 +45,7 @@ export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategori
         try {
             const response = await axios.post('http://localhost:3001/recurringTransactions/create', {
                 userId,
-                amount: parseFloat(amountInput),
+                amount: amountInCAD,
                 type: typeSelect,
                 categoryId: parseInt(categorySelect, 10),
                 counterparty: counterpartyInput,

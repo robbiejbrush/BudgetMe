@@ -5,8 +5,11 @@ import { validationSchema } from '../RecurringTransactionSchema';
 import { useState } from 'react';
 import { RecurringTransactionForm } from '../RecurringTransactionForm/RecurringTransactionForm';
 import { useRecurringTransactionEdit } from '../../../hooks/useRecurringTransactionEdit';
+import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 export function RecurringTransactionItem({tx, categoryName, setRecurringTransactions, rawCategories}) {
+    const { convert, currencySymbol } = useCurrencies();
+
     //Delete recurring transaction
     const {
         deleteRecurringTransaction,
@@ -36,7 +39,7 @@ export function RecurringTransactionItem({tx, categoryName, setRecurringTransact
     );
     
     const initialValues = {
-        amountInput: tx.amount,
+        amountInput: Math.round(convert(tx.amount) * 100) / 100,
         typeSelect: tx.type,
         categorySelect: tx.categoryId,
         counterpartyInput: tx.counterparty,
@@ -58,7 +61,7 @@ export function RecurringTransactionItem({tx, categoryName, setRecurringTransact
                 />
             ) : (
                 <>
-                    <span className={`${styles.itemSpan} ${styles.amount}`}>${formatCurrency(tx.amount)}</span>
+                    <span className={`${styles.itemSpan} ${styles.amount}`}>{currencySymbol}{formatCurrency(convert(tx.amount))}</span>
                     <span className={`${styles.itemSpan} ${styles.type}`}>{tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}</span>
                     <span className={`${styles.itemSpan} ${styles.category}`}>{categoryName}</span>
                     <span className={`${styles.itemSpan} ${styles.counterparty}`}>{tx.counterparty}</span>

@@ -3,7 +3,7 @@ import styles from '../BudgetItem/BudgetItem.module.css';
 import { useCurrencies } from '../../../pages/Settings/CurrencyContext';
 
 function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, formatCurrency }) {
-  const { convert } = useCurrencies();
+  const { convert, currencySymbol } = useCurrencies();
   
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({ categoryId: budget.categoryId, monthlyLimit: budget.monthlyLimit });
@@ -29,7 +29,7 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
           </select>
 
           <div className={styles.inputWrapper}>
-            <span className={styles.currencySymbol}>$</span>
+            <span className={styles.currencySymbol}>{currencySymbol}</span>
             <input 
               type="number" 
               step="0.01"
@@ -57,7 +57,7 @@ function BudgetItem({ budget, categories, unusedCategories, onEdit, onDelete, fo
       ) : (
         <>
           <span className={styles.itemSpan}>{category?.name || 'Unknown'}</span>
-          <span className={styles.itemSpan}>${formatCurrency(convert(budget.monthlyLimit).toFixed(2))}</span>
+          <span className={styles.itemSpan}>{currencySymbol}{formatCurrency(convert(budget.monthlyLimit).toFixed(2))}</span>
           <div className={styles.actionsDiv}>
             <button onClick={() => {
               setEditForm({ 
