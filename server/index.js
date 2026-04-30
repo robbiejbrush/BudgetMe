@@ -28,11 +28,9 @@ app.use("/budgets", budgetsRouter);
 const ratesRouter = require('./routes/CurrencyRates')
 app.use("/", ratesRouter);
 
-const PORT = 3001; //process.env.PORT || 3306;
+const PORT = process.env.PORT || 3306;
 
-db.sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-        recurringTransactionsJob.start();
-    });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    recurringTransactionsJob.start();
 });
