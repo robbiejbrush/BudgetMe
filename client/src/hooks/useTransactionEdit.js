@@ -28,7 +28,7 @@ export const useTransactionEdit = (transactionId, { onSuccess } = {}) => {
     };
     
     try {
-      const response = await axios.put(`http://localhost:3001/transactions/edit/${transactionId}`, updatedData);
+      const response = await axios.put(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/edit/${transactionId}`, updatedData);
       
       if (response.status === 200 && onSuccess) {
         onSuccess(response.data); 
@@ -50,7 +50,7 @@ export const useTransactionUpdate = () => {
     setLoading(true);
     try {
       const response = await axios.put(
-        `http://localhost:3001/transactions/edit/${transactionId}`, 
+        `https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/edit/${transactionId}`, 
         updatedData
       );
       return response.data;

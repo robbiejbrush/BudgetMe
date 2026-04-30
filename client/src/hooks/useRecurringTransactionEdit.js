@@ -46,7 +46,7 @@ export const useRecurringTransactionEdit = (setRecurringTransactions, setIsEditi
         };
         
         try {
-            await axios.put(`http://localhost:3001/recurringTransactions/edit/${recurringTransactionId}`, submissionData);
+            await axios.put(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/recurringTransactions/edit/${recurringTransactionId}`, submissionData);
 
             setRecurringTransactions(prev => {
                 const updatedList = prev.map(item => {
@@ -78,7 +78,7 @@ export const useRecurringTransactionUpdate = () => {
     setLoading(true);
     try {
       const response = await axios.put(
-        `http://localhost:3001/recurringTransactions/edit/${recurringTransactionId}`, 
+        `https://budget-me-rbrush-4ea934ec5562.herokuapp.com/recurringTransactions/edit/${recurringTransactionId}`, 
         updatedData
       );
       return response.data;

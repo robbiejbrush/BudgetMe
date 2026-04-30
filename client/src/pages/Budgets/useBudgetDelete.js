@@ -10,7 +10,7 @@ const useBudgetDelete = () => {
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/budgets/${budgetId}`);
+      const response = await axios.delete(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/budgets/${budgetId}`);
 
       setSuccess(true);
       return response.data;

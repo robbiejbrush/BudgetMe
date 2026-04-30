@@ -28,7 +28,7 @@ export const useTransactionAdd = () => {
     });
     
     try {
-      const response = await axios.post('http://localhost:3001/transactions/create', {
+      const response = await axios.post('https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/create', {
         transactions: transactionsWithUser
       });
       

@@ -7,7 +7,7 @@ export const useRecurringTransactions = (userId) => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`http://localhost:3001/recurringTransactions/getAll/${userId}`)
+    axios.get(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/recurringTransactions/getAll/${userId}`)
       .then(res => setRecurringTransactions(res.data))
       .finally(() => setLoading(false));
   }, [userId]);

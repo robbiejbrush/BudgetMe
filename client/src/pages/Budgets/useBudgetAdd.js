@@ -20,7 +20,7 @@ export const useBudgetAdd = (setBudgets) => {
         }
 
         try {
-        const response = await axios.post('http://localhost:3001/budgets/create', {
+        const response = await axios.post('https://budget-me-rbrush-4ea934ec5562.herokuapp.com/budgets/create', {
             userId,
             categoryId: parseInt(categoryId, 10),
             monthlyLimit: Number(amountInCAD.toFixed(2))

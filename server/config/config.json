@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "Bru$hy98",
-    "database": "budgetmedb",
-    "host": "localhost",
+    "username": "ugz5r020e7w0f9l9",
+    "password": "rh4btbffsm29qhyq",
+    "database": "ohg4ln4ajat3aszi",
+    "host": "qn66usrj1lwdk1cc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "timezone": "+00:00"
   },

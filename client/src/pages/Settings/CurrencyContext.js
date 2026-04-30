@@ -38,7 +38,7 @@ export const CurrencyProvider = ({ children, isAuthenticated }) => {
       try {
         setLoading(true);
 
-        const response = await axios.get('http://localhost:3001/rates');
+        const response = await axios.get('https://budget-me-rbrush-4ea934ec5562.herokuapp.com/rates');
         if (response.data) {
           const newRates = response.data;
           setRates(newRates);

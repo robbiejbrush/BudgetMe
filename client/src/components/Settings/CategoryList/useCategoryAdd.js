@@ -7,7 +7,7 @@ export const useCategoryAdd = (userId, setRawCategories) => {
   const addCategory = async (values, { resetForm }) => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3001/categories/create', {
+      const response = await axios.post('https://budget-me-rbrush-4ea934ec5562.herokuapp.com/categories/create', {
         name: values.nameInput,
         type: values.typeSelect,
         userId: userId,

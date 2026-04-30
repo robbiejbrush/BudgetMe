@@ -43,7 +43,7 @@ export const useRecurringTransactionAdd = (setRecurringTransactions, rawCategori
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/recurringTransactions/create', {
+            const response = await axios.post('https://budget-me-rbrush-4ea934ec5562.herokuapp.com/recurringTransactions/create', {
                 userId,
                 amount: amountInCAD,
                 type: typeSelect,

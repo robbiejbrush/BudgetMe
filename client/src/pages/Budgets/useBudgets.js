@@ -7,7 +7,7 @@ export const useBudgets = (userId) => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`http://localhost:3001/budgets/${userId}`)
+    axios.get(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/budgets/${userId}`)
       .then(res => setBudgets(res.data))
       .finally(() => setLoading(false));
   }, [userId]);

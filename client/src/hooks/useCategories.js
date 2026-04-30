@@ -7,7 +7,7 @@ export const useCategories = (userId) => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`http://localhost:3001/categories/${userId}`)
+    axios.get(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/categories/${userId}`)
       .then(res => setRawCategories(res.data))
       .finally(() => setLoading(false));
   }, [userId]);

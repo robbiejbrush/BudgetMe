@@ -24,7 +24,7 @@ export const useBudgetEdit = (setBudgets) => {
     };
     
     try {
-      const response = await axios.put(`http://localhost:3001/budgets/edit/${budgetId}`, updatedData);
+      const response = await axios.put(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/budgets/edit/${budgetId}`, updatedData);
       
       if (response.status === 200) {
         // Update the local list state

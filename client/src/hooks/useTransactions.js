@@ -7,7 +7,7 @@ export const useTransactions = (userId) => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`http://localhost:3001/transactions/getAll/${userId}`)
+    axios.get(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/getAll/${userId}`)
       .then(res => setRawTransactions(res.data))
       .finally(() => setLoading(false));
   }, [userId]);

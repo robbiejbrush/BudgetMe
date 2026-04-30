@@ -10,7 +10,7 @@ const useTransactionDelete = () => {
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/transactions/${transactionId}`);
+      const response = await axios.delete(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/${transactionId}`);
 
       setSuccess(true);
       return response.data;

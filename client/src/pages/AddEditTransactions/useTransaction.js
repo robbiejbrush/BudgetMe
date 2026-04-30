@@ -8,7 +8,7 @@ export const useTransaction = (transactionId) => {
     useEffect(() => {
         const fetchTransaction = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/transactions/getOne/${transactionId}`);
+                const response = await axios.get(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/transactions/getOne/${transactionId}`);
                 
                 const data = response.data;
                 const formattedData = {

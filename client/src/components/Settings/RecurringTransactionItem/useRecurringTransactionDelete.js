@@ -10,7 +10,7 @@ const useRecurringTransactionDelete = () => {
     setSuccess(false);
 
     try {
-      const response = await axios.delete(`http://localhost:3001/recurringTransactions/${recurringTransactionId}`);
+      const response = await axios.delete(`https://budget-me-rbrush-4ea934ec5562.herokuapp.com/recurringTransactions/${recurringTransactionId}`);
 
       setSuccess(true);
       return response.data;
