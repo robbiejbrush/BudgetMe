@@ -18,6 +18,9 @@ This project demonstrates full-stack development with dynamic data filtering, CR
 ### Demo 
 https://drive.google.com/file/d/1GnZbPjYCDDnLrfZDtPBspg9jr8NY_xw8/view?usp=sharing
 
+### Screenshots
+https://drive.google.com/drive/folders/1TvR8GXl-13T5brj2hHLwS2vKws4xx0jh?usp=sharing
+
 ### Database Schema
 https://drive.google.com/file/d/1jhM8gv_UdRbjxJ6qUh9v4RF0lZJY7kJx/view?usp=sharing
 
