@@ -2,6 +2,13 @@
     display: contents;
 }
 
+.nameDiv, .typeDiv {
+    justify-self: flex-start;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
 .fieldInput {
     composes: inputBase from '../../../styles/shared.module.css';
     margin-left: 15px;
@@ -28,19 +35,19 @@
 .errorSpan {
     color: red;
     font-family: var(--font-main);
-    padding-left: 20px;
+    padding-top: 10px;
 }
 
 @media (max-width: 600px) {
     .fieldInput {
-        margin: 20px;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
         text-align: center;
     }
 
     .fieldSelect {
-        margin-right: 20px;
-        margin-left: 20px;
-        margin-bottom: 20px;
+        margin: 20px;
         text-align: center;
     }
 

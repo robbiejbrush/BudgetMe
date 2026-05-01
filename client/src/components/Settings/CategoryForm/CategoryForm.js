@@ -7,19 +7,18 @@ export function CategoryForm({ onSubmit }) {
         <Formik initialValues= {initialValues} onSubmit= {onSubmit} validationSchema= {validationSchema} enableReinitialize={true}>
           {({ isSubmitting }) => (
             <Form className={styles.form}>
-              <Field className={styles.fieldInput} id="nameInput" placeholder= "Name" name="nameInput" disabled={isSubmitting}/>
-              <Field className={styles.fieldSelect} id="typeSelect" name="typeSelect" as="select" disabled={isSubmitting}>
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>  
-              </Field>
-              <button className={styles.addBtn} type="submit" disabled={isSubmitting}>Add</button>
-
-              <div>
+              <div className={styles.nameDiv}>
+                <Field className={styles.fieldInput} id="nameInput" placeholder= "Name" name="nameInput" disabled={isSubmitting}/>
                 <ErrorMessage className={styles.errorSpan} name="nameInput" component="span"/>
               </div>
-              <div>
+              <div className={styles.typeDiv}>
+                <Field className={styles.fieldSelect} id="typeSelect" name="typeSelect" as="select" disabled={isSubmitting}>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>  
+                </Field>
                 <ErrorMessage className={styles.errorSpan} name="typeSelect" component="span"/>
               </div>
+              <button className={styles.addBtn} type="submit" disabled={isSubmitting}>Add</button>
             </Form>
           )}
         </Formik>
