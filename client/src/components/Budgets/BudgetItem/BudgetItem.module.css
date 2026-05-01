@@ -43,25 +43,21 @@
 
 .textInput {
     composes: inputBase from '../../../styles/shared.module.css';
-    width: 100%;
-    height: 30px;
     font-size: 20px;
     box-sizing: border-box;
     margin-left: 15px;
-    width: 100%;
-    min-width: 70px;
     margin: 0;
     border: none;
+    width: 100%;
 }
 
 .categorySelect {
     composes: selectBase from '../../../styles/shared.module.css';
     width: 100%;
-    height: 30px;
     font-size: 20px;
     box-sizing: border-box;
     margin-left: 15px;
-    min-width: 0px;
+    width: auto;
 }
 
 .inputWrapper {
@@ -75,7 +71,6 @@
     font-family: var(--font-main);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
-    min-width: 0;
 }
 
 .currencySymbol {
@@ -85,8 +80,64 @@
 }
 
 /* Mobile Adjustments */
-@media (max-width: 800px) {
+@media (max-width: 600px) {
+    .budgetItem {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid var(--primary-color);
+        width: 100%;
+    }
+    
+    .itemSpan {
+        text-align: center;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+    }
+
+    .itemSpan:first-child::before {
+        content: "Category: ";
+    }
+
+    .itemSpan:nth-child(2)::before {
+        content: "Monthly Limit: ";
+    }
+
+    .itemSpan::before {
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+    .actionsDiv {
+        align-self: center;
+        padding-bottom: 20px;
+    }
+
+    .deleteBtn {
+        margin: 0px;
+    }
+    
     .budgetItem span, .currencySymbol, .categorySelect, .textInput {                 
         font-size: 16px;
+    }
+
+    /*Editing styles*/
+    .categorySelect {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .inputWrapper {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        padding: 0px;
+    }
+
+    .textInput {
+        text-align: center;
+        padding-right: 20px;
     }
 }

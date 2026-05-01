@@ -50,10 +50,10 @@
 /* Mobile Adjustments */
 @media (max-width: 600px) {
   .userH1 {
-    font-size: 1.0rem;
+    display: none;
   }
 
   .headingH1 {
-    font-size: 30px;
+    font-size: 28px;
   }
 }

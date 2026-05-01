@@ -7,5 +7,5 @@ export const validationSchema = Yup.object({
 
 export const initialValues = {
     nameInput: '',
-    typeSelect: ''
+    typeSelect: 'income'
 };

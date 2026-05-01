@@ -49,3 +49,44 @@
     justify-self: end; 
     align-self: center;
 }
+
+@media (max-width: 600px) {
+    .categoriesListDiv {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .itemsHeading {
+        display: none;
+    }
+
+    .categoryItem {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid var(--primary-color);
+    }
+
+    .itemSpan {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+
+    .itemSpan:first-child::before {
+        content: "Name: ";
+    }
+
+    .itemSpan:nth-child(2)::before {
+        content: "Type: ";
+    }
+
+    .itemSpan::before {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .deleteBtn {
+        margin: 20px;
+    }
+}

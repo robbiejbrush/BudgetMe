@@ -35,20 +35,22 @@ const MonthlyBarChart = ({ data }) => {
   if (!data || data.length === 0) return null;
 
   const maxVal = Math.max(...data.map(d => d.expenses));
-  const dynamicWidth = maxVal.toLocaleString().length * 10;
+  const dynamicWidth = maxVal.toLocaleString().length * 8;
 
   return (
-    <div style={{ width: '100%', height: '100%', minWidth: '400px' }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data= { data }>
+        <BarChart 
+          data= { data }
+          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
             <XAxis 
                 dataKey="month"
-                tick={{ fill: 'white', fontSize: 14, fontFamily: 'Outfit' }} 
+                tick={{ fill: 'white', fontSize: 12, fontFamily: 'Outfit' }} 
                 stroke="white"
             />
             <YAxis 
                 width={ dynamicWidth }
-                tick={{ fill: 'white', fontSize: 14, fontFamily: 'Outfit' }} 
+                tick={{ fill: 'white', fontSize: 12, fontFamily: 'Outfit' }} 
                 stroke="white" 
                 tickFormatter={(value) => `${currencySymbol}${value.toLocaleString(undefined, {
                     minimumFractionDigits: 2,

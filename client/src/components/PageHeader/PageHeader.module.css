@@ -36,3 +36,22 @@
     flex: 1;
     padding-right: 20px;
 }
+/* Mobile Adjustments */
+@media (max-width: 1000px) {
+  .headerCenter {
+    font-size: 28px;
+  }
+
+  .headerDiv {
+    flex-direction: column;
+  }
+
+  .headerDiv div:first-of-type {
+    align-self: flex-start;
+    width: auto;
+  }
+
+  .headerRight {
+    padding: 0;
+  }
+}

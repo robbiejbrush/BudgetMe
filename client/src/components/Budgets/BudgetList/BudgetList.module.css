@@ -48,9 +48,7 @@
     min-width: 0;
     composes: selectBase from '../../../styles/shared.module.css';
     font-size: 20px;
-    height: 30px;
     margin-left: 15px;
-    width: 100%;
 }
 
 .inputWrapper {
@@ -64,7 +62,6 @@
     font-family: var(--font-main);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     border: none;
-    min-width: 0;
 }
 
 .currencySymbol {
@@ -77,9 +74,7 @@
     composes: inputBase from '../../../styles/shared.module.css';
     min-width: 0;
     font-size: 20px;
-    height: 30px;
     width: 100%;
-    min-width: 70px;
 }
 
 .addBtn{
@@ -91,8 +86,40 @@
 }
 
 /* Mobile Adjustments */
-@media (max-width: 800px) {
+@media (max-width: 600px) {
+    .budgetsListDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0;
+    }
+
+    .itemsHeading, .headerDivider {
+        display: none;
+    }
+    
+    /*Add form*/
     .currencySymbol, .categorySelect, .textInput {
         font-size: 16px;
+        margin: 0;
+    }
+
+    .categorySelect {
+        text-align: center;
+    }
+
+    .textInput {
+        text-align: center;
+        padding-right: 20px;
+    }
+
+    .addBtn {
+        margin: 0;
+    }
+
+    .inputWrapper {
+        padding: 0;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }

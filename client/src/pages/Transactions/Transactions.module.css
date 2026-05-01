@@ -1,3 +1,9 @@
 .addBtn {
   composes: btnBase from '../../styles/shared.module.css';
 }
+
+@media (max-width: 1000px) {
+  .addBtn {
+    margin-top: 20px;
+  }
+}

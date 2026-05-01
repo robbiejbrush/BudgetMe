@@ -25,6 +25,7 @@
     font-family: var(--font-main);
     align-items: center;
     justify-content: start;
+    table-layout: fixed;
 }
 
 .transRow span {
@@ -73,10 +74,11 @@
 
 /* Mobile Adjustments */
 @media (max-width: 800px) {
-  .counterparty, .category {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .transRow span {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word; 
+    text-align: center;
   }
 
   .transRow.header {

@@ -42,7 +42,7 @@ const ExpensesPieChart = ({ data }) => {
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <ResponsiveContainer width="100%" height="100%" minWidth="400px">
+      <ResponsiveContainer width="100%" height="100%" minWidth="100px" minHeight="100px">
         <PieChart>
           <Pie 
             data={sortedData} 
@@ -50,7 +50,7 @@ const ExpensesPieChart = ({ data }) => {
             nameKey="name" 
             cx="50%" 
             cy="50%" 
-            outerRadius={178}
+            outerRadius={"100%"}
             shape={renderSlice} 
             startAngle={90}    
             endAngle={-270}

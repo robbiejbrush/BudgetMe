@@ -33,7 +33,6 @@
   border-radius: 6px;
   overflow: hidden;
   height: 12px;
-  min-width: 150px;
 }
 
 .barFill {
@@ -51,4 +50,10 @@
   color: var(--primary-color);
   font-family: var(--font-main);
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .label {
+    font-size: 16px;
+  }
 }

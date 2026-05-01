@@ -1,5 +1,5 @@
 import styles from '../Overview/Overview.module.css'
-import ExpensesPieChart from '../../components/Overview/ExpensesPieChart';
+import ExpensesPieChart from '../../components/Overview/ExpensesPieChart.js';
 import MonthlyBarChart from '../../components/Overview/MonthlyBarChart';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import SummaryStats from '../../components/Overview/SummaryStats/SummaryStats.js';

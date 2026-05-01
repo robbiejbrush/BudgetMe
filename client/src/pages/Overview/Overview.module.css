@@ -12,6 +12,6 @@
 @media screen and (max-width: 800px) {
   .graphsDiv {
     flex-direction: column;
-    height: 800px;
+    gap: 20px;
   }
 }

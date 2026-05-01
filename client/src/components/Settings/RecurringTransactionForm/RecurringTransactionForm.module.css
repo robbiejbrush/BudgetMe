@@ -81,6 +81,8 @@
         margin-right: 20px;
         justify-self: center;
         color: var(--third-color);
+        display: flex;
+        flex-direction: column;
     }
 
     .amountWrapper::before { content: "Amount:"; }
@@ -95,6 +97,8 @@
         font-weight: bold;
         color: var(--primary-color);
         font-family: var(--font-main);
+        display: block;
+        margin-bottom: 10px;
     }
 
     .actionsDiv {

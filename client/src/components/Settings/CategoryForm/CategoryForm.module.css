@@ -5,8 +5,6 @@
 .fieldInput {
     composes: inputBase from '../../../styles/shared.module.css';
     margin-left: 15px;
-    min-width: 175px;
-    width: auto;
     text-align: left;
     font-size: 16px;
 }
@@ -16,7 +14,6 @@
     text-align: left;
     margin-left: 15px;
     font-size: 16px;
-    width: auto;
 }
 
 .addBtn {
@@ -32,4 +29,27 @@
     color: red;
     font-family: var(--font-main);
     padding-left: 20px;
+}
+
+@media (max-width: 600px) {
+    .fieldInput {
+        margin: 20px;
+        text-align: center;
+    }
+
+    .fieldSelect {
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .fieldInput::before {
+        content: "Name: "
+    }
+
+    .addBtn {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
