@@ -1,6 +1,7 @@
 # BudgetMe
 
 ### Live App
+https://budgetmerbrush.netlify.app/
 
 ### Description
 A full-stack budgeting application that helps users track spending, manage budgets, and gain insights into their financial habits.
