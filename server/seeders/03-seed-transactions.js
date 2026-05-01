@@ -4,10 +4,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     try {
         console.log('--- Cleaning Transactions table ---');
-        await queryInterface.bulkDelete('Transactions', null, {});
+        await queryInterface.bulkDelete('transactions', null, {});
 
         const [categories] = await queryInterface.sequelize.query(
-            `SELECT categoryId, type, name from Categories 
+            `SELECT categoryId, type, name from categories 
              WHERE name NOT IN ('Other (Income)', 'Other (Expense)');`
         );
 
@@ -49,14 +49,14 @@ module.exports = {
                 counterparty: faker.company.name(),
                 date: faker.date.past({ years: 2 }),
                 categoryId: category.categoryId,
-                userId: 1,
+                userId: 2,
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
         }
 
         console.log('--- Seeding Transactions ---');
-        await queryInterface.bulkInsert('Transactions', transactions);
+        await queryInterface.bulkInsert('transactions', transactions);
         console.log('--- SUCCESS: Transactions seeded!');
     } catch (error) {
         console.error('--- ERROR IN TRANSACTIONS SEEDER ---');
@@ -71,6 +71,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Transactions', null, {});
+    await queryInterface.bulkDelete('transactions', null, {});
   }
 };

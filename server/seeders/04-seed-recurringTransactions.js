@@ -5,11 +5,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     try {
         console.log('--- Cleaning Recurring Transactions table ---');
-        await queryInterface.bulkDelete('RecurringTransactions', null, {});
+        await queryInterface.bulkDelete('recurringtransactions', null, {});
 
         const [categories] = await queryInterface.sequelize.query(
             `SELECT categoryId, type 
-            FROM Categories 
+            FROM categories 
             WHERE type = 'expense' 
             AND name != 'Other (Expense)';`
         );
@@ -49,14 +49,14 @@ module.exports = {
                 nextChargeDate: nextChargeDate,
                 lastChargedDate: null,
                 categoryId: category.categoryId,
-                userId: 1,
+                userId: 2,
                 createdAt: new Date(),
                 updatedAt: new Date()
             }
         });
 
         console.log('--- Seeding Recurring Transactions ---');
-        await queryInterface.bulkInsert('RecurringTransactions', recurringTransactions);
+        await queryInterface.bulkInsert('recurringtransactions', recurringTransactions);
         console.log('SUCCESS: Recurring Transactions seeded!');
     } catch (error) {
         console.error('--- ERROR IN RECURRING TRANSACTIONS SEEDER ---');
@@ -71,6 +71,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('RecurringTransactions', null, {});
+    await queryInterface.bulkDelete('recurringtransactions', null, {});
   }
 };

@@ -4,11 +4,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     try {
         console.log('--- Cleaning Budgets table ---');
-        await queryInterface.bulkDelete('Budgets', null, {});
+        await queryInterface.bulkDelete('budgets', null, {});
 
         const [categories] = await queryInterface.sequelize.query(
           `SELECT categoryId 
-            FROM Categories 
+            FROM categories 
             WHERE type = 'expense' 
             AND name != 'Other (Expense)';`
         );
@@ -19,13 +19,13 @@ module.exports = {
         const budgets = selectedCategoryIds.map (categoryId => ({
             monthlyLimit: faker.number.float( {min: 50, max: 5000, fractionDigits: 2} ),
             categoryId: categoryId,
-            userId: 1,
+            userId: 2,
             createdAt: new Date(),
             updatedAt: new Date()
         }));
 
         console.log('--- Seeding Budgets ---');
-        await queryInterface.bulkInsert('Budgets', budgets);
+        await queryInterface.bulkInsert('budgets', budgets);
         console.log('--- SUCESS: Budgets Seeded!');
     } catch (error) {
         console.error('--- ERROR IN BUDGETS SEEDER ---');
@@ -40,6 +40,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Budgets', null, {});
+    await queryInterface.bulkDelete('budgets', null, {});
   }
 };

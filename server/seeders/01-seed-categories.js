@@ -32,7 +32,7 @@ module.exports = {
   async up(queryInterface) {
     try {
         console.log('--- Cleaning Categories Table ---');
-        await queryInterface.bulkDelete('Categories', null, {});
+        await queryInterface.bulkDelete('categories', null, {});
 
         const categories = categoryList.map(cat => ({
         ...cat,
@@ -42,7 +42,7 @@ module.exports = {
         }));
 
         console.log('--- Seeding Categories ---');
-        await queryInterface.bulkInsert('Categories', categories);
+        await queryInterface.bulkInsert('categories', categories);
         console.log('--- SUCCESS: Categories Seeded! ---');
     } catch (error) {
         console.error('--- ERROR IN CATEGORIES SEEDER ---');
@@ -57,6 +57,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Categories', null, {});
+    await queryInterface.bulkDelete('categories', null, {});
   }
 };
