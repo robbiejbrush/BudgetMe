@@ -54,3 +54,15 @@
   pointer-events: none;
   line-height: 1;
 }
+
+.fieldInput[type="date"]::before {
+    content: attr(placeholder);
+    width: 100%;
+    color: var(--primary-color);
+}
+
+.fieldInput[type="date"]:focus::before,
+.fieldInput[type="date"]:valid::before {
+    display: none;
+    content: "";
+}
