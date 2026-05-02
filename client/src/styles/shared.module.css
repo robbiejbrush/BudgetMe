@@ -1,7 +1,4 @@
 .btnBase, .selectBase, .inputBase {
-    -webkit-appearance: none;
-    -moz-appearance: none;   
-    appearance: none; 
     background-color: var(--background-color);
     color: var(--primary-color);
     border-radius: 5px;
