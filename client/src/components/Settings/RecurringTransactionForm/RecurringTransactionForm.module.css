@@ -114,4 +114,16 @@
         justify-self: center;
         margin: 0px;
     }
+
+    .fieldInput[type="date"]::before {
+        content: attr(placeholder);
+        width: 100%;
+        color: var(--primary-color);
+    }
+
+    .fieldInput[type="date"]:focus::before,
+    .fieldInput[type="date"]:valid::before {
+        display: none;
+        content: "";
+    }
 }
