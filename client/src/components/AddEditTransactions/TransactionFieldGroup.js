@@ -58,7 +58,7 @@ function TransactionFieldGroup( {index, transaction, errors, rawCategories, cate
             )}
 
             <label className= {styles.label} htmlFor="DateInput">Date:</label>
-            <Field className = {styles.fieldInput} id= {`date-${index}`} name= {`transactions.${index}.date`} type= "date" placeholder= "Date"/>
+            <Field className = {styles.fieldInput} id= {`date-${index}`} name= {`transactions.${index}.date`} type= "text" onfocus="(this.type='date')" onblur="if(!this.value)this.type= 'text'" placeholder= "Date"/>
             {errors.transactions?.[index]?.date && (
                 <span className={styles.error}>{errors.transactions[index].date}</span>
             )}
