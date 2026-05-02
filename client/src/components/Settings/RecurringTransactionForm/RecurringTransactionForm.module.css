@@ -76,6 +76,10 @@
         color: var(--third-color)
     }
 
+    .typeWrapper, .categoriesWrapper, .counterpartyWrapper, .frequencyWrapper, .startDateWrapper, .endDateWrapper {
+        justify-self: center;
+    }
+
     .fieldInput, .fieldSelect {
         margin-left: 20px;
         margin-right: 20px;

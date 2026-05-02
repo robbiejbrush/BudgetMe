@@ -56,12 +56,12 @@ export function RecurringTransactionForm( { initialValues, onSubmit, onCancel, v
                 </div>
                 
                 <div className={styles.startDateWrapper}>
-                    <Field className={styles.fieldInput} id="startDateInput" name="startDateInput" type="date" disabled={isSubmitting}/>
+                    <Field className={styles.fieldInput} id="startDateInput" name="startDateInput" type="date" placeholder="Start Date" disabled={isSubmitting}/>
                     <ErrorMessage className={styles.errorSpan} name="startDateInput" component="div"/>
                 </div>
 
                 <div className= {styles.endDateWrapper}>
-                    <Field className={styles.fieldInput} id="endDateInput" name="endDateInput" type="date" disabled={isSubmitting}/>
+                    <Field className={styles.fieldInput} id="endDateInput" name="endDateInput" type="date" placeholder= "End Date" disabled={isSubmitting}/>
                 </div>
                 <div className={styles.actionsDiv}>
                     <button className={styles.addBtn} type="submit" disabled={isSubmitting}>{buttonText}</button>
